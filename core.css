@@ -1,1 +1,111 @@
+:root {
+  --bg: #020617;
+  --surface: #0f172a;
+  --primary: #38bdf8;
+  --html-color: #ef4444;
+  --css-color: #3b82f6;
+  --js-color: #eab308;
+  --game-color: #10b981;
+  --text: #f1f5f9;
+  --text-dim: #94a3b8;
+}
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  padding: 40px 0;
+  border-bottom: 1px solid #1e293b;
+}
+
+/* Navegação entre Abas Mestras */
+.master-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.master-btn {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  background: #1e293b;
+  color: var(--text-dim);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.master-btn.active-master {
+  border-color: var(--primary);
+  background: #0c4a6e;
+  color: white;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+/* Visibilidade das Views */
+.mode-view {
+  display: none;
+}
+
+.mode-view.active-view {
+  display: block;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modais Universais */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #1e293b;
+  border-radius: 20px;
+  position: relative;
+  border: 1px solid #334155;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
