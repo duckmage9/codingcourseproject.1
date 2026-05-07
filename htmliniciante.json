@@ -1,0 +1,217 @@
+{
+  "tecnologia": "HTML",
+  "dificuldade": "Fácil",
+  "total_fases": 10,
+  "fases": [
+    {
+      "id": 1,
+      "tema": "Tags Básicas",
+      "perguntas": [
+        {
+          "pergunta": "Qual tag é usada para envolver todo o conteúdo que será visível para o usuário no navegador?",
+          "opcoes": ["<head>", "<html>", "<body>", "<main>"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Qual é a forma correta de fechar uma tag que possui conteúdo interno?",
+          "opcoes": ["<tag>", "</tag>", "<close tag>", "<\\tag>"],
+          "correta": 1
+        },
+        {
+          "pergunta": "O que acontece se você esquecer de fechar uma tag como <div>?",
+          "opcoes": ["O código não executa", "O navegador tenta adivinhar o fechamento, podendo quebrar o layout", "A página fica em branco", "O computador trava"],
+          "correta": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "tema": "Estrutura Global",
+      "perguntas": [
+        {
+          "pergunta": "Qual instrução informa ao navegador que o documento é do tipo HTML5?",
+          "opcoes": ["<html>", "<body>", "<!DOCTYPE html>", "<meta html5>"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Onde devem ser inseridas as informações que não aparecem na tela, como links para arquivos CSS?",
+          "opcoes": ["<head>", "<body>", "<footer>", "<header>"],
+          "correta": 0
+        },
+        {
+          "pergunta": "Qual tag é a raiz de todo o documento HTML, contendo tanto o head quanto o body?",
+          "opcoes": ["<root>", "<html>", "<base>", "<main>"],
+          "correta": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "tema": "Atributos",
+      "perguntas": [
+        {
+          "pergunta": "Qual atributo é usado para identificar um elemento de forma única para que o JavaScript possa manipulá-lo?",
+          "opcoes": ["class", "id", "name", "type"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Como os atributos devem ser escritos dentro de uma tag?",
+          "opcoes": ["nome:valor", "nome='valor'", "valor(nome)", "{nome:valor}"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Qual atributo permite aplicar o mesmo estilo CSS a vários elementos diferentes ao mesmo tempo?",
+          "opcoes": ["id", "style", "class", "group"],
+          "correta": 2
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "tema": "Títulos (H1 - H6)",
+      "perguntas": [
+        {
+          "pergunta": "Qual tag representa o título principal de maior importância em uma página?",
+          "opcoes": ["<h6>", "<h1>", "<header>", "<head>"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Qual é a tag de título que representa o menor nível de importância na hierarquia padrão?",
+          "opcoes": ["<h1>", "<h3>", "<h6>", "<h10>"],
+          "correta": 2
+        },
+        {
+          "pergunta": "É recomendado usar mais de um <h1> por página para uma boa estrutura de SEO?",
+          "opcoes": ["Sim, quantos quiser", "Não, o ideal é apenas um título principal por página", "Sim, desde que tenham IDs diferentes", "Apenas em telas mobile"],
+          "correta": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "tema": "Parágrafos",
+      "perguntas": [
+        {
+          "pergunta": "Qual tag é utilizada para definir blocos de texto ou parágrafos?",
+          "opcoes": ["<text>", "<span>", "<p>", "<label>"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Como o navegador costuma renderizar a tag <p> por padrão?",
+          "opcoes": ["Na mesma linha", "Com uma margem/espaço antes e depois do bloco", "Com texto em negrito", "Com letra maior"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Qual tag pode ser usada dentro de um parágrafo para quebrar a linha sem criar um novo parágrafo?",
+          "opcoes": ["<hr>", "<break>", "<br>", "<line>"],
+          "correta": 2
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "tema": "Links e Âncora",
+      "perguntas": [
+        {
+          "pergunta": "Qual tag é usada para criar hiperlinks no HTML?",
+          "opcoes": ["<link>", "<a>", "<url>", "<href>"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Qual atributo obrigatório define o destino (URL) do link?",
+          "opcoes": ["src", "link", "href", "target"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Para fazer um link abrir em uma nova aba do navegador, qual valor usamos no atributo target?",
+          "opcoes": ["_self", "_new", "_blank", "_parent"],
+          "correta": 2
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "tema": "Listas",
+      "perguntas": [
+        {
+          "pergunta": "Qual tag cria uma lista não ordenada (com 'bullets' ou pontos)?",
+          "opcoes": ["<ol>", "<ul>", "<li>", "<list>"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Qual tag é usada para definir cada item individual dentro de uma lista?",
+          "opcoes": ["<item>", "<li>", "<ul>", "<ol>"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Qual tag cria uma lista ordenada (1, 2, 3...)?",
+          "opcoes": ["<ul>", "<ol>", "<li>", "<dl>"],
+          "correta": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "tema": "Imagens",
+      "perguntas": [
+        {
+          "pergunta": "Qual atributo indica o caminho ou o nome do arquivo de imagem a ser exibido?",
+          "opcoes": ["href", "src", "alt", "link"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Qual é a função do atributo 'alt' em uma tag de imagem?",
+          "opcoes": ["Mudar a cor da imagem", "Mostrar um texto caso a imagem não carregue e para leitores de tela", "Definir a largura", "Colocar um link na imagem"],
+          "correta": 1
+        },
+        {
+          "pergunta": "A tag <img> requer uma tag de fechamento (</img>)?",
+          "opcoes": ["Sim", "Não, ela é uma tag vazia (self-closing)", "Apenas se tiver um ID", "Sim, no HTML5"],
+          "correta": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "tema": "Comentários",
+      "perguntas": [
+        {
+          "pergunta": "Qual é a sintaxe correta para comentar algo no código HTML?",
+          "opcoes": ["// comentário", "/* comentário */", "<!-- comentário -->", "# comentário"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Para que servem os comentários no código?",
+          "opcoes": ["Para os usuários lerem no site", "Para o navegador ignorar o trecho e servir de nota para o programador", "Para acelerar o site", "Para proteger o site de hackers"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Um comentário pode 'esconder' uma tag inteira sem deletá-la?",
+          "opcoes": ["Sim, basta envolvê-la no símbolo de comentário", "Não, comentários só funcionam para textos", "Sim, mas a tag continua visível", "Não, causa erro"],
+          "correta": 0
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "tema": "Formulários Simples",
+      "perguntas": [
+        {
+          "pergunta": "Qual tag é usada como container para agrupar campos de entrada de dados?",
+          "opcoes": ["<input>", "<field>", "<form>", "<submit>"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Qual tag cria uma caixa de entrada onde o usuário pode digitar seu nome?",
+          "opcoes": ["<input type='text'>", "<button>", "<label>", "<input type='checkbox'>"],
+          "correta": 0
+        },
+        {
+          "pergunta": "Qual tag define um botão que envia as informações coletadas no formulário?",
+          "opcoes": ["<input type='text'>", "<button type='submit'>", "<label>", "<textarea>"],
+          "correta": 1
+        }
+      ]
+    }
+  ]
+}
