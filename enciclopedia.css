@@ -1,66 +1,103 @@
-.main-tabs, .level-selector {
+/* Abas de Tecnologias */
+.main-tabs {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
-.main-btn, .lvl-btn {
-  padding: 10px 20px;
+.main-btn {
+  padding: 10px 25px;
   border: none;
   border-radius: 8px;
   background: #1e293b;
   color: white;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
   transition: 0.2s;
 }
 
-.active-html { background: var(--html-color) !important; }
-.active-css { background: var(--css-color) !important; }
-.active-js { background: var(--js-color) !important; color: #000 !important; }
-.active-lvl { background: var(--primary) !important; color: #000 !important; }
+/* Cores por Categoria */
+.active-html { background: var(--html-color) !important; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+.active-css { background: var(--css-color) !important; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+.active-js { background: var(--js-color) !important; color: #000 !important; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3); }
 
+/* Seletor de Nível */
+.level-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+.lvl-btn {
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid #334155;
+  color: var(--text-dim);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.active-lvl {
+  background: var(--primary) !important;
+  color: #000 !important;
+  border-color: var(--primary);
+  font-weight: bold;
+}
+
+/* Grid de Cards */
 .topics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
 }
 
 .topic-card {
   background: var(--surface);
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #334155;
+  padding: 30px 20px;
+  border-radius: 16px;
+  border: 1px solid #1e293b;
   text-align: center;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.3s ease;
+}
+
+.topic-card h3 {
+  font-size: 1.05rem;
+  color: var(--text);
 }
 
 .topic-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
+  background: #1e293b;
 }
 
+/* Conteúdo do Modal Reader */
 .modal-body h2 {
   color: var(--primary);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
   border-bottom: 1px solid #334155;
   padding-bottom: 10px;
 }
 
 .modal-body p {
-  color: #cbd5e1;
+  color: var(--text-dim);
   font-size: 1.1rem;
+  line-height: 1.7;
 }
 
-/* Texto semi-transparente para instrução de saída */
+/* Dica visual para fechar o modal */
 .exit-hint {
+  display: block;
   text-align: center;
-  color: rgba(255, 255, 255, 0.4);
+  margin-top: 30px;
+  color: rgba(255, 255, 255, 0.3); /* Texto semi-transparente */
   font-size: 0.85rem;
-  margin-top: 25px;
   font-style: italic;
-  pointer-events: none; /* Garante que o clique passe através do texto */
+  letter-spacing: 1px;
 }
