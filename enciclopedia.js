@@ -1,52 +1,53 @@
-// BANCO DE DADOS DA ENCICLOPÉDIA
 const db = {
     html: {
-        iniciante: ["Tags Básicas", "Estrutura Global", "Atributos", "Títulos (H1-H6)", "Parágrafos", "Links e Âncoras", "Listas", "Imagens", "Comentários", "Formulários Simples"],
-        intermediario: ["Semântica Pro", "Tags de Áudio", "Tags de Vídeo", "Canvas 2D Básico", "Data Attributes", "SVG Inline", "Tabelas Complexas", "Iframe Integrations", "Meta Tags SEO", "Input Types Avançados"],
-        avancado: ["Web Workers", "WebSockets", "Offscreen Canvas", "Service Workers", "Gamepad API", "Web Audio API", "Shadow DOM", "Template Tags", "IndexedDB", "WebAssembly"]
+        iniciante: ["Tags Básicas", "Estrutura Global", "Atributos", "Títulos (H1-H6)", "Parágrafos", "Links", "Listas", "Imagens", "Comentários", "Formulários"],
+        intermediario: ["Semântica", "Áudio e Vídeo", "Canvas Básico", "SVG", "Data Attributes", "Tabelas", "Iframes", "Meta Tags", "SEO Base", "Inputs Avançados"],
+        avancado: ["Web Workers", "WebSockets", "Offscreen Canvas", "Service Workers", "Gamepad API", "Web Audio", "Shadow DOM", "Templates", "IndexedDB", "WebAssembly"]
     },
     css: {
-        iniciante: ["Seletores", "Cores e Fundos", "Fontes Básicas", "Box Model", "Padding/Margin", "Bordas", "Display Block/Inline", "ID vs Class", "CSS Interno/Externo", "Unidades PX"],
-        intermediario: ["Flexbox", "CSS Grid", "Positioning", "Z-Index", "Pseudo-classes", "Pseudo-elements", "Transitions", "Media Queries", "Variables", "Unidades Relativas (REM/VW)"],
-        avancado: ["Animações Keyframes", "Transformações 3D", "Filtros e Backdrop", "Clip-path", "Grid Area Mapping", "Custom Properties Dinâmicas", "Scroll Snap", "Container Queries", "Logical Properties", "CSS Houdini"]
+        iniciante: ["Seletores", "Cores", "Box Model", "Padding/Margin", "Bordas", "Display", "Flexbox Base", "Fonts", "CSS Externo", "Units (PX/%)"],
+        intermediario: ["Flexbox Avançado", "CSS Grid", "Position", "Z-index", "Pseudo-classes", "Pseudo-elements", "Transitions", "Media Queries", "Variables", "Units (REM/VW)"],
+        avancado: ["Animations", "3D Transforms", "Filters", "Clip-path", "Grid Area", "Custom Props", "Scroll Snap", "Container Queries", "Logical Props", "Houdini"]
     },
     js: {
-        iniciante: ["Variáveis (let/const)", "Tipos de Dados", "Operadores", "If/Else", "Funções Simples", "Arrays", "Loops (For/While)", "Console Debugging", "Alert/Confirm", "DOM Selection"],
-        intermediario: ["Event Listeners", "Arrow Functions", "Array Methods (Map/Filter)", "Objects", "JSON", "Fetch API", "Promises", "Async/Await", "Local Storage", "SetTimeout/Interval"],
-        avancado: ["Game Loop Avançado", "Máquinas de Estado", "Object Pooling", "Cálculo de Colisão", "Pathfinding A*", "Design Patterns", "Web Workers Logic", "Physics Math", "Prototypes/Classes", "Memory Management"]
+        iniciante: ["Variables", "Data Types", "Operators", "If/Else", "Functions", "Arrays", "Loops", "Console", "DOM Select", "Events"],
+        intermediario: ["Listeners", "Arrow Functions", "Array Methods", "Objects", "JSON", "Fetch", "Promises", "Async/Await", "Local Storage", "Timers"],
+        avancado: ["Game Loop", "State Machines", "Collision", "Pathfinding", "Web Workers", "Physics Math", "Prototypes", "Memory", "A* Algorithm", "Design Patterns"]
     }
 };
 
-let encTech = 'html';
-let encLevel = 'iniciante';
+let currentTech = 'html';
+let currentLevel = 'iniciante';
 
 function renderEncGrid() {
     const grid = document.getElementById('topics-grid');
-    if(!grid) return;
-    
+    if (!grid) return;
+
     grid.innerHTML = '';
-    db[encTech][encLevel].forEach(topic => {
+    db[currentTech][currentLevel].forEach(topic => {
         const card = document.createElement('div');
         card.className = 'topic-card';
         card.innerHTML = `<h3>${topic}</h3>`;
-        card.onclick = () => openModal('reader', `<h2>${topic}</h2><p>Conteúdo técnico sobre ${topic}.</p>`);
+        card.onclick = () => openModal('reader', `<h2>${topic}</h2><p>Estudando ${topic} na trilha de ${currentTech.toUpperCase()} (${currentLevel}). Conteúdo técnico em desenvolvimento.</p>`);
         grid.appendChild(card);
     });
 }
 
 function setTech(tech) {
-    encTech = tech;
+    currentTech = tech;
     document.querySelectorAll('#modo-enciclopedia .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
     document.getElementById(`btn-${tech}`).classList.add(`active-${tech}`);
     renderEncGrid();
 }
 
 function setLevel(lvl) {
-    encLevel = lvl;
+    currentLevel = lvl;
     document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active-lvl'));
     event.currentTarget.classList.add('active-lvl');
     renderEncGrid();
 }
 
-// Inicia a grid assim que o arquivo carregar
-window.addEventListener('DOMContentLoaded', renderEncGrid);
+// Inicializar ao carregar
+window.addEventListener('DOMContentLoaded', () => {
+    if(document.getElementById('topics-grid')) renderEncGrid();
+});
