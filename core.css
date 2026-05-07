@@ -17,11 +17,10 @@
 }
 
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.5;
-  overflow-x: hidden;
 }
 
 .container {
@@ -32,11 +31,10 @@ body {
 
 header {
   text-align: center;
-  padding: 40px 0;
+  padding: 30px 0;
   border-bottom: 1px solid #1e293b;
 }
 
-/* Navegação entre Abas Mestras */
 .master-tabs {
   display: flex;
   justify-content: center;
@@ -45,31 +43,29 @@ header {
 }
 
 .master-btn {
-  padding: 12px 30px;
-  font-size: 1.1rem;
+  padding: 15px 30px;
   background: #1e293b;
   color: var(--text-dim);
   border: 2px solid transparent;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.3s;
+  font-weight: bold;
 }
 
-.master-btn.active-master {
+.active-master {
   border-color: var(--primary);
   background: #0c4a6e;
   color: white;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
 
-/* Visibilidade das Views */
 .mode-view {
   display: none;
 }
 
 .mode-view.active-view {
   display: block;
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.4s ease;
 }
 
 @keyframes fadeIn {
@@ -77,24 +73,22 @@ header {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Modais Universais */
 .modal-overlay {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.9);
   z-index: 1000;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
 }
 
 .modal-content {
-  max-width: 700px;
+  max-width: 800px;
   margin: 50px auto;
-  padding: 30px;
+  padding: 40px;
   background: #1e293b;
   border-radius: 20px;
   position: relative;
-  border: 1px solid #334155;
 }
 
 .close-modal {
@@ -104,8 +98,9 @@ header {
   background: #ef4444;
   color: white;
   border: none;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   cursor: pointer;
+  font-weight: bold;
 }
