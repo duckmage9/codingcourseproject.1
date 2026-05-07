@@ -1,108 +1,63 @@
-// Função de Console Manual para Motores sem F12
-function manualLog(msg, type = "info") {
-    const consoleEl = document.getElementById('debug-console');
-    if (consoleEl) {
-        const entry = document.createElement('div');
-        entry.className = 'log-entry';
-        const time = new Date().toLocaleTimeString();
-        entry.innerHTML = `<span style="color:gray">[${time}]</span> <span class="log-version">v0.1.9:</span> ${msg}`;
-        consoleEl.prepend(entry); // Mostra o log mais recente no topo
-    }
-    console.log(msg); // Mantém no console original também
-}
-
-manualLog("Arquivo enciclopedia.js iniciado com sucesso.");
+// Limpa o console de debug para mostrar que atualizou
+document.getElementById('debug-console').innerHTML = "🟢 SISTEMA V0.2.4 CARREGADO COM SUCESSO!";
 
 const db = {
     html: {
-        iniciante: ["Tags Básicas", "Estrutura Global", "Atributos", "Títulos (H1-H6)", "Parágrafos", "Links", "Listas", "Imagens", "Comentários", "Formulários"],
-        intermediario: ["Semântica", "Áudio e Vídeo", "Canvas Básico", "SVG", "Data Attributes", "Tabelas", "Iframes", "Meta Tags", "SEO Base", "Inputs Avançados"],
-        avancado: ["Web Workers", "WebSockets", "Offscreen Canvas", "Service Workers", "Gamepad API", "Web Audio", "Shadow DOM", "Templates", "IndexedDB", "WebAssembly"]
+        iniciante: ["Tags Básicas", "Estrutura Global", "Tags de Conteúdo", "Meta Tags", "Atributos"],
+        intermediario: [], avancado: []
     },
-    css: {
-        iniciante: ["Seletores", "Cores", "Box Model", "Padding/Margin", "Bordas", "Display", "Flexbox Base", "Fonts", "CSS Externo", "Units (PX/%)"],
-        intermediario: ["Flexbox Avançado", "CSS Grid", "Position", "Z-index", "Pseudo-classes", "Pseudo-elements", "Transitions", "Media Queries", "Variables", "Units (REM/VW)"],
-        avancado: ["Animations", "3D Transforms", "Filters", "Clip-path", "Grid Area", "Custom Props", "Scroll Snap", "Container Queries", "Logical Props", "Houdini"]
-    },
-    js: {
-        iniciante: ["Variáveis", "Tipos de Dados", "Operadores", "If/Else", "Funções", "Arrays", "Loops", "Console", "DOM Select", "Eventos"],
-        intermediario: ["Listeners", "Arrow Functions", "Array Methods", "Objetos", "JSON", "Fetch", "Promises", "Async/Await", "Local Storage", "Timers"],
-        avancado: ["Game Loop", "State Machines", "Colisão", "Pathfinding", "Web Workers", "Física Básica", "Prototypes", "Memória", "A* Algorithm", "Design Patterns"]
-    }
+    css: { iniciante: [], intermediario: [], avancado: [] },
+    js: { iniciante: [], intermediario: [], avancado: [] }
 };
 
-const codeStyle = "background: #020617; padding: 15px; border-radius: 8px; border: 1px solid #334155; overflow-x: auto; font-family: monospace; color: #38bdf8; margin-top: 15px; display: block; white-space: pre-wrap;";
+const codeStyle = "background: #020617; padding: 15px; border-radius: 8px; border: 1px solid #334155; color: #38bdf8; display: block; white-space: pre-wrap; margin-top: 10px;";
 
 const conteudosManuais = {
     "Tags Básicas": `
-        <p>O HTML funciona através de <strong>Tags</strong>. Pense nelas como etiquetas que dizem ao navegador o que cada parte do texto significa.</p>
-        <p>A maioria das tags tem abertura <code>&lt;tag&gt;</code> e fechamento <code>&lt;/tag&gt;</code>.</p>
-        <pre style="${codeStyle}">&lt;h1&gt;Título&lt;/h1&gt;\n&lt;p&gt;Parágrafo&lt;/p&gt;</pre>
+        <p>As <strong>Tags</strong> servem para dar mais informações sobre o código para o programa ou navegador. As tags são abertas com <code>&lt;tag&gt;</code> um exemplo é a <code>p</code>, que serve para criar um parágrafo, e é escrita da seguinte maneira: <code>&lt;p&gt;texto&lt;/p&gt;</code>.</p>
+        <p>No desenvolvimento de jogos, as tags são fundamentais para criar a interface. Elas classificam cada elemento, permitindo que o navegador entenda o que é um botão de comando, um título de menu ou uma descrição de item. Sem elas, o navegador veria apenas texto puro sem qualquer função ou estrutura.</p>
+        <pre style="${codeStyle}">&lt;p&gt;Este é um parágrafo básico de informação.&lt;/p&gt;</pre>
     `,
     "Estrutura Global": `
-        <p>Todo arquivo precisa de um esqueleto base para ser lido corretamente pelo navegador.</p>
-        <p>Usamos o <code>&lt;!DOCTYPE html&gt;</code> no topo.</p>
-        <pre style="${codeStyle}">&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n  &lt;title&gt;Título&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;!-- Conteúdo --&gt;\n&lt;/body&gt;\n&lt;/html&gt;</pre>
+        <p>As <strong>Tags de Estrutura</strong> servem para organizar o seu código. Elas separam cada área do código e dizem para o navegador o que cada parte do seu código está fazendo e que tipo de informações ela guarda. As duas tags de estrutura mais comuns e importantes são a <code>&lt;head&gt;</code> e a <code>&lt;body&gt;</code>.</p>
+        <p>A <strong>Head</strong> serve para guardar informações sobre o jogo/site, como links para arquivos CSS e JavaScript, além das meta tags. A <strong>Body</strong> serve para inserir os arquivos que realmente vão aparecer para o jogador, como as imagens dos personagens, textos de diálogos e áudios. É na body que colocamos as tags de conteúdo.</p>
+        <pre style="${codeStyle}">&lt;html&gt;\n &lt;head&gt; Configurações &lt;/head&gt;\n &lt;body&gt; Conteúdo Visível &lt;/body&gt;\n&lt;/html&gt;</pre>
+    `,
+    "Tags de Conteúdo": `
+        <p>As <strong>Tags de Conteúdo</strong> são utilizadas para a criação de textos ou a inserção de imagens ou áudio. Essas tags são utilizadas na parte Body do código e podem aparecer até mesmo dentro de outras tags.</p>
+        <p>Na criação de jogos com HTML, as tags de conteúdo servem para a criação de “huds”, cenários, áudios e personagens. Elas são responsáveis por <strong>colocar</strong> os elementos no jogo, mas lembre-se: a animação e as reações aos comandos do jogador são feitas exclusivamente no JavaScript.</p>
+        <pre style="${codeStyle}">&lt;img src="sprite.png"&gt;\n&lt;h1&gt;Pontuação: 100&lt;/h1&gt;</pre>
+    `,
+    "Meta Tags": `
+        <p><strong>Meta tags</strong> são aquelas que ficam na parte <code>&lt;head&gt;</code> do código. Elas são informações que não ficam visíveis para o usuário mas são lidas pelo navegador para conseguir mais informações técnicas sobre o site.</p>
+        <p>Em jogos para navegador, elas são essenciais para definir o tamanho da tela (viewport), o zoom e a escala, garantindo que o jogo apareça corretamente tanto no computador quanto no celular. Elas preparam o ambiente para que o jogo rode de forma estável.</p>
+        <pre style="${codeStyle}">&lt;meta charset="UTF-8"&gt;\n&lt;meta name="viewport" content="width=device-width"&gt;</pre>
     `,
     "Atributos": `
-        <p>Atributos dão características extras às tags, como <code>class</code> ou <code>id</code>.</p>
-        <pre style="${codeStyle}">&lt;div class="heroi" id="player1"&gt;Jogador&lt;/div&gt;</pre>
-    `,
-    "Títulos (H1-H6)": `
-        <p>Existem 6 níveis de títulos, do <code>&lt;h1&gt;</code> (maior) ao <code>&lt;h6&gt;</code> (menor).</p>
-        <pre style="${codeStyle}">&lt;h1&gt;Título Principal&lt;/h1&gt;\n&lt;h2&gt;Subtítulo&lt;/h2&gt;</pre>
-    `,
-    "Parágrafos": `
-        <p>A tag <code>&lt;p&gt;</code> define um bloco de texto comum.</p>
-        <pre style="${codeStyle}">&lt;p&gt;Este é um texto de exemplo.&lt;/p&gt;</pre>
-    `,
-    "Links": `
-        <p>Usamos <code>&lt;a&gt;</code> com o atributo <code>href</code> para criar links.</p>
-        <pre style="${codeStyle}">&lt;a href="https://google.com"&gt;Link&lt;/a&gt;</pre>
-    `,
-    "Listas": `
-        <p>Listas podem ser numeradas (<code>&lt;ol&gt;</code>) ou com marcadores (<code>&lt;ul&gt;</code>).</p>
-        <pre style="${codeStyle}">&lt;ul&gt;\n  &lt;li&gt;Item A&lt;/li&gt;\n  &lt;li&gt;Item B&lt;/li&gt;\n&lt;/ul&gt;</pre>
-    `,
-    "Imagens": `
-        <p>A tag <code>&lt;img&gt;</code> mostra fotos. Precisa de <code>src</code> e <code>alt</code>.</p>
-        <pre style="${codeStyle}">&lt;img src="foto.jpg" alt="Descrição"&gt;</pre>
-    `,
-    "Comentários": `
-        <p>Comentários servem para anotar coisas no código sem que elas apareçam no site.</p>
-        <pre style="${codeStyle}">&lt;!-- Isso é um comentário --&gt;</pre>
-    `,
-    "Formulários": `
-        <p>Usamos <code>&lt;form&gt;</code> e <code>&lt;input&gt;</code> para coletar dados.</p>
-        <pre style="${codeStyle}">&lt;form&gt;\n  &lt;input type="text"&gt;\n  &lt;button&gt;Enviar&lt;/button&gt;\n&lt;/form&gt;</pre>
+        <p><strong>Atributos</strong> são propriedades que adicionamos dentro das tags para dar características extras a elas. O exemplo mais comum em jogos é o <code>id</code>, que dá um nome único para a tag, facilitando para o JavaScript encontrar aquele elemento e mudar sua vida ou posição.</p>
+        <pre style="${codeStyle}">&lt;div id="player" class="active"&gt;&lt;/div&gt;</pre>
     `
 };
 
+// Funções obrigatórias para o funcionamento
 function getTopicContent(topic) {
-    const limpo = topic.trim();
-    manualLog(`Abrindo tópico: ${limpo}`);
-    if (conteudosManuais[limpo]) {
-        return conteudosManuais[limpo];
-    }
-    return `<p>Conteúdo em desenvolvimento.</p>`;
+    return conteudosManuais[topic.trim()] || "Conteúdo não encontrado.";
 }
 
 let currentTech = 'html';
 let currentLevel = 'iniciante';
 
 function renderEncGrid() {
-    manualLog(`Renderizando grade: ${currentTech} - ${currentLevel}`);
     const grid = document.getElementById('topics-grid');
     if (!grid) return;
     grid.innerHTML = '';
-    
     db[currentTech][currentLevel].forEach(topic => {
         const card = document.createElement('div');
         card.className = 'topic-card';
         card.innerHTML = `<h3>${topic}</h3>`;
         card.onclick = () => {
-            const htmlContent = `<h2>${topic}</h2>${getTopicContent(topic)}`;
-            openModal('reader', htmlContent);
+            const content = `<h2>${topic}</h2>${getTopicContent(topic)}`;
+            openModal('reader', content);
         };
         grid.appendChild(card);
     });
@@ -110,20 +65,15 @@ function renderEncGrid() {
 
 function setTech(tech) {
     currentTech = tech;
-    document.querySelectorAll('#modo-enciclopedia .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
-    const target = document.getElementById(`btn-${tech}`);
-    if(target) target.classList.add(`active-${tech}`);
     renderEncGrid();
 }
 
-function setLevel(lvl, element) {
+function setLevel(lvl, el) {
     currentLevel = lvl;
-    document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active-lvl'));
-    if(element) element.classList.add('active-lvl');
     renderEncGrid();
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    manualLog("DOM Carregado - Iniciando sistema.");
+// Inicialização
+window.onload = () => {
     renderEncGrid();
-});
+};
