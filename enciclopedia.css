@@ -1,159 +1,179 @@
-/* Layout Geral */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+/* Layout e Container Principal */
+.container { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
-.main-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+/* Abas de Tecnologias */
+.main-tabs { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 20px; 
 }
 
-.main-btn {
-    flex: 1;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    background: #1e293b;
-    color: #94a3b8;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    transition: 0.3s;
+.main-btn { 
+    flex: 1; 
+    padding: 15px; 
+    border: none; 
+    border-radius: 8px; 
+    background: #1e293b; 
+    color: #94a3b8; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 16px; 
+    transition: all 0.3s ease; 
 }
 
+/* Cores Dinâmicas das Tecnologias */
 .active-html { background: #e34c26 !important; color: white; box-shadow: 0 4px 15px rgba(227, 76, 38, 0.3); }
 .active-css { background: #264de4 !important; color: white; box-shadow: 0 4px 15px rgba(38, 77, 228, 0.3); }
 .active-js { background: #f7df1e !important; color: #000; box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3); }
 
-.level-selector {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 30px;
-    background: #0f172a;
-    padding: 6px;
-    border-radius: 12px;
+/* Seletor de Nível (Iniciante, Intermediário...) */
+.level-selector { 
+    display: flex; 
+    gap: 5px; 
+    margin-bottom: 30px; 
+    background: #0f172a; 
+    padding: 6px; 
+    border-radius: 12px; 
 }
 
-.lvl-btn {
-    flex: 1;
-    padding: 10px;
-    background: transparent;
-    border: none;
-    color: #64748b;
-    cursor: pointer;
-    border-radius: 8px;
+.lvl-btn { 
+    flex: 1; 
+    padding: 10px; 
+    background: transparent; 
+    border: none; 
+    color: #64748b; 
+    cursor: pointer; 
+    border-radius: 8px; 
     transition: 0.2s;
 }
 
-.active-lvl { background: #38bdf8; color: #020617; font-weight: bold; }
-
-/* Grid de Tópicos */
-.topics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
+.active-lvl { 
+    background: #38bdf8; 
+    color: #020617; 
+    font-weight: bold; 
 }
 
-.topic-card {
-    background: #1e293b;
-    padding: 25px 15px;
-    border-radius: 15px;
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid #334155;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
+/* Grid de Tópicos */
+.topics-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 20px; 
+}
+
+.topic-card { 
+    background: #1e293b; 
+    padding: 25px 15px; 
+    border-radius: 15px; 
+    text-align: center; 
+    cursor: pointer; 
+    border: 1px solid #334155; 
+    transition: all 0.3s ease; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 80px; 
+    color: white; 
 }
 
 .topic-card h3 {
-    margin: 0;
     font-size: 16px;
-    color: #f8fafc;
+    margin: 0;
 }
 
-.topic-card:hover {
-    transform: translateY(-5px);
-    border-color: #38bdf8;
-    background: #1e293b;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+.topic-card:hover { 
+    transform: translateY(-5px); 
+    border-color: #38bdf8; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
 }
 
-/* MODAL DE LEITURA */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(2, 6, 23, 0.95);
-    z-index: 10000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+/* --- SISTEMA DE MODAL --- */
+
+.modal-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(2, 6, 23, 0.95); 
+    z-index: 10000; 
+    display: none; 
+    justify-content: center; 
+    align-items: center; 
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+    pointer-events: none; /* Crucial para não travar cliques quando fechado */
 }
 
-.modal-overlay.active {
-    display: flex;
-    pointer-events: auto;
-    opacity: 1;
+.modal-overlay.active { 
+    display: flex; 
+    opacity: 1; 
+    pointer-events: auto; 
 }
 
-.modal-content {
-    background: #1e293b;
-    width: 90%;
-    max-width: 650px;
-    max-height: 85vh;
-    border-radius: 20px;
-    padding: 40px;
-    position: relative;
-    overflow-y: auto; /* Permite rolar o texto se for grande */
-    border: 1px solid #38bdf8;
-    box-shadow: 0 0 50px rgba(56, 189, 248, 0.15);
+.modal-content { 
+    background: #1e293b; 
+    width: 95%; 
+    max-width: 700px; 
+    max-height: 90vh; 
+    border-radius: 20px; 
+    padding: 40px; 
+    position: relative; 
+    overflow-y: auto; 
+    border: 1px solid #334155; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-/* Estilização do texto dentro do modal */
 .modal-body h2 { 
     color: #38bdf8; 
-    margin-bottom: 20px; 
-    border-bottom: 1px solid #334155;
-    padding-bottom: 10px;
+    margin-bottom: 25px; 
+    border-bottom: 1px solid #334155; 
+    padding-bottom: 10px; 
+    font-size: 28px; 
 }
 
 .modal-body p { 
-    line-height: 1.8; 
+    line-height: 1.7; 
     color: #cbd5e1; 
-    font-size: 17px;
-    margin-bottom: 15px;
+    font-size: 17px; 
+    margin-bottom: 15px; 
 }
 
-.modal-body ul {
-    color: #cbd5e1;
-    margin-bottom: 20px;
+/* Blocos de Código (Exemplos Técnicos) */
+.code-block { 
+    background: #0f172a; 
+    padding: 20px; 
+    border-radius: 10px; 
+    border-left: 4px solid #38bdf8; 
+    margin: 25px 0; 
+    overflow-x: auto; 
 }
 
-.modal-body li {
-    margin-bottom: 10px;
-    line-height: 1.5;
+.code-block pre { 
+    margin: 0; 
 }
 
-.modal-body code {
-    background: #0f172a;
-    padding: 2px 6px;
-    border-radius: 4px;
-    color: #f7df1e;
-    font-family: monospace;
+.code-block code { 
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace; 
+    color: #f7df1e; 
+    font-size: 14px; 
+    line-height: 1.5; 
 }
 
-/* Custom Scrollbar para o modal */
+/* Tags de código no meio do texto */
+.modal-body code { 
+    background: rgba(56, 189, 248, 0.1); 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    color: #38bdf8; 
+    font-family: monospace; 
+}
+
+/* Scrollbar Customizada para o Modal */
 .modal-content::-webkit-scrollbar {
     width: 8px;
 }
@@ -163,4 +183,7 @@
 .modal-content::-webkit-scrollbar-thumb {
     background: #334155;
     border-radius: 10px;
+}
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #475569;
 }
