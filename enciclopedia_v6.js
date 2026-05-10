@@ -1,5 +1,5 @@
 /**
- * ENCICLOPÉDIA GAMEDEV - VERSÃO V6 (Lógica Pura)
+ * ENCICLOPÉDIA GAMEDEV - VERSÃO V6.1 (Com Debug)
  */
 
 const db = {
@@ -24,7 +24,11 @@ function openModal(topic) {
     
     let content = "<p>Conteúdo em fase de produção.</p>";
 
-    // Busca direta na variável global que veio do arquivo html.js
+    // DEBUG: Vamos ver no console o que o JS está encontrando
+    console.log("Tentando abrir tópico:", topic);
+    console.log("Tecnologia atual:", currentTech);
+    console.log("Variável conteudosHTML existe?", typeof window.conteudosHTML !== 'undefined');
+
     if (currentTech === 'html' && typeof window.conteudosHTML !== 'undefined') {
         content = window.conteudosHTML[topic] || content;
     } else if (currentTech === 'css' && typeof window.conteudosCSS !== 'undefined') {
@@ -89,5 +93,4 @@ function renderEncGrid() {
     });
 }
 
-// Inicialização
 renderEncGrid();
