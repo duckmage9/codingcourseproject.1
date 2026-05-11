@@ -1,6 +1,5 @@
 /**
  * ENCICLOPÉDIA GAMEDEV - VERSÃO V6 (Lógica de Renderização)
- * Este arquivo gerencia a troca de tecnologias, níveis e abertura do modal.
  */
 
 const db = {
@@ -47,7 +46,6 @@ function openModal(topic) {
     const container = document.getElementById('reader-body');
     let content = "<p>Conteúdo em fase de produção.</p>";
 
-    // Busca nos conteúdos carregados globalmente pelo arquivo conteudos/html.js
     if (currentTech === 'html' && typeof window.conteudosHTML !== 'undefined') {
         content = window.conteudosHTML[topic] || content;
     }
@@ -71,7 +69,6 @@ function closeModal() {
     }
 }
 
-// Fecha o modal ao clicar na área escura
 window.addEventListener('click', (e) => {
     const overlay = document.getElementById('reader');
     if (e.target === overlay) closeModal();
@@ -103,11 +100,12 @@ function renderEncGrid() {
     topics.forEach(topic => {
         const card = document.createElement('div');
         card.className = 'topic-card';
-        card.innerHTML = `<h3>${topic}</h3>`;
+        // CORREÇÃO: Escapar os caracteres < e > para o texto não sumir no botão
+        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        card.innerHTML = `<h3>${safeTitle}</h3>`;
         card.onclick = () => openModal(topic);
         grid.appendChild(card);
     });
 }
 
-// Inicialização automática ao carregar o script
 renderEncGrid();
