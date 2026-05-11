@@ -1,5 +1,5 @@
 /**
- * ENCICLOPÉDIA GAMEDEV - VERSÃO V6 (Lógica de Renderização)
+ * ENCICLOPÉDIA GAMEDEV - VERSÃO V6.1 (Correção de Títulos)
  */
 
 const db = {
@@ -35,12 +35,13 @@ const db = {
         ]
     },
     css: { iniciante: [], intermediario: [], avancado: [] },
-    js: { iniciante: [], intermediario: [], avancado: [] }
+    js: { iniciante: [], intermediario: [] , avancado: [] }
 };
 
 let currentTech = 'html';
 let currentLevel = 'iniciante';
 
+// FUNÇÃO CORRIGIDA: Agora trata o título para não quebrar o H2
 function openModal(topic) {
     const overlay = document.getElementById('reader');
     const container = document.getElementById('reader-body');
@@ -51,7 +52,10 @@ function openModal(topic) {
     }
     
     if (overlay && container) {
-        container.innerHTML = `<h2>${topic}</h2>${content}`;
+        // Escapa os sinais de menor e maior apenas para exibição no título
+        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        
+        container.innerHTML = `<h2>${safeTitle}</h2>${content}`;
         overlay.style.display = 'flex';
         setTimeout(() => overlay.classList.add('active'), 10);
         document.body.style.overflow = 'hidden';
@@ -100,9 +104,9 @@ function renderEncGrid() {
     topics.forEach(topic => {
         const card = document.createElement('div');
         card.className = 'topic-card';
-        // CORREÇÃO: Escapar os caracteres < e > para o texto não sumir no botão
-        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        card.innerHTML = `<h3>${safeTitle}</h3>`;
+        // Escapa os títulos nos cards também
+        const safeTitleForCard = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        card.innerHTML = `<h3>${safeTitleForCard}</h3>`;
         card.onclick = () => openModal(topic);
         grid.appendChild(card);
     });
