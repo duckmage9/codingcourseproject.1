@@ -1,49 +1,10 @@
 /**
- * BANCO DE DADOS DE TEXTOS - HTML COMPLETO (INICIANTE, INTERMEDIÁRIO E AVANÇADO)
+ * BANCO DE DADOS DE TEXTOS - HTML COMPLETO (AVANÇADO ÍNTEGRA)
  */
 
 window.conteudosHTML = {
-    // === NÍVEL INICIANTE (Mantidos da versão anterior) ===
-    "Conceito de Tags": `
-        <p>As tags são a base da linguagem HTML e funcionam como comandos que informam ao navegador como o conteúdo deve ser estruturado. No desenvolvimento de jogos, elas são usadas para definir desde a área onde o jogo será exibido até os botões de menu e textos de interface. Cada tag é envolvida por colchetes angulares, como <code>&lt;html&gt;</code>.</p>
-        <p>A maioria das tags trabalha em pares: uma de abertura e uma de fechamento (que possui uma barra), como em <code>&lt;p&gt;Texto&lt;/p&gt;</code>. Essa estrutura em "cascata" permite que o desenvolvedor organize a hierarquia visual da página de forma lógica.</p>
-        <div class="code-block"><pre><code>&lt;h1&gt;Meu Primeiro Jogo&lt;/h1&gt;
-&lt;p&gt;Pressione Start para começar.&lt;/p&gt;</code></pre></div>`,
+    // === NÍVEL AVANÇADO (TEXTOS COMPLETOS) ===
 
-    "Estrutura Global": `
-        <p>Todo documento HTML5 profissional precisa seguir uma estrutura global obrigatória. Isso garante que o navegador identifique o arquivo como um site moderno e aplique as regras de renderização corretamente. Essa estrutura começa sempre com a declaração <code>&lt;!DOCTYPE html&gt;</code>.</p>
-        <div class="code-block"><pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Game Page&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;!-- O jogo entra aqui --&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre></div>`,
-
-    "Tags de Texto": `<p>As tags de texto são usadas para exibir informações escritas, como diálogos de NPCs e pontuação...</p>`,
-    "Meta Tags Técnicas": `<p>Instruções técnicas essenciais como charset e viewport...</p>`,
-    "Atributos e IDs": `<p>Propriedades para identificar elementos e manipulá-los via JS...</p>`,
-    "Links e Navegação": `<p>Uso da tag &lt;a&gt; para conectar recursos e páginas...</p>`,
-    "Listas de Inventário": `<p>Organização de itens usando ul, ol e li...</p>`,
-    "Inserção de Mídia": `<p>Trabalhando com img, audio e video...</p>`,
-    "Containers Div": `<p>O uso de caixas genéricas para organizar o layout...</p>`,
-    "Comentários de Código": `<p>Organização interna do desenvolvedor no HTML...</p>`,
-
-    // === NÍVEL INTERMEDIÁRIO (Mantidos da versão anterior) ===
-    "Elementos Semânticos (Header, Nav, Footer)": `<p>Estrutura lógica para acessibilidade e SEO...</p>`,
-    "Seções de Conteúdo (Section, Article, Aside)": `<p>Divisão específica de blocos de informação...</p>`,
-    "Estrutura de Tabelas Simples (Table, Tr, Td)": `<p>Exibição de dados em linhas e colunas...</p>`,
-    "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)": `<p>Organização avançada de tabelas de ranking...</p>`,
-    "Formulários Básicos (Form, Input, Label)": `<p>Coleta de dados e interação com o jogador...</p>`,
-    "Tipos de Input (Text, Password, Email, Button)": `<p>Diferentes funções para campos de entrada...</p>`,
-    "Seleções em Formulários (Radio, Checkbox, Select)": `<p>Escolha de opções pré-definidas...</p>`,
-    "Validação Nativa de Formulários": `<p>Atributos required, min e max...</p>`,
-    "Introdução à Acessibilidade (Atributos ARIA)": `<p>Inclusão de jogadores com necessidades especiais...</p>`,
-    "A tag <dialog> (Modais Nativos)": `<p>Criação de janelas pop-up nativas do navegador...</p>`,
-
-    // === NÍVEL AVANÇADO (TEXTOS COMPLETOS ATUALIZADOS) ===
     "A tag <canvas> (O Palco dos Jogos)": `
         <p>A tag <code>&lt;canvas&gt;</code> é um dos elementos mais importantes do desenvolvimento de jogos web modernos. Ela funciona como uma área de desenho dentro da página HTML onde o JavaScript pode renderizar gráficos, animações, partículas, personagens e cenários em tempo real. Diferente de elementos HTML tradicionais, o <code>&lt;canvas&gt;</code> não possui conteúdo visual próprio; tudo o que aparece nele é desenhado dinamicamente através de código. Isso permite criar jogos 2D e até experiências 3D usando bibliotecas gráficas. Em projetos de jogos, o canvas geralmente representa literalmente a “tela do jogo”.</p>
         <p>Na prática, o <code>&lt;canvas&gt;</code> é usado junto da API Canvas do JavaScript para desenhar formas, imagens e animações continuamente. O desenvolvedor cria um elemento <code>&lt;canvas&gt;</code> no HTML e depois utiliza JavaScript para acessar seu contexto gráfico usando <code>getContext("2d")</code>. Esse contexto permite desenhar sprites, HUDs, barras de vida e mapas inteiros. Em engines próprias, o canvas também é responsável pelo sistema de colisão visual e atualização de frames. Jogos em estilo arcade, plataforma e RPG frequentemente utilizam essa técnica.</p>
@@ -94,9 +55,9 @@ ctx.fillText("Jogador 1", 40, 40);
         <p>Na prática, <code>preload</code> é usado para arquivos necessários imediatamente, enquanto <code>prefetch</code> prepara recursos que poderão ser usados futuramente. O navegador interpreta essas instruções no <code>&lt;head&gt;</code> do HTML e começa os downloads em segundo plano. Isso permite que sprites, trilhas sonoras e mapas estejam prontos antes da partida começar. Em jogos grandes, essa técnica evita travamentos quando o jogador muda de fase. Também melhora a fluidez das animações iniciais.</p>
         <p>Esse recurso é importante porque jogos dependem muito de carregamento rápido e contínuo. Se um som ou textura demorar para carregar durante a ação, a experiência pode parecer quebrada. O pré-carregamento reduz falhas visuais, evita telas vazias e melhora a percepção de qualidade do projeto. Em jogos online, isso ajuda a criar uma experiência mais profissional e responsiva. Muitas engines utilizam sistemas automáticos de preload baseados nessas técnicas do HTML.</p>
         <div class="code-block"><pre><code>&lt;head&gt;
-<link rel="preload" href="player.png" as="image"&gt;
-<link rel="preload" href="fase1.mp3" as="audio"&gt;
-<link rel="prefetch" href="fase2.png"&gt;
+&lt;link rel="preload" href="player.png" as="image"&gt;
+&lt;link rel="preload" href="fase1.mp3" as="audio"&gt;
+&lt;link rel="prefetch" href="fase2.png"&gt;
 &lt;/head&gt;</code></pre></div>`,
 
     "Iframe Avançado (<iframe> e Sandbox)": `
@@ -131,9 +92,7 @@ document.body.appendChild(template.content.cloneNode(true));
         <p>Esse recurso é extremamente importante porque melhora a experiência do usuário sem depender totalmente de servidores online. Jogos offline usam armazenamento local para criar sistemas de save state simples e rápidos. Além disso, ele reduz custos de infraestrutura e facilita prototipagem de projetos independentes. Mesmo jogos online frequentemente usam armazenamento local para cache e preferências temporárias. Isso torna a navegação mais rápida e personalizada.</p>
         <div class="code-block"><pre><code>&lt;script&gt;
 localStorage.setItem("faseAtual", "3");
-
 const fase = localStorage.getItem("faseAtual");
-
 console.log("Fase salva:", fase);
 &lt;/script&gt;</code></pre></div>`,
 
@@ -149,7 +108,6 @@ class HudJogador extends HTMLElement {
     this.innerHTML = "&lt;h2&gt;Vida: 100&lt;/h2&gt;";
   }
 }
-
 customElements.define("hud-jogador", HudJogador);
 &lt;/script&gt;</code></pre></div>`,
 
