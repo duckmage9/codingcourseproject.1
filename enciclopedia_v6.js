@@ -1,5 +1,6 @@
 /**
  * ENCICLOPÉDIA GAMEDEV - VERSÃO V6 (Lógica de Renderização)
+ * Este arquivo gerencia a troca de tecnologias, níveis e abertura do modal.
  */
 
 const db = {
@@ -21,7 +22,18 @@ const db = {
             "Introdução à Acessibilidade (Atributos ARIA)", 
             "A tag <dialog> (Modais Nativos)"
         ],
-        avancado: []
+        avancado: [
+            "A tag <canvas> (O Palco dos Jogos)",
+            "SVG inline (<svg> e <path>)",
+            "Imagens Responsivas (<picture> e srcset)",
+            "Áudios Avançados (Atributos e Eventos de <audio>)",
+            "Pré-carregamento de Assets (preload e prefetch)",
+            "Iframe Avançado (<iframe> e Sandbox)",
+            "Manipulação de Templates (<template> e <slot>)",
+            "Armazenamento no Navegador (O papel técnico do HTML5)",
+            "Componentes Web Nativos (Custom Elements)",
+            "Acessibilidade de Teclado Avançada (tabindex e Foco)"
+        ]
     },
     css: { iniciante: [], intermediario: [], avancado: [] },
     js: { iniciante: [], intermediario: [], avancado: [] }
@@ -35,7 +47,7 @@ function openModal(topic) {
     const container = document.getElementById('reader-body');
     let content = "<p>Conteúdo em fase de produção.</p>";
 
-    // Busca nos conteúdos carregados globalmente
+    // Busca nos conteúdos carregados globalmente pelo arquivo conteudos/html.js
     if (currentTech === 'html' && typeof window.conteudosHTML !== 'undefined') {
         content = window.conteudosHTML[topic] || content;
     }
@@ -59,6 +71,7 @@ function closeModal() {
     }
 }
 
+// Fecha o modal ao clicar na área escura
 window.addEventListener('click', (e) => {
     const overlay = document.getElementById('reader');
     if (e.target === overlay) closeModal();
@@ -96,5 +109,5 @@ function renderEncGrid() {
     });
 }
 
-// === A LINHA QUE ESTAVA FALTANDO: INICIALIZAÇÃO ===
+// Inicialização automática ao carregar o script
 renderEncGrid();
