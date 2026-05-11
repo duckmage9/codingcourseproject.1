@@ -1,10 +1,11 @@
 /**
- * BANCO DE DADOS: HTML - NÍVEL INICIANTE
- * Este arquivo contém apenas os textos detalhados.
+ * BANCO DE DADOS: HTML (Níveis Iniciante e Intermediário)
  */
 
 window.conteudosHTML = {
+    // ==========================================
     // === NÍVEL INICIANTE (10 TÓPICOS) ===
+    // ==========================================
 
     "Conceito de Tags": `
         <p>As tags são os blocos fundamentais do HTML e funcionam como instruções que dizem ao navegador como cada parte da página deve ser exibida. A maioria das tags possui uma estrutura de abertura e fechamento, como <code>&lt;p&gt;</code> e <code>&lt;/p&gt;</code>, envolvendo o conteúdo que será interpretado. Existem também tags sem fechamento, como <code>&lt;img&gt;</code>, usadas para inserir elementos específicos na tela. Cada tag possui uma função própria, podendo representar textos, imagens, divisões de interface ou áreas interativas. Sem as tags, o navegador não conseguiria entender como organizar os elementos de um jogo web.</p>
@@ -17,7 +18,7 @@ window.conteudosHTML = {
     "Estrutura Global": `
         <p>A estrutura global do HTML representa a base obrigatória de qualquer página web e define como o navegador deve interpretar o documento. As principais divisões são as tags <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> e <code>&lt;body&gt;</code>. A tag <code>&lt;html&gt;</code> envolve todo o conteúdo da página, funcionando como o container principal. Dentro dela, o <code>&lt;head&gt;</code> armazena configurações técnicas e conexões com arquivos externos, enquanto o <code>&lt;body&gt;</code> contém tudo o que será exibido visualmente ao jogador. Essa organização garante que o navegador carregue o jogo corretamente.</p>
         <p>Na prática, essa estrutura funciona como a fundação de um projeto de jogo web. O <code>&lt;head&gt;</code> normalmente recebe links para arquivos CSS responsáveis pelo visual da interface e scripts JavaScript que controlam mecânicas do jogo. Já o <code>&lt;body&gt;</code> abriga elements como menus, canvas do jogo, placares e barras de energia. Sem essa separação, o código ficaria desorganizado e difícil de manter. Mesmo projetos pequenos precisam dessa estrutura para funcionar corretamente em diferentes navegadores.</p>
-        <p>Para jogos web, a estrutura global é importante porque ajuda a separar responsabilidades dentro do projeto. O HTML cuida da organização da interface, o CSS da aparência visual e o JavaScript da lógica e da movimentação do jogo. Essa divisão facilita atualizações futuras e permite que diferentes pessoas trabalhem no mesmo projeto sem conflitos. Em projetos maiores, a organização correta evita erros e melhora o desempenho do desenvolvimento. Além disso, muitos frameworks e bibliotecas dependem dessa estrutura para funcionar corretamente.</p>
+        <p>Para jogos web, a estrutura global é importante porque ajuda a separar responsabilidades dentro do projeto. O HTML cuida da organização da interface, o CSS da aparência visual e o JavaScript da lógica e da movimentação do jogo. Essa divisão facilita atualizações futures e permite que diferentes pessoas trabalhem no mesmo projeto sem conflitos. Em projetos maiores, a organização correta evita erros e melhora o desempenho do desenvolvimento. Além disso, muitos frameworks e bibliotecas dependem dessa estrutura para funcionar corretamente.</p>
         <div class="code-block"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -84,7 +85,7 @@ window.conteudosHTML = {
     "Containers Div": `
         <p>A tag <code>&lt;div&gt;</code> funciona como um container genérico usado para agrupar elementos dentro da página. Ela não possui significado visual próprio, mas serve para organizar e separar áreas da interface. Desenvolvedores utilizam divs para criar blocos independentes que podem receber estilos e comportamentos específicos. Isso facilita bastante a construção de layouts complexos em jogos web. Quase toda interface moderna utiliza múltiplas divs.</p>
         <p>Na prática, as divs são usadas para criar menus, barras de vida, painéis de inventário e janelas flutuantes. Cada parte da interface pode ficar dentro de uma div diferente para facilitar a estilização com CSS. Também é comum usar divs para separar áreas do jogo, como HUD e gameplay. Scripts em JavaScript conseguem alterar essas áreas dinamicamente durante a execução. Isso torna a interface mais organizada e flexível.</p>
-        <p>No desenvolvimento de jogos, containers div são importantes porque ajudam a estruturar interfaces complexas sem confusão. Jogos possuem muitos elementos simultâneos na tela, e agrupar componentes evita bagunça no código. Além disso, divs permitem controlar posições, tamanhos e animações com facilidade. Sistemas de pausa, menus rápidos e notificações geralmente dependem desse tipo de organização. Projetos bem estruturados costumam utilizar divs em praticamente toda a interface.</p>
+        <p>No desenvolvimento de jogos, containers div são importantes porque ajudam a estruturar interfaces complexas sem confusão. Jogos possuem muitos elements simultâneos na tela, e agrupar componentes evita bagunça no código. Além disso, divs permitem controlar posições, tamanhos e animações com facilidade. Sistemas de pausa, menus rápidos e notificações geralmente dependem desse tipo de organização. Projetos bem estruturados costumam utilizar divs em praticamente toda a interface.</p>
         <div class="code-block"><pre><code>&lt;div id="hud"&gt;
     &lt;div id="vida"&gt;Vida: 80&lt;/div&gt;
     &lt;div id="moedas"&gt;Moedas: 150&lt;/div&gt;
@@ -102,5 +103,179 @@ window.conteudosHTML = {
 &lt;!-- Menu de pausa --&gt;
 &lt;div id="pauseMenu"&gt;
     &lt;button&gt;Continuar&lt;/button&gt;
-&lt;/div&gt;</code></pre></div>`
+&lt;/div&gt;</code></pre></div>`,
+
+
+    // ==========================================
+    // === NÍVEL INTERMEDIÁRIO (10 TÓPICOS) ===
+    // ==========================================
+
+    "Elementos Semânticos (Header, Nav, Footer)": `
+        <p>Os elementos semânticos do HTML servem para organizar uma página de maneira lógica e compreensível tanto para os desenvolvedores quanto para os navegadores. As tags <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code> e <code>&lt;footer&gt;</code> substituem o uso exagerado de <code>&lt;div&gt;</code>, deixando a estrutura mais clara e profissional. O <code>&lt;header&gt;</code> normalmente representa o topo da página, contendo o título, logotipo ou informações iniciais. O <code>&lt;nav&gt;</code> é utilizado para menus de navegação, enquanto o <code>&lt;footer&gt;</code> representa o rodapé com créditos, contatos ou informações finais. Essas tags ajudam os mecanismos de busca e tecnologias assistivas a entenderem melhor o conteúdo do site.</p>
+        <p>Na prática, essas tags são extremamente úteis no desenvolvimento de jogos web. O <code>&lt;header&gt;</code> pode ser usado para mostrar o nome do jogo, a pontuação ou o menu principal. O <code>&lt;nav&gt;</code> pode conter botões como “Jogar”, “Configurações” e “Ranking”. Já o <code>&lt;footer&gt;</code> pode exibir informações do desenvolvedor, direitos autorais ou atalhos rápidos. Ao utilizar elementos semânticos, o código fica mais fácil de manter, principalmente em projetos maiores que possuem várias telas e funcionalidades diferentes.</p>
+        <p>Outro ponto importante é a organização da equipe de desenvolvimento. Em projetos de jogos, normalmente existem arquivos separados para HTML, CSS e JavaScript. Quando o HTML está bem estruturado semanticamente, fica muito mais simples localizar cada área da interface e aplicar estilos ou comportamentos específicos. Isso evita confusão e reduz erros durante o desenvolvimento. Além disso, muitos frameworks modernos aproveitam essa estrutura semântica para melhorar desempenho e acessibilidade.</p>
+        <div class="code-block"><pre><code>&lt;header&gt;
+    &lt;h1&gt;Space Battle&lt;/h1&gt;
+&lt;/header&gt;
+&lt;nav&gt;
+    &lt;a href="#"&gt;Jogar&lt;/a&gt;
+    &lt;a href="#"&gt;Ranking&lt;/a&gt;
+    &lt;a href="#"&gt;Configurações&lt;/a&gt;
+&lt;/nav&gt;
+&lt;footer&gt;
+    &lt;p&gt;Desenvolvido por Indie Studio&lt;/p&gt;
+&lt;/footer&gt;</code></pre></div>`,
+
+    "Seções de Conteúdo (Section, Article, Aside)": `
+        <p>As tags <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code> e <code>&lt;aside&gt;</code> servem para dividir o conteúdo da página em áreas organizadas e independentes. A tag <code>&lt;section&gt;</code> representa uma parte temática do conteúdo, funcionando como um agrupamento lógico. O <code>&lt;article&gt;</code> é utilizado para conteúdos que fazem sentido sozinhos, como notícias, posts ou descrições de fases de um jogo. Já o <code>&lt;aside&gt;</code> representa conteúdos secundários, como anúncios, dicas ou widgets laterais.</p>
+        <p>Em jogos web, essas tags ajudam bastante na criação de interfaces organizadas. Uma <code>&lt;section&gt;</code> pode representar a área principal do jogo, enquanto outra pode mostrar objetivos da missão. Um <code>&lt;article&gt;</code> pode ser usado em blogs internos do jogo, notícias de atualizações ou descrição de personagens. O <code>&lt;aside&gt;</code> funciona muito bem para exibir rankings, propagandas, dicas rápidas ou atalhos para redes sociais do jogo.</p>
+        <p>A grande vantagem dessa divisão é a clareza estrutural. Em projetos grandes, é comum existirem muitas áreas diferentes na tela, e usar apenas <code>&lt;div&gt;</code> deixa tudo confuso. Com elementos semânticos, qualquer desenvolvedor consegue identificar rapidamente o propósito de cada parte do sistema. Isso melhora a manutenção, a acessibilidade e também facilita futuras expansões do projeto, como adicionar novas telas ou modos de jogo.</p>
+        <div class="code-block"><pre><code>&lt;section&gt;
+    &lt;h2&gt;Missão Atual&lt;/h2&gt;
+    &lt;p&gt;Derrote todos os inimigos da arena.&lt;/p&gt;
+&lt;/section&gt;
+&lt;article&gt;
+    &lt;h2&gt;Atualização 1.2&lt;/h2&gt;
+    &lt;p&gt;Novo personagem desbloqueado.&lt;/p&gt;
+&lt;/article&gt;
+&lt;aside&gt;
+    &lt;p&gt;Dica: Use escudo contra ataques mágicos.&lt;/p&gt;
+&lt;/aside&gt;</code></pre></div>`,
+
+    "Estrutura de Tabelas Simples (Table, Tr, Td)": `
+        <p>As tabelas em HTML são usadas para organizar informações em linhas e colunas. A tag <code>&lt;table&gt;</code> cria a tabela principal, <code>&lt;tr&gt;</code> representa cada linha e <code>&lt;td&gt;</code> representa as células que armazenam os dados. Esse tipo de estrutura é muito útil quando os dados possuem relação organizada, como números, estatísticas ou classificações. Apesar de simples, as tabelas continuam sendo importantes em diversos tipos de aplicações web.</p>
+        <p>No desenvolvimento de jogos, tabelas são bastante utilizadas para mostrar placares, rankings de jogadores, atributos de personagens ou inventários simples. Cada linha pode representar um jogador diferente, enquanto as colunas exibem informações como pontuação, nível e tempo de jogo. Isso permite apresentar grandes quantidades de dados de forma clara e fácil de entender pelo usuário.</p>
+        <p>Além da aparência visual organizada, as tabelas também ajudam na manutenção do projeto. Quando os dados estão estruturados corretamente, fica mais simples atualizar informações usando JavaScript ou integrar sistemas de banco de dados futuramente. Em jogos online, por exemplo, rankings dinâmicos normalmente são montados utilizando estruturas tabulares no HTML combinadas com scripts que atualizam os valores automaticamente.</p>
+        <div class="code-block"><pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Jogador&lt;/th&gt;
+        &lt;th&gt;Pontos&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Ana&lt;/td&gt;
+        &lt;td&gt;4500&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Carlos&lt;/td&gt;
+        &lt;td&gt;3200&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre></div>`,
+
+    "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)": `
+        <p>As tags <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code> e <code>&lt;tfoot&gt;</code> servem para dividir tabelas em partes organizadas e semanticamente corretas. O <code>&lt;thead&gt;</code> representa o cabeçalho da tabela, contendo os títulos das colunas. O <code>&lt;tbody&gt;</code> agrupa os dados principais da tabela, enquanto o <code>&lt;tfoot&gt;</code> normalmente apresenta resultados finais, totais ou resumos. Essa separação melhora a leitura do código e facilita a manutenção de tabelas maiores.</p>
+        <p>Em jogos web, tabelas organizadas dessa forma são muito úteis em sistemas de ranking, estatísticas de partidas ou inventários extensos. O <code>&lt;thead&gt;</code> pode mostrar os nomes das categorias como “Jogador”, “Vitórias” e “Derrotas”. O <code>&lt;tbody&gt;</code> exibe os dados reais de cada usuário. Já o <code>&lt;tfoot&gt;</code> pode apresentar informações gerais, como total de participantes ou média de pontos da competição.</p>
+        <p>Outro benefício importante é a integração com CSS e JavaScript. Quando a tabela possui grupos bem definidos, fica mais fácil aplicar estilos específicos apenas no cabeçalho ou criar scripts que manipulem somente determinadas áreas da tabela. Isso torna o desenvolvimento mais organizado e melhora a escalabilidade do projeto, principalmente em jogos competitivos online que possuem muitos dados dinâmicos.</p>
+        <div class="code-block"><pre><code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Jogador&lt;/th&gt;
+            &lt;th&gt;Pontos&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Lucas&lt;/td&gt;
+            &lt;td&gt;9000&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Maria&lt;/td&gt;
+            &lt;td&gt;8700&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Total&lt;/td&gt;
+            &lt;td&gt;2 jogadores&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre></div>`,
+
+    "Formulários Básicos (Form, Input, Label)": `
+        <p>Os formulários são a principal forma de interação entre o usuário e o sistema dentro do HTML. A tag <code>&lt;form&gt;</code> cria a estrutura do formulário, <code>&lt;input&gt;</code> permite inserir informações e <code>&lt;label&gt;</code> identifica cada campo de maneira clara. Esses elementos são fundamentais para capturar dados do usuário, como nome, senha, e-mail ou preferências. Sem formulários, seria impossível criar sistemas de login, cadastro ou envio de informações.</p>
+        <p>No contexto de jogos web, formulários aparecem em várias situações importantes. Eles podem ser usados para criar telas de login, registro de jogadores, envio de feedback ou configuração de personagens. Um campo <code>&lt;input&gt;</code> pode capturar o nickname do jogador, enquanto o <code>&lt;label&gt;</code> ajuda a identificar exatamente o que deve ser digitado. Isso melhora a experiência do usuário e evita confusões durante a utilização do sistema.</p>
+        <p>Além da funcionalidade prática, formulários organizados corretamente também ajudam na acessibilidade e manutenção do projeto. O uso correto de <code>&lt;label&gt;</code> permite que leitores de tela entendam melhor os campos disponíveis. Em equipes de desenvolvimento, um HTML bem estruturado facilita futuras alterações e integração com bancos de dados ou APIs responsáveis pelo armazenamento das informações dos jogadores.</p>
+        <div class="code-block"><pre><code>&lt;form&gt;
+    &lt;label for="nome"&gt;Nome do Jogador:&lt;/label&gt;
+    &lt;input type="text" id="nome"&gt;
+    &lt;button type="submit"&gt;Entrar no Jogo&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>`,
+
+    "Tipos de Input (Text, Password, Email, Button)": `
+        <p>Os diferentes tipos de <code>&lt;input&gt;</code> permitem que o HTML trate cada informação de maneira específica. O tipo <strong>text</strong> é usado para textos comuns, <strong>password</strong> oculta caracteres digitados, <strong>email</strong> verifica automaticamente o formato de e-mails e <strong>button</strong> cria botões clicáveis. Esses tipos ajudam o navegador a entender qual tipo de dado está sendo solicitado ao usuário.</p>
+        <p>Em jogos web, esses campos aparecem frequentemente em sistemas de autenticação e menus interativos. O text pode ser usado para o nickname do jogador, o password protege a senha da conta e o email é importante em cadastros online ou recuperação de senha. Já os botões permitem iniciar partidas, salvar configurações ou confirmar ações importantes dentro da interface.</p>
+        <p>O uso correto dos tipos de input melhora a experiência do usuário e reduz erros de preenchimento. Além disso, navegadores modernos oferecem recursos automáticos baseados nesses tipos, como teclados específicos em celulares e validações básicas integradas. Isso diminui a necessidade de criar verificações extras com JavaScript e torna o desenvolvimento mais eficiente.</p>
+        <div class="code-block"><pre><code>&lt;form&gt;
+    &lt;input type="text" placeholder="Nickname"&gt;
+    &lt;input type="password" placeholder="Senha"&gt;
+    &lt;input type="email" placeholder="E-mail"&gt;
+    &lt;input type="button" value="Iniciar Jogo"&gt;
+&lt;/form&gt;</code></pre></div>`,
+
+    "Seleções em Formulários (Radio, Checkbox, Select)": `
+        <p>Os elementos <strong>radio</strong>, <strong>checkbox</strong> e <strong>select</strong> permitem criar opções de escolha dentro dos formulários. O radio serve para selecionar apenas uma opção entre várias disponíveis. O checkbox permite marcar múltiplas opções ao mesmo tempo. Já o <code>&lt;select&gt;</code> cria menus suspensos conhecidos como dropdowns, muito usados quando existem muitas opções disponíveis.</p>
+        <p>Em jogos web, esses recursos aparecem em telas de configuração e personalização. Um grupo de radio pode permitir escolher o nível de dificuldade do jogo. Os checkboxes podem ativar ou desativar efeitos sonoros, legendas ou notificações. O <code>&lt;select&gt;</code> pode ser usado para escolher personagens, mapas ou idiomas disponíveis no sistema.</p>
+        <p>Esses elementos tornam a interface mais organizada e intuitiva para o jogador. Em vez de exigir digitação manual, o usuário apenas escolhe opções prontas, reduzindo erros e agilizando a interação. Além disso, formulários com seleções estruturadas facilitam o processamento dos dados pelo JavaScript e pelos sistemas internos do jogo.</p>
+        <div class="code-block"><pre><code>&lt;form&gt;
+    &lt;p&gt;Dificuldade:&lt;/p&gt;
+    <label>
+        &lt;input type="radio" name="nivel" value="facil"&gt; Fácil
+    </label>
+    <label>
+        &lt;input type="radio" name="nivel" value="dificil"&gt; Difícil
+    </label>
+
+    &lt;p&gt;Configurações:&lt;/p&gt;
+    <label>
+        &lt;input type="checkbox" name="musica"&gt; Música
+    </label>
+    <label>
+        &lt;input type="checkbox" name="sfx"&gt; Efeitos Sonoros
+    </label>
+
+    &lt;select name="classe"&gt;
+        &lt;option value="guerreiro"&gt;Guerreiro&lt;/option&gt;
+        &lt;option value="mago"&gt;Mago&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/form&gt;</code></pre></div>`,
+
+    "Validação Nativa de Formulários": `
+        <p>A validação nativa do HTML utiliza atributos especiais para impedir o envio de dados incorretos sem precisar de JavaScript. O atributo <strong>required</strong> obriga o preenchimento do campo. Os atributos <strong>min</strong> e <strong>max</strong> definem limites numéricos, enquanto <strong>pattern</strong> cria regras específicas usando expressões regulares. Esses recursos ajudam a garantir que os dados enviados sejam válidos antes mesmo de chegarem ao servidor.</p>
+        <p>Em jogos web, isso é muito útil para formulários de cadastro, criação de personagens e sistemas online. O required pode impedir que o jogador entre sem informar um nickname. O min e max podem limitar a idade do usuário ou quantidade de personagens criados. Já o pattern pode impedir nomes inválidos contendo caracteres proibidos.</p>
+        <p>Além de melhorar a segurança e qualidade dos dados, a validação nativa reduz a necessidade de scripts extras. Isso deixa o projeto mais leve e fácil de manter. O navegador já exibe mensagens automáticas de erro para o usuário, tornando a experiência mais prática e intuitiva, especialmente em sistemas simples ou jogos independentes feitos por iniciantes.</p>
+        <div class="code-block"><pre><code>&lt;form&gt;
+    &lt;input 
+        type="text"
+        placeholder="Nickname"
+        required
+        pattern="[A-Za-z0-9]{3,10}"
+    &gt;
+    &lt;input 
+        type="number"
+        min="1"
+        max="99"
+        placeholder="Idade"
+    &gt;
+    &lt;button type="submit"&gt;Cadastrar&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>`,
+
+    "Introdução à Acessibilidade (Atributos ARIA)": `
+        <p>Os atributos ARIA ajudam a tornar páginas e aplicações acessíveis para pessoas que utilizam leitores de tela ou outras tecnologias assistivas. ARIA significa <em>Accessible Rich Internet Applications</em>. Esses atributos fornecem informações extras para ferramentas de acessibilidade entenderem melhor o propósito dos elementos presentes na interface. Eles complementam o HTML semântico quando determinadas informações não ficam claras apenas pelas tags tradicionais.</p>
+        <p>No desenvolvimento de jogos web, acessibilidade é extremamente importante para permitir que mais pessoas possam utilizar o sistema. Um botão de “Iniciar Jogo” pode receber um atributo ARIA descrevendo sua função de maneira mais detalhada. Menus, barras de vida e notificações também podem usar atributos especiais para que leitores de tela consigam informar corretamente o que está acontecendo durante a navegação.</p>
+        <p>Além da inclusão social, acessibilidade melhora a qualidade geral do projeto. Interfaces acessíveis costumam ser mais organizadas, claras e bem estruturadas. Empresas grandes da indústria de jogos vêm investindo cada vez mais em acessibilidade para alcançar públicos maiores e cumprir padrões modernos de desenvolvimento web. Aprender ARIA desde cedo ajuda a criar projetos mais profissionais e completos.</p>
+        <div class="code-block"><pre><code>&lt;button aria-label="Iniciar nova partida"&gt;
+    Jogar
+&lt;/button&gt;
+&lt;div aria-live="polite"&gt;
+    Vida do jogador: 80%
+&lt;/div&gt;</code></pre></div>`,
+
+    "A tag <dialog> (Modais Nativos)": `
+        <p>A tag <code>&lt;dialog&gt;</code> é um recurso moderno do HTML usado para criar janelas modais e caixas de diálogo sem precisar de soluções improvisadas com várias <code>&lt;div&gt;</code> e muito JavaScript. Ela permite abrir e fechar pop-ups de maneira mais simples e organizada. Os navegadores modernos já oferecem suporte nativo para esse elemento, tornando sua utilização cada vez mais comum.</p>
+        <p>Nos jogos web, modais são usados em diversas situações importantes. Eles podem mostrar mensagens de “Game Over”, menus de pausa, confirmações de saída ou avisos importantes para o jogador. Antes da existência do <code>&lt;dialog&gt;</code>, era necessário criar estruturas complexas usando CSS e scripts extras. Agora, o próprio HTML já fornece um componente preparado para esse tipo de interação.</p>
+        <p>Outra vantagem importante é a acessibilidade automática. O <code>&lt;dialog&gt;</code> já possui comportamentos nativos que ajudam leitores de tela e navegação por teclado. Isso melhora a experiência do usuário e reduz a quantidade de código necessário no projeto. Em jogos independentes e projetos iniciantes, isso economiza tempo e deixa a interface mais moderna e profissional.</p>
+        <div class="code-block"><pre><code>&lt;dialog open&gt;
+    &lt;h2&gt;Game Over&lt;/h2&gt;
+    &lt;p&gt;Você perdeu todas as vidas.&lt;/p&gt;
+    &lt;button&gt;Reiniciar&lt;/button&gt;
+&lt;/dialog&gt;</code></pre></div>`
 };
