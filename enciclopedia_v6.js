@@ -1,6 +1,5 @@
 /**
- * ENCICLOPÉDIA GAMEDEV - VERSÃO V6.2
- * (Inicialização Segura e Mapeamento Completo de Arrays)
+ * ENCICLOPÉDIA GAMEDEV - VERSÃO V6.3 (Lógica Dinâmica Corrigida)
  */
 
 const db = {
@@ -23,48 +22,30 @@ const db = {
             "A tag <dialog> (Modais Nativos)"
         ],
         avancado: [
-            "A tag <canvas> (O Palco dos Jogos)",
-            "SVG inline (<svg> e <path>)",
-            "Imagens Responsivas (<picture> e srcset)",
-            "Áudios Avançados (Atributos e Eventos de <audio>)",
-            "Pré-carregamento de Assets (preload e prefetch)",
-            "Iframe Avançado (<iframe> e Sandbox)",
-            "Manipulação de Templates (<template> e <slot>)",
-            "Armazenamento no Navegador (O papel técnico do HTML5)",
-            "Componentes Web Nativos (Custom Elements)",
-            "Acessibilidade de Teclado Avançada (tabindex e Foco)"
+            "A tag <canvas> (O Palco dos Jogos)", "SVG inline (<svg> e <path>)", 
+            "Imagens Responsivas (<picture> e srcset)", "Áudios Avançados (Atributos e Eventos de <audio>)", 
+            "Pré-carregamento de Assets (preload e prefetch)", "Iframe Avançado (<iframe> e Sandbox)", 
+            "Manipulação de Templates (<template> e <slot>)", "Armazenamento no Navegador (O papel técnico do HTML5)", 
+            "Componentes Web Nativos (Custom Elements)", "Acessibilidade de Teclado Avançada (tabindex e Foco)"
         ]
     },
     css: { 
-        iniciante: [], 
-        intermediario: [], 
-        avancado: [] 
+        iniciante: ["Variáveis CSS (:root)", "Reset de Estilos (*)", "Modelo de Caixa (Box Model)"], 
+        intermediario: ["Flexbox para Interfaces", "Grid Layout de Cenários", "Transições Suaves"], 
+        avancado: ["Animações com Keyframes", "Filtros Gráficos (Blur/Invert)", "Responsividade com Media Queries"] 
     },
     js: { 
         iniciante: [
-            "Variáveis e Constantes (let e const)", 
-            "Tipos de Dados Essenciais", 
-            "Operadores Matemáticos e Lógicos", 
-            "Estruturas Condicionais (if, else, else if)", 
-            "Estruturas de Repetição (for e while)", 
-            "Introdução às Funções", 
-            "Arrays Simples (Listas)", 
-            "Objetos Básicos (Chave e Valor)", 
-            "Manipulação Básica do DOM (getElementById)", 
+            "Variáveis e Constantes (let e const)", "Tipos de Dados Essenciais", "Operadores Matemáticos e Lógicos", 
+            "Estruturas Condicionais (if, else, else if)", "Estruturas de Repetição (for e while)", "Introdução às Funções", 
+            "Arrays Simples (Listas)", "Objetos Básicos (Chave e Valor)", "Manipulação Básica do DOM (getElementById)", 
             "Eventos de Teclado e Mouse (addEventListener)"
         ], 
         intermediario: [], 
         avancado: [
-            "Callbacks e Event Loop", 
-            "Promises (Promessas)", 
-            "Async / Await", 
-            "Recursividade", 
-            "Manipulação Avançada de Objetos", 
-            "APIs e Fetch", 
-            "Bitwise Operators (Operadores de Bit)", 
-            "Regular Expressions (Regex)", 
-            "Memory Management (Garbage Collector)", 
-            "Design Patterns (Padrões de Projeto)"
+            "Callbacks e Event Loop", "Promises (Promessas)", "Async / Await", "Recursividade", 
+            "Manipulação Avançada de Objetos", "APIs e Fetch", "Bitwise Operators (Operadores de Bit)", 
+            "Regular Expressions (Regex)", "Memory Management (Garbage Collector)", "Design Patterns (Padrões de Projeto)"
         ] 
     }
 };
@@ -77,7 +58,6 @@ function openModal(topic) {
     const container = document.getElementById('reader-body');
     let content = "<p>Conteúdo em fase de produção ou não localizado no banco de dados.</p>";
 
-    // Selecionar o conteúdo com base na tecnologia ativa
     if (currentTech === 'html' && typeof window.conteudosHTML !== 'undefined') {
         content = window.conteudosHTML[topic] || content;
     } else if (currentTech === 'js' && typeof window.conteudosJS !== 'undefined') {
@@ -87,11 +67,9 @@ function openModal(topic) {
     }
     
     if (overlay && container) {
-        // Escapar caracteres para não corromper as tags H2
         const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         container.innerHTML = `<h2>${safeTitle}</h2>${content}`;
         overlay.style.display = 'flex';
-        // Pequeno atraso para a animação de opacidade funcionar
         setTimeout(() => overlay.classList.add('active'), 10);
         document.body.style.overflow = 'hidden';
     }
@@ -141,13 +119,15 @@ function renderEncGrid() {
     });
 }
 
-// O gatilho que impede o motor de correr antes do HTML estar construído
-document.addEventListener('DOMContentLoaded', () => {
-    renderEncGrid();
-    
-    // Fechar ao clicar no fundo escuro
-    window.addEventListener('click', (e) => {
-        const overlay = document.getElementById('reader');
-        if (e.target === overlay) closeModal();
-    });
+// Evento global para fechar no fundo escuro
+window.addEventListener('click', (e) => {
+    const overlay = document.getElementById('reader');
+    if (e.target === overlay) closeModal();
 });
+
+// Verificação inteligente de estado de carregamento
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    renderEncGrid(); // Renderiza direto se a injeção for via Bootstrap GitHub
+} else {
+    document.addEventListener('DOMContentLoaded', renderEncGrid); // Aguarda se for acesso normal local
+}
