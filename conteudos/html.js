@@ -162,4 +162,125 @@ window.conteudosHTML = {
         <div class="code-block"><pre><code>&lt;div role="progressbar" aria-valuenow="50" aria-valuemax="100"&gt;&lt;/div&gt;</code></pre></div>`,
 
     "A tag <dialog> (Modais Nativos)": `
-        <p>Nascida para ceifar centenas de montagens pesadas e bibliotecas imensas embutidas com truques (Gambiarra de Z-index
+        <p>Nascida para ceifar centenas de montagens pesadas e bibliotecas imensas embutidas com truques (Gambiarra de Z-index sobreposição div CSS). A tag modela nativamente popups brutais, as famosas janelas de Inventário Suspenso cravadas sobre a tela obscurecida pausando foco das atividades no fundo imediatamente (Função Backdrop sombreada) abrindo perfeitamente limpo.</p>
+        <p>Controlável totalmente pelo Javascript invoca showModal() jogando o elemento pra prioridade suprema na visualização engavetando teclados alheios na página focado eternamente ali na caixa dialogada aberta impedindo cliques passarem pra baixo quebrando botões de compra dupla em lojas que deram tela travada ou compras incorretas sem o isolamento da função modal correta.</p>
+        <p>Possui gatilho de close() enraizado na semântica base, sendo limpa e com acessibilidade absoluta em transição para o motor do jogo, um luxo que torna telas de Menus (Pausa/Sair/Avisos Criticos/Loja) extremamente fluidas e modulares com a inserção baseada em nativa pureza com total garantia sem quebrar sobre a tela principal do Canvas pintado embaixo dele.</p>
+        <div class="code-block"><pre><code>&lt;dialog id="lojaModal"&gt;
+    &lt;p&gt;Comprar Espada de Ferro?&lt;/p&gt;
+    &lt;button onclick="this.parentNode.close()"&gt;Fechar&lt;/button&gt;
+&lt;/dialog&gt;</code></pre></div>`,
+
+    // ==========================================
+    // === NÍVEL AVANÇADO ===
+    // ==========================================
+
+    "A tag <canvas> (O Palco dos Jogos)": `
+        <p>A tag <code>&lt;canvas&gt;</code> é um dos elementos mais importantes do desenvolvimento de jogos web modernos. Ela funciona como uma área de desenho dentro da página HTML onde o JavaScript pode renderizar gráficos, animações, partículas e cenários em tempo real. Diferente de elementos tradicionais, não possui conteúdo visual próprio; tudo é desenhado dinamicamente.</p>
+        <p>Na prática, o <code>&lt;canvas&gt;</code> é usado junto da API Canvas usando <code>getContext("2d")</code>. Esse contexto permite desenhar sprites, HUDs, barras de vida e mapas. Em engines próprias, o canvas também é responsável pelo sistema de atualização de frames. Jogos de plataforma frequentemente utilizam essa técnica central.</p>
+        <p>A importância do <code>&lt;canvas&gt;</code> é enorme porque ele oferece controle total pixel por pixel. Ele permite desenhar centenas de objetos rapidamente em uma única área, facilitando sistemas de câmera e movimentação contínua, mantendo a performance estável.</p>
+        <div class="code-block"><pre><code>&lt;canvas id="telaJogo" width="800" height="400"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+const canvas = document.getElementById("telaJogo");
+const ctx = canvas.getContext("2d");
+
+ctx.fillStyle = "green";
+ctx.fillRect(50, 50, 100, 100);
+&lt;/script&gt;</code></pre></div>`,
+
+    "SVG inline (<svg> e <path>)": `
+        <p>O SVG (Scalable Vector Graphics) permite criar gráficos vetoriais diretamente dentro do HTML. Diferente de PNG ou JPG, os SVGs não perdem qualidade ao serem ampliados, pois são desenhados matematicamente através de formas, linhas e curvas. São muito úteis para interfaces limpas e botões HUD leves.</p>
+        <p>Usado inline diretamente no HTML, permite criar escudos e indicadores dinâmicos de energia sem baixar arquivos externos da internet no Loading inicial do game e são super amigáveis com conexões baixas.</p>
+        <p>Esses botões não embaçam independentes do monitor e diminuem largamente espaço pesado no repositório final gerando leveza pro processador principal cuidar só do 3D ou dos Sprites da jogabilidade primária garantida da sua imersão gráfica final.</p>
+        <div class="code-block"><pre><code>&lt;svg width="100" height="100"&gt;
+    &lt;circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /&gt;
+&lt;/svg&gt;</code></pre></div>`,
+
+    "Imagens Responsivas (<picture> e srcset)": `
+        <p>As imagens responsivas carregam arquivos diferentes dependendo da resolução ou da capacidade do dispositivo do jogador. A tag <code>&lt;picture&gt;</code> ajuda o navegador a escolher qual imagem usar automaticamente, evitando que celulares baixem sprites 4K desnecessários e travem.</p>
+        <p>O desenvolvedor cria várias versões e o navegador então decide: um smartphone recebe um background comprimido e leve, um PC gamer recebe alta resolução. Isso corta tempo de loading drasticamente pro usuário final.</p>
+        <p>Essa equalização de peso contra qualidade diminui abandonos de loading infinito, adequando os hardwares fracos e beneficiando os possantes nas texturas majestosas de forma passiva do motor principal do projeto final sem esforço ativo lógico de verificação base.</p>
+        <div class="code-block"><pre><code>&lt;picture&gt;
+  &lt;source media="(max-width: 600px)" srcset="fundoMobile.png"&gt;
+  &lt;source media="(min-width: 601px)" srcset="fundoPC.png"&gt;
+  &lt;img src="fundoPC.png" alt="Cenário Responsivo"&gt;
+&lt;/picture&gt;</code></pre></div>`,
+
+    "Áudios Avançados (Atributos e Eventos de <audio>)": `
+        <p>A tag <code>&lt;audio&gt;</code> embute os sons sem necessidade de plugins eternos. Suporta trilhas e eventos nativos. Atributos base como <code>loop</code> e <code>autoplay</code> oferecem controles limpos da sonorização de fundo do nível sendo inicializado imediatamente pro jogador sem esforço extra.</p>
+        <p>Permite via Javascript pausar trilhas nos menus de forma agressiva acoplada e separar canais em múltiplos fluxos entre Efeitos SFX (Tiros) soltos e Músicas pesadas fluindo continuas independentemente. Preload permite carregar antecipado antes que a ação visual se concretize na tela impedindo engasgos sonoros do tiro demorar 1 segundo pra sair ao apertar arma.</p>
+        <p>Um sistema de imersão de áudio sem travamentos com a física atrelada eleva drasticamente o patamar da experiência garantindo respostas táteis auditivas em sincronia ao clicar e confirmar acertos críticos baseados estritamente na tag HTML manipulada no motor lúdico do sistema sonoro sem atrasos destrutivos aos estímulos nervosos sensíveis do usuário jogando focadamente nas interações.</p>
+        <div class="code-block"><pre><code>&lt;audio id="musicaBoss" loop preload="auto"&gt;
+  &lt;source src="temaFinal.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;</code></pre></div>`,
+
+    "Pré-carregamento de Assets (preload e prefetch)": `
+        <p>O pré-carregamento força downloads pesados antecipados da jogatina. As instruções injetadas na estrutura da aba <code>preload</code> exigem prioridade máxima nas engrenagens das Sprites que serão cruciais abrindo o nível atual estancando lacunas do renderizador. Prefetch manda adiantar o nível dois que ele passará enquanto ele joga o primeiro de forma oculta inteligente e mascarada no processador solto ocioso dele minimizando telas na passagem de capítulos de loading pesados no enredo contínuo final!</p>
+        <p>O uso no cabeçalho criva o navegador sem necessidade lógica extensa em Javascript puxando sons gigantes e cenários massivos estabilizando o ambiente inteiro virtual da fase em memória com segurança na taxa inicial do Frame garantindo sem artefatos cinzentos surgirem no carregamento ou texturas falhas da armadura quebrando as ilusões épicas ambientais de sua engenharia perimetral no browser rodante ao lado cliente da partida interconectada.</p>
+        <p>Tratamento industrial da navegação: evita as telas brancas infames, estende o verniz da programação com as ferramentas silenciosas HTML garantindo carregamentos massivos fluidos escondidos no meio tempo dos frames e interações passivas em vez de barramentos bruscos interrompidos nos climas acalorados entre os menus até a cena começar estopins!</p>
+        <div class="code-block"><pre><code>&lt;head&gt;
+&lt;link rel="preload" href="spritesheetPesada.png" as="image"&gt;
+&lt;link rel="preload" href="tiroSFX.mp3" as="audio"&gt;
+&lt;/head&gt;</code></pre></div>`,
+
+    "Iframe Avançado (<iframe> e Sandbox)": `
+        <p>A tag <code>&lt;iframe&gt;</code> injeta blocos HTML contendo páginas terceirizadas dentro da partida principal do Canvas sem esbarrar no fluxo e variáveis de origem rodando ali fora. Permite que painéis complexos embutidos ou widgets mini-games independentes ocorram rodando lado a lado sem destruir e derramar dados na engine rodando principal no palco em frente unificados harmonicamente como peças LEGO.</p>
+        <p>Com atributo Sandbox nós engaiolamos severamente a execução maliciosa barrando redirecionamentos furtivos e bloqueios agressivos por sites não permitidos injetados lá com total controle isolado protetor impedindo hackers ou scripts de roubos saírem do quadrante deles para vazar para tela master sua onde logamos dados.</p>
+        <p>Integrações assíncronas modulares permitindo lançadores de "Portal Hub" contendo vários minigames rodando isolados nos Iframes, blindados, perfeitos da interferência paralela sem sujar os motores individuais baseados sob amarras do sistema raiz gerenciador e controlador emulando segurança máxima protetiva.</p>
+        <div class="code-block"><pre><code>&lt;iframe 
+  src="portalRanking.html"
+  width="400"
+  height="600"
+  sandbox="allow-scripts"&gt;
+&lt;/iframe&gt;</code></pre></div>`,
+
+    "Manipulação de Templates (<template> e <slot>)": `
+        <p>A tag fantasma <code>&lt;template&gt;</code> armazena matrizes do HTML não reativas prontas na forma passiva e enclausurada do mundo. Não pesam carregamento renderizado nem travam navegações: O JS atua duplicando elas com extrema eficácia "clonando nós" injetando vidas reais preenchendo grades de menus ou inventários massivos de 100 poções que criariam código manual nojento de redigir sem a repetição por clonagem programática ativada nas inserções em tempo tático final executado pela fábrica.</p>
+        <p>Slots injetam pontuais modificações dentro desta clonagem, alterando cores e ícones na mesma estrutura mãe do template flexível. Você cria o chassi estrutural da tag, clona 50 vezes e joga a imagem de cada poção no slot dinâmico, populando as tabelas e gerando interações fluidas do jogador nos baús enormes em sua busca infinita com design imaculado limpo garantindo performance inicial avassaladora livre do hardcode textual semântico.</p>
+        <p>Essa tecnologia baseou os componentes universais e revolucionou a escalabilidade do que antigamente pesava páginas massivas estáticas transmutando em fábricas orgânicas leves na arquitetura DOM mantendo manutenibilidade impecável pro DEV trocar apenas a placa mãe do HTML da poção para refletir universal em todas no servidor alterado ativamente num relance dinâmico rápido sem dependências massivas destrutivas pro projeto gigante rodar.</p>
+        <div class="code-block"><pre><code>&lt;template id="cardInimigo"&gt;
+  &lt;div class="inimigo-box"&gt;
+    &lt;h3&gt;Nome Fantasma&lt;/h3&gt;
+    &lt;p&gt;Vida: 100&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre></div>`,
+
+    "Armazenamento no Navegador (O papel técnico do HTML5)": `
+        <p>A glória do Armazenamento Local HTML transmutada permite guardar o progresso do save do jogador debaixo da infraestrutura offline no HD sem acionar APIs de Nuvens lentas atrelado inteiramente na sua máquina física, gravando o estado exato dos inventários via JSON local mantendo o registro vital e intocado da aba reaberta ou de um dia para o outro salvando os pontos base cruciais garantidos para continuar do ponto exato pausado de onde finalizou a fase!</p>
+        <p>SessionStorage grava sessões voláteis purificadas fechadas em sumiços (Perde ao fechar a aba) adequados pro Loading Intermédio. LocalStorage sela nas chaves permanentes dados profundos: Status da Fase, Conquistas Liberadas, Upgrades, persistindo offline o jogo isolado do Single-Player garantindo jogatina remota deslogada em conexões desertas de áreas distantes em smartphones cortados de WIFI salvaguardando progressão eterna nas entranhas limpas da base nativa de cache suportado amplamente nos atuais browsers.</p>
+        <p>Abraçou independência do servidor e barateou o sistema imenso salvaguardando o mercado "Indie" ao não precisar forçar base de dados para arquivar meras configs de volume e binds de teclado de cada usuário na internet global, alocando recursos da rede na parte que dita essencial: Rankings. Transferir os metadados fixos de "Modo Hard / Modo Fácil" para persistência via navegador e não Banco Sql é uma engenharia mestra limpa do desenvolvedor final.</p>
+        <div class="code-block"><pre><code>&lt;script&gt;
+// O JS usa a API nativa do HTML5 no navegador para "Saves"
+localStorage.setItem("ultimoNivel", "Fase 5");
+
+const carregar = localStorage.getItem("ultimoNivel");
+console.log("Save Carregado: " + carregar);
+&lt;/script&gt;</code></pre></div>`,
+
+    "Componentes Web Nativos (Custom Elements)": `
+        <p>As Custom Elements moldam literalmente classes HTML injetando tags com seus próprios nomes customizados para o motor entender: <code>&lt;barra-vida&gt;</code> acoplados em sistemas nativos sem depender do React pesados de render. Traz componentes embutidos encapsulados comportamentais auto-suficientes injetados na tela prontos que se comportam sem explodirem do nada e interferirem nos outros componentes visuais estáticos.</p>
+        <p>Separar e enclausurar sistemas gigantes é a vida útil estendida imortal. O HUB (HUD) do jogo flutuando pode estar ali dentro e operar seus contadores matemáticos de cura e morte sem ter as engrenagens estilhaçadas para fora ou varridas pela varredura CSS principal em acidentes de conflito de classes nominativas globais. Suas funções são contidas dentro garantindo as propriedades orgânicas fixas imutáveis das heranças modulares baseadas nas HTMLElement garantindo sobrevidas nos escopos isolados.</p>
+        <p>Eleva os alicerces pro ecossistema engajado do mercado na modularidade bruta injetável em larga gama unificada onde engines poderosas carregam menus sem interferir logicamente, abrindo margens limpas escalonáveis incrivelmente leves na manutenção legível dos nós front end aplicados em alto volume mantendo um chassi forte final e produtivo para as extensões lúdicas sem perder o rumo visual arquitetônico planejado na fase um!</p>
+        <div class="code-block"><pre><code>&lt;vida-heroi&gt;&lt;/vida-heroi&gt;
+
+&lt;script&gt;
+class VidaHeroi extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = "&lt;div style='color:red;'&gt;Vida [100/100]&lt;/div&gt;";
+  }
+}
+customElements.define("vida-heroi", VidaHeroi);
+&lt;/script&gt;</code></pre></div>`,
+
+    "Acessibilidade de Teclado Avançada (tabindex e Foco)": `
+        <p>Organizar a navegação sistêmica proeminente por cliques puros dependentes do mouse arruína experiências táteis rápidas de teclados nativos viciados das máquinas clássicas. A Tabulação focada (Tabindex) numera sequências do fluxo direcionador lógico saltando focos nos elementos dos Menus ativando botões brilhantes sem toques externos. Essencial absolutos de inclusão PcD proeminentes motoras mantendo controle rápido nas esquivas dos menus perigosos.</p>
+        <p>Gerir tabulação em interfaces de lojas lotadas no jogo, ativando saltos corretos das Espadas aos Escudos ao invés do foco voar randomicamente invisível pras bordas inúteis dos quadros estéticos CSS eleva UX e conforto responsivo garantido para jogar apenas usando as teclas do W, A, S, D ou setas direcionais nos controles emulados na tela sem o suporte analógico externo físico.</p>
+        <p>As estilizações dinâmicas acopladas aos estados nativos em :focus revelam indicações marcadas do destino onde se reside e engatilham cliques rápidos do Enter ou Space englobando usabilidade suprema polida ao esmero do fluxo limpo tático das UI modernas profissionais mantidas como requisitos máximos básicos universais atestando selos de excelência dos jogos limpos adaptativos para o panteão unificado.</p>
+        <div class="code-block"><pre><code>&lt;button tabindex="1"&gt;Iniciar Nova Partida&lt;/button&gt;
+&lt;button tabindex="2"&gt;Carregar Save&lt;/button&gt;
+&lt;button tabindex="3"&gt;Opções / Sair&lt;/button&gt;
+
+&lt;style&gt;
+button:focus { border: 2px solid cyan; transform: scale(1.1); }
+&lt;/style&gt;</code></pre></div>`
+};
