@@ -1,13 +1,16 @@
-/* * ARQUIVO: enciclopedia.js 
- * Este arquivo controla a lógica de exibição dos conteúdos
+/**
+ * ENCICLOPÉDIA GAMEDEV - VERSÃO V6 
+ * Arquitetura de Abas e Modais
  */
-console.log("O FICHEIRO ESTÁ A SER LIDO PELO NAVEGADOR!");
 
 const db = {
     html: {
         iniciante: ["Conceito de Tags", "Estrutura Global", "Tags de Texto", "Meta Tags Técnicas", "Atributos e IDs", "Links e Navegação", "Listas de Inventário", "Inserção de Mídia", "Containers Div", "Comentários de Código"],
         intermediario: ["Elementos Semânticos (Header, Nav, Footer)", "Seções de Conteúdo (Section, Article, Aside)", "Estrutura de Tabelas Simples (Table, Tr, Td)", "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)", "Formulários Básicos (Form, Input, Label)", "Tipos de Input (Text, Password, Email, Button)", "Seleções em Formulários (Radio, Checkbox, Select)", "Validação Nativa de Formulários", "Introdução à Acessibilidade (Atributos ARIA)", "A tag <dialog> (Modais Nativos)"],
         avancado: ["A tag <canvas> (O Palco dos Jogos)", "SVG inline (<svg> e <path>)", "Imagens Responsivas (<picture> e srcset)", "Áudios Avançados (Atributos e Eventos de <audio>)", "Pré-carregamento de Assets (preload e prefetch)", "Iframe Avançado (<iframe> e Sandbox)", "Manipulação de Templates (<template> e <slot>)", "Armazenamento no Navegador (O papel técnico do HTML5)", "Componentes Web Nativos (Custom Elements)", "Acessibilidade de Teclado Avançada (tabindex e Foco)"]
+    },
+    css: { 
+        iniciante: [], intermediario: [], avancado: [] 
     },
     js: { 
         iniciante: ["Variáveis e Constantes (let e const)", "Tipos de Dados Essenciais", "Operadores Matemáticos e Lógicos", "Estruturas Condicionais (if, else, else if)", "Estruturas de Repetição (for e while)", "Introdução às Funções", "Arrays Simples (Listas)", "Objetos Básicos (Chave e Valor)", "Manipulação Básica do DOM (getElementById)", "Eventos de Teclado e Mouse (addEventListener)"], 
@@ -16,54 +19,94 @@ const db = {
     }
 };
 
-// Função principal de renderização
-function renderizarConteudo(tecnologia, nivel, topico) {
-    const container = document.getElementById("conteudo-principal");
-    if (!container) return;
+let currentTech = 'html';
+let currentLevel = 'iniciante';
 
-    let dados = (tecnologia === 'html') ? window.conteudosHTML : window.conteudosJS;
+function setTech(tech) {
+    currentTech = tech;
+    document.querySelectorAll('.main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
+    const btn = document.getElementById('btn-' + tech);
+    if (btn) btn.classList.add('active-' + tech);
     
-    if (dados && dados[topico]) {
-        container.innerHTML = `<h2>${topico}</h2>${dados[topico]}`;
-    } else {
-        container.innerHTML = `<h2>Erro</h2><p>Conteúdo não encontrado para: ${topico}</p>`;
-    }
+    // Evita níveis vazios ao trocar para CSS/JS
+    if (currentTech === 'js' && currentLevel === 'intermediario' && db.js.intermediario.length === 0) currentLevel = 'iniciante';
+    setLevel(currentLevel);
 }
 
-// Função para gerar o menu lateral ou grid
-function renderGrid(tecnologia, nivel) {
-    const grid = document.getElementById("grid-conteudos");
+function setLevel(lvl) {
+    currentLevel = lvl;
+    document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active-lvl'));
+    const btn = document.getElementById('lvl-' + lvl);
+    if (btn) btn.classList.add('active-lvl');
+    renderEncGrid();
+}
+
+function renderEncGrid() {
+    const grid = document.getElementById('topics-grid');
     if (!grid) return;
-
-    grid.innerHTML = ""; // Limpa anterior
-    const lista = db[tecnologia][nivel];
-
-    lista.forEach(topico => {
-        const card = document.createElement("div");
-        card.className = "card-topico";
-        card.innerText = topico;
-        card.onclick = () => renderizarConteudo(tecnologia, nivel, topico);
+    
+    grid.innerHTML = '';
+    const topics = db[currentTech][currentLevel] || [];
+    
+    topics.forEach(topic => {
+        const card = document.createElement('div');
+        card.className = 'topic-card';
+        const safeTitleForCard = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        card.innerHTML = `<h3>${safeTitleForCard}</h3>`;
+        card.onclick = () => openModal(topic);
         grid.appendChild(card);
     });
 }
 
-// Sistema de segurança: Espera os dados carregarem antes de rodar
-function iniciarMotor() {
-    console.log("Verificando dados...");
-    
-    // Verifica se os objetos globais existem
-    const dadosCarregados = (typeof window.conteudosHTML !== 'undefined') && 
-                            (typeof window.conteudosJS !== 'undefined');
+function openModal(topic) {
+    const overlay = document.getElementById('reader');
+    const container = document.getElementById('reader-body');
+    let content = "<p>Conteúdo não encontrado. Verifique a conexão com o banco de dados.</p>";
 
-    if (dadosCarregados) {
-        console.log("Dados encontrados! Montando interface...");
-        // Exemplo: Carrega o primeiro tópico do JS Iniciante por padrão
-        renderGrid('js', 'iniciante');
-    } else {
-        console.warn("Dados ainda não carregaram. Retentando...");
-        setTimeout(iniciarMotor, 200); // Tenta novamente em 200ms
+    if (currentTech === 'html' && typeof window.conteudosHTML !== 'undefined') {
+        content = window.conteudosHTML[topic] || content;
+    } else if (currentTech === 'js' && typeof window.conteudosJS !== 'undefined') {
+        content = window.conteudosJS[topic] || content;
+    }
+    
+    if (overlay && container) {
+        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        container.innerHTML = `<h2>${safeTitle}</h2>${content}`;
+        overlay.style.display = 'flex';
+        setTimeout(() => overlay.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden'; 
     }
 }
 
-// Inicia assim que o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', iniciarMotor);
+function closeModal() {
+    const overlay = document.getElementById('reader');
+    if (overlay) {
+        overlay.classList.remove('active');
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+        }, 200);
+    }
+}
+
+// Clica fora para fechar
+window.addEventListener('click', (e) => {
+    const overlay = document.getElementById('reader');
+    if (e.target === overlay) closeModal();
+});
+
+// A proteção 'aguardarDados' foi adicionada para motores genéricos baseados em web 
+function aguardarDadosERenderizar() {
+    if (typeof window.conteudosHTML !== 'undefined' && typeof window.conteudosJS !== 'undefined') {
+        renderEncGrid();
+    } else {
+        setTimeout(aguardarDadosERenderizar, 100);
+    }
+}
+
+// Inicia com segurança
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    aguardarDadosERenderizar();
+} else {
+    document.addEventListener('DOMContentLoaded', aguardarDadosERenderizar);
+}
