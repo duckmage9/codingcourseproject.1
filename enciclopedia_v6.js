@@ -1,6 +1,6 @@
 /**
  * ENCICLOPÉDIA GAMEDEV - VERSÃO V6 DEFINITIVA
- * Contém o mapeamento de todas as caixas e as funções das abas.
+ * Motor Completo com Navegação de Abas e Modais
  */
 
 const db = {
@@ -49,65 +49,71 @@ const db = {
 let currentTech = 'html';
 let currentLevel = 'iniciante';
 
-// Atualiza a tecnologia selecionada (HTML, CSS, JS)
+// 1. Função que troca a aba principal (HTML, CSS, JS)
 function setTech(tech) {
     currentTech = tech;
+    
+    // Remove as cores ativas de todos os botões
     document.querySelectorAll('.main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
+    
+    // Adiciona a cor correta ao botão clicado
     const btn = document.getElementById('btn-' + tech);
     if (btn) btn.classList.add('active-' + tech);
     
-    // Volta o nível para iniciante ao trocar de tecnologia para não bugar a tela
+    // Se mudarmos para JS, garantimos que não fica num nível vazio (como intermediário)
     if (currentTech === 'js' && currentLevel === 'intermediario') currentLevel = 'iniciante'; 
     setLevel(currentLevel);
 }
 
-// Atualiza o nível selecionado (Iniciante, Intermediário, Avançado)
+// 2. Função que troca o nível de dificuldade
 function setLevel(lvl) {
     currentLevel = lvl;
     document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active-lvl'));
     const btn = document.getElementById('lvl-' + lvl);
     if (btn) btn.classList.add('active-lvl');
+    
+    // Redesenha as caixas na tela com base no novo nível
     renderEncGrid();
 }
 
-// Desenha as caixas na tela
+// 3. Função central que desenha os Cards
 function renderEncGrid() {
     const grid = document.getElementById('topics-grid');
-    // Se a grelha ainda não carregou do GitHub, tenta de novo em meio segundo
     if (!grid) {
-        setTimeout(renderEncGrid, 500);
+        setTimeout(renderEncGrid, 300); // Aguarda o HTML existir
         return;
     }
     
     grid.innerHTML = '';
+    
+    // Puxa a lista correta do nosso banco de dados acima
     const topics = db[currentTech][currentLevel] || [];
     
     topics.forEach(topic => {
         const card = document.createElement('div');
         card.className = 'topic-card';
         
-        // Escapa os símbolos matemáticos para não quebrar o visual
+        // Protege os títulos que têm símbolos matemáticos
         const safeTitleForCard = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         card.innerHTML = `<h3>${safeTitleForCard}</h3>`;
         
-        // Abre a janela de leitura ao clicar
         card.onclick = () => openModal(topic);
         grid.appendChild(card);
     });
 }
 
-// Abre a janela flutuante com o texto de estudo
+// 4. Função que abre o modal de leitura
 function openModal(topic) {
     const overlay = document.getElementById('reader');
     const container = document.getElementById('reader-body');
     
-    let content = "<p>Conteúdo em fase de produção ou não localizado no banco de dados.</p>";
+    let content = "<p>Conteúdo ainda não redigido ou ficheiro de dados não encontrado.</p>";
 
-    // Verifica de qual arquivo deve puxar o texto
-    if (currentTech === 'html' && typeof window.conteudosHTML !== 'undefined') {
-        content = window.conteudosHTML[topic] || content;
-    } else if (currentTech === 'js' && typeof window.conteudosJS !== 'undefined') {
-        content = window.conteudosJS[topic] || content;
+    // Injeta os textos das variáveis globais
+    if (currentTech === 'html' && window.conteudosHTML && window.conteudosHTML[topic]) {
+        content = window.conteudosHTML[topic];
+    } else if (currentTech === 'js' && window.conteudosJS && window.conteudosJS[topic]) {
+        content = window.conteudosJS[topic];
     }
     
     if (overlay && container) {
@@ -115,29 +121,29 @@ function openModal(topic) {
         container.innerHTML = `<h2>${safeTitle}</h2>${content}`;
         overlay.style.display = 'flex';
         setTimeout(() => overlay.classList.add('active'), 10);
-        document.body.style.overflow = 'hidden'; // Esconde a barra de rolagem do fundo
+        document.body.style.overflow = 'hidden'; 
     }
 }
 
-// Fecha a janela flutuante
+// 5. Função que fecha o modal
 function closeModal() {
     const overlay = document.getElementById('reader');
     if (overlay) {
         overlay.classList.remove('active');
         setTimeout(() => {
             overlay.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Devolve a rolagem
+            document.body.style.overflow = 'auto'; 
         }, 200);
     }
 }
 
-// Clica fora da janela para fechá-la
+// Fechar modal ao clicar fora da caixa de texto
 window.addEventListener('click', (e) => {
     const overlay = document.getElementById('reader');
     if (e.target === overlay) closeModal();
 });
 
-// Dá a largada na aplicação quando o HTML termina de carregar
+// Arranca com a aplicação
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
     renderEncGrid();
 } else {
