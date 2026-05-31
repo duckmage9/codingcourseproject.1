@@ -1,6 +1,7 @@
 /* * ARQUIVO: enciclopedia.js 
  * Este arquivo controla a lógica de exibição dos conteúdos
  */
+console.log("O FICHEIRO ESTÁ A SER LIDO PELO NAVEGADOR!");
 
 const db = {
     html: {
