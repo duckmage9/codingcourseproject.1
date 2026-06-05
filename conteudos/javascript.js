@@ -1,272 +1,190 @@
-// ==========================================
-// 1. BANCO DE DADOS: HTML
-// ==========================================
-const conteudosHTML = {
-    "Conceito de Tags": `
-        <p>As tags são a base da linguagem HTML e funcionam como comandos que informam ao navegador como o conteúdo deve ser estruturado. No desenvolvimento de jogos, elas são usadas para definir desde a área onde o jogo será exibido até os botões de menu e textos de interface. Cada tag é envolvida por colchetes angulares.</p>
-        <p>A maioria das tags trabalha em pares: uma de abertura e uma de fechamento (que possui uma barra), como em <code>&lt;p&gt;Texto&lt;/p&gt;</code>. Essa estrutura em "cascata" permite que o desenvolvedor organize a hierarquia visual da página de forma lógica. Tags bem utilizadas garantem que o navegador interprete o código sem erros.</p>
-        <p>Entender o conceito de tags é o primeiro passo para criar qualquer projeto web. Elas permitem separar o que é um título, o que é um parágrafo e o que é um script de lógica do jogo. Sem as tags, o navegador veria apenas um bloco de texto sem formatação ou funcionalidade.</p>
-        <div class="code-block"><pre><code>&lt;h1&gt;Meu Primeiro Jogo&lt;/h1&gt;\n&lt;p&gt;Pressione Start para começar.&lt;/p&gt;</code></pre></div>`,
-
-    "Estrutura Global": `
-        <p>Todo documento HTML5 profissional precisa seguir uma estrutura global obrigatória. Isso garante que o navegador identifique o arquivo como um site moderno e aplique as regras de renderização corretamente. Essa estrutura começa sempre com a declaração <code>&lt;!DOCTYPE html&gt;</code>.</p>
-        <p>Dentro da tag principal <code>&lt;html&gt;</code>, dividimos o código em duas grandes áreas: o <code>&lt;head&gt;</code> e o <code>&lt;body&gt;</code>. No cabeçalho ficam as configurações invisíveis ao usuário. No corpo fica tudo o que o jogador realmente vê na tela.</p>
-        <p>Manter essa organização é fundamental para evitar conflitos de carregamento de scripts. Em jogos web, geralmente chamamos o motor do jogo no final do body para garantir que todos os elementos visuais já tenham sido carregados pelo navegador.</p>
-        <div class="code-block"><pre><code>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Game Page&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;!-- O jogo entra aqui --&gt;\n&lt;/body&gt;\n&lt;/html&gt;</code></pre></div>`,
-
-    "Tags de Texto": `
-        <p>As tags de texto são usadas para exibir informações escritas, como diálogos de NPCs, pontuação ou descrições de itens. As tags mais comuns são os títulos (<code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code>) e os parágrafos (<code>&lt;p&gt;</code>).</p>
-        <p>Além das básicas, existem tags para destacar partes do texto, como <code>&lt;strong&gt;</code> para negrito ou <code>&lt;em&gt;</code> para itálico. Em interfaces de jogos, isso é útil para destacar nomes de itens lendários ou valores críticos de dano.</p>
-        <p>Usar as tags corretas não apenas melhora o visual, mas também ajuda na acessibilidade e no SEO do projeto. O navegador entende automaticamente a hierarquia e o espaçamento padrão entre esses elementos.</p>
-        <div class="code-block"><pre><code>&lt;h2&gt;Missão Principal&lt;/h2&gt;\n&lt;p&gt;Encontre a &lt;strong&gt;Chave de Ouro&lt;/strong&gt; no calabouço.&lt;/p&gt;</code></pre></div>`,
-
-    "Meta Tags Técnicas": `
-        <p>As meta tags ficam localizadas dentro do cabeçalho do documento e fornecem instruções técnicas essenciais para o navegador. A tag <code>charset="UTF-8"</code> é obrigatória para que caracteres especiais funcionem corretamente.</p>
-        <p>Outra meta tag crucial para jogos web é a <code>viewport</code>. Ela configura como a página deve se comportar em telas de celulares e tablets, garantindo que o jogo não fique com zoom exagerado.</p>
-        <p>Embora sejam invisíveis para o jogador, essas tags ditam a compatibilidade do projeto e ajudam na divulgação do jogo para novos usuários.</p>
-        <div class="code-block"><pre><code>&lt;meta charset="UTF-8"&gt;\n&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre></div>`,
-
-    "Atributos e IDs": `
-        <p>Atributos são propriedades que adicionamos às tags para modificar seu comportamento ou identificá-las. O atributo <code>id</code> funciona como um nome exclusivo para um elemento, permitindo que o JavaScript o encontre rapidamente.</p>
-        <p>Enquanto o <code>id</code> deve ser único, o atributo <code>class</code> pode ser usado em vários elementos ao mesmo tempo, aplicando o mesmo estilo visual simultaneamente.</p>
-        <p>IDs são usados para elementos de controle (como a tela de Canvas), enquanto classes são usadas para elementos de design que se repetem na interface.</p>
-        <div class="code-block"><pre><code>&lt;div id="jogador-um" class="status-box"&gt;&lt;/div&gt;\n&lt;div id="jogador-dois" class="status-box"&gt;&lt;/div&gt;</code></pre></div>`,
-
-    "Links e Navegação": `
-        <p>A tag <code>&lt;a&gt;</code> (âncora) é utilizada para criar links que conectam diferentes páginas. Em um portal de jogos, pode levar o jogador do menu principal para a página de créditos.</p>
-        <p>O atributo principal é o <code>href</code>, que indica o destino. É comum usar o atributo <code>target="_blank"</code> para que o link abra em uma nova aba, mantendo o jogo aberto.</p>
-        <p>Links também podem ser usados para navegar dentro da mesma página (âncoras internas), o que é útil em wikis de jogos longas.</p>
-        <div class="code-block"><pre><code>&lt;a href="creditos.html"&gt;Ver Créditos&lt;/a&gt;\n&lt;a href="https://wiki.com" target="_blank"&gt;Wiki do Jogo&lt;/a&gt;</code></pre></div>`,
-
-    "Listas de Inventário": `
-        <p>As listas são a melhor forma de organizar conjuntos de informações. Existem listas não ordenadas (<code>&lt;ul&gt;</code>) com marcadores, e ordenadas (<code>&lt;ol&gt;</code>) com números.</p>
-        <p>Usamos a tag <code>&lt;li&gt;</code> para cada item. Em jogos, essas tags são perfeitas para estruturar inventários, listas de missões ativas ou logs de combate.</p>
-        <p>O uso de listas facilita muito a estilização com CSS e garante a leitura correta por tecnologias assistivas.</p>
-        <div class="code-block"><pre><code>&lt;ul&gt;\n    &lt;li&gt;Poção de Cura&lt;/li&gt;\n    &lt;li&gt;Espada de Ferro&lt;/li&gt;\n&lt;/ul&gt;</code></pre></div>`,
-
-    "Inserção de Mídia": `
-        <p>Tags como <code>&lt;img&gt;</code>, <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> inserem arquivos visuais e sonoros. A tag de imagem utiliza o atributo <code>src</code> para localizar o arquivo do sprite.</p>
-        <p>Sempre devemos utilizar o atributo <code>alt</code> em imagens para fornecer uma descrição textual de emergência.</p>
-        <p>Para áudio, o HTML5 oferece controles nativos, mas em jogos, ocultamos esses controles visuais e comandamos o som direto pelo JavaScript.</p>
-        <div class="code-block"><pre><code>&lt;img src="hero.png" alt="Herói do Jogo"&gt;\n&lt;audio src="tema.mp3" controls&gt;&lt;/audio&gt;</code></pre></div>`,
-
-    "Containers Div": `
-        <p>A tag <code>&lt;div&gt;</code> é um container genérico invisível que ajuda a organizar o layout do jogo em blocos separados, facilitando a vida do CSS.</p>
-        <p>Você pode colocar toda a interface do usuário (HUD) dentro de uma div chamada "hud-container", movendo todos os elementos de uma vez.</p>
-        <p>É a ferramenta mais versátil para estruturar layouts complexos e criar camadas sobrepostas.</p>
-        <div class="code-block"><pre><code>&lt;div class="menu-pausa"&gt;\n    &lt;button&gt;Continuar&lt;/button&gt;\n    &lt;button&gt;Sair&lt;/button&gt;\n&lt;/div&gt;</code></pre></div>`,
-
-    "Comentários de Código": `
-        <p>Comentários no HTML não são processados pelo navegador e não aparecem na tela. Servem para o programador organizar as notas lógicas.</p>
-        <p>Em projetos grandes, os comentários marcam onde começa e termina cada seção da interface.</p>
-        <p>Ajudam a desativar temporariamente blocos de código sem a necessidade de apagá-los.</p>
-        <div class="code-block"><pre><code>&lt;!-- Início da Seção de Inventário --&gt;\n&lt;div id="inv"&gt;&lt;/div&gt;\n&lt;!-- Fim da Seção de Inventário --&gt;</code></pre></div>`,
-
-    "Elementos Semânticos (Header, Nav, Footer)": `<p>Tags semânticas indicam claramente a função de cada parte da página, organizando melhor a estrutura do código.</p><div class="code-block"><pre><code>&lt;header&gt;\n    &lt;h1&gt;Dragon Quest&lt;/h1&gt;\n&lt;/header&gt;</code></pre></div>`,
-    "Seções de Conteúdo (Section, Article, Aside)": `<p>Dividem o conteúdo tematicamente. Ótimas para separar perfil, conquistas e lista de amigos em abas isoladas.</p><div class="code-block"><pre><code>&lt;section id="conquistas"&gt;&lt;/section&gt;</code></pre></div>`,
-    "Estrutura de Tabelas Simples (Table, Tr, Td)": `<p>Organizam estatísticas e lojas de itens em colunas perfeitas que não quebram a estética da interface.</p><div class="code-block"><pre><code>&lt;table&gt;\n    &lt;tr&gt;\n        &lt;td&gt;Espada&lt;/td&gt;\n        &lt;td&gt;Dano: 10&lt;/td&gt;\n    &lt;/tr&gt;\n&lt;/table&gt;</code></pre></div>`,
-    "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)": `<p>Protegem o título da tabela para que ele não suma ao rolar um longo Leaderboard mundial para baixo.</p><div class="code-block"><pre><code>&lt;thead&gt;\n    &lt;tr&gt;&lt;th&gt;Posição&lt;/th&gt;&lt;th&gt;Kills&lt;/th&gt;&lt;/tr&gt;\n&lt;/thead&gt;</code></pre></div>`,
-    "Formulários Básicos (Form, Input, Label)": `<p>Coletam textos do usuário, como o nome do herói. Labels garantem que clicar no nome selecione a caixa de texto automaticamente.</p><div class="code-block"><pre><code>&lt;form&gt;\n    &lt;label&gt;Nome:&lt;/label&gt;\n    &lt;input type="text"&gt;\n&lt;/form&gt;</code></pre></div>`,
-    "Tipos de Input (Text, Password, Email, Button)": `<p>Mudar o tipo de input força o teclado do celular a se adaptar (exibindo símbolo de arroba ou escondendo a senha).</p><div class="code-block"><pre><code>&lt;input type="password" placeholder="Senha"&gt;</code></pre></div>`,
-    "Seleções em Formulários (Radio, Checkbox, Select)": `<p>Criam menus de configurações, escolha de idiomas ou opções gráficas essenciais nos menus do game.</p><div class="code-block"><pre><code>&lt;select&gt;\n    &lt;option&gt;Servidor BR&lt;/option&gt;\n&lt;/select&gt;</code></pre></div>`,
-    "Validação Nativa de Formulários": `<p>Usa atributos 'required' ou 'minlength' para barrar lixo enviado pro servidor antes mesmo do JavaScript agir.</p><div class="code-block"><pre><code>&lt;input type="text" required minlength="4"&gt;</code></pre></div>`,
-    "Introdução à Acessibilidade (Atributos ARIA)": `<p>Injeta legendas ocultas em ícones gráficos para garantir que softwares de leitura leiam a interface para jogadores cegos.</p><div class="code-block"><pre><code>&lt;div role="progressbar" aria-valuenow="50"&gt;&lt;/div&gt;</code></pre></div>`,
-    "A tag <dialog> (Modais Nativos)": `<p>Gera pop-ups perfeitos (Telas de Pausa) que bloqueiam os cliques no fundo automaticamente com total estabilidade visual.</p><div class="code-block"><pre><code>&lt;dialog id="lojaModal"&gt;\n    &lt;button onclick="this.parentNode.close()"&gt;Fechar&lt;/button&gt;\n&lt;/dialog&gt;</code></pre></div>`,
-    
-    "A tag <canvas> (O Palco dos Jogos)": `<p>A área sagrada do rendering 2D e 3D. A tela final gráfica controlada linha por linha pelo Javascript.</p><div class="code-block"><pre><code>&lt;canvas id="tela" width="800" height="400"&gt;&lt;/canvas&gt;</code></pre></div>`,
-    "SVG inline (<svg> e <path>)": `<p>Gráficos em código matemático puro, perfeitos para HUDs limpas que não borram com o zoom da tela.</p>`,
-    "Imagens Responsivas (<picture> e srcset)": `<p>Entrega sprites grandes para PCs e imagens comprimidas para celulares automaticamente, salvando banda e RAM.</p>`,
-    "Áudios Avançados (Atributos e Eventos de <audio>)": `<p>Controle preciso de repetições (loops) e separação de faixas para efeitos (tiros) e trilhas sonoras independentes.</p>`,
-    "Pré-carregamento de Assets (preload e prefetch)": `<p>Instruções no cabeçalho que baixam gigabytes gráficos ocultamente enquanto a barra de Loading avança.</p>`,
-    "Iframe Avançado (<iframe> e Sandbox)": `<p>Embutir portais paralelos sem o risco de scripts invasores hackearem a aba principal.</p>`,
-    "Manipulação de Templates (<template> e <slot>)": `<p>Fábricas de clonagem em HTML para multiplicar 100 poções no inventário sem repetir código bruto manualmente.</p>`,
-    "Armazenamento no Navegador (O papel técnico do HTML5)": `<p>Cria Saves locais via LocalStorage para jogadores manterem seu progresso travado offline no HD da própria máquina.</p>`,
-    "Componentes Web Nativos (Custom Elements)": `<p>Tags 100% próprias (&lt;vida-heroi&gt;) criadas do zero para modularizar lógicas isoladas da interface sem quebrar o CSS raiz.</p>`,
-    "Acessibilidade de Teclado Avançada (tabindex e Foco)": `<p>Permite navegar no inventário complexo unicamente pelas setas numéricas fluindo pelo foco sem mouse ativo.</p>`
-};
-
-// ==========================================
-// 2. BANCO DE DADOS: JAVASCRIPT
-// ==========================================
-const conteudosJS = {
+window.conteudosJS = {
+    // ==========================================
+    // === NÍVEL INICIANTE ===
+    // ==========================================
     "Variáveis e Constantes (let e const)": `
-        <p>As variáveis e constantes são os alicerces, recipientes na memória para armazenar informações. Usamos <code>let</code> para dados voláteis, como posição, e <code>const</code> para valores imutáveis (gravidade).</p>
-        <p>Declaramos no topo para configurar a cena. O <code>const</code> define parâmetros globais. Já o <code>let</code> é usado no Game Loop para atualizar coordenadas continuamente.</p>
-        <p>Se definir a gravidade como variável comum e alterá-la, o personagem flutua descontrolado. O <code>const</code> garante que a cadência visual se mantenha firme do início ao fim.</p>
-        <div class="code-block"><pre><code>const GRAVIDADE = 0.8;\nlet personagemX = 100;\nlet vidaAtual = 3;</code></pre></div>`,
+        <p>As variáveis e constantes são os alicerces de qualquer jogo, funcionando como recipientes na memória do computador para armazenar informações que mudam ou permanecem fixas. No JavaScript moderno, utilizamos o <code>let</code> para dados voláteis, como a posição atual de um herói que corre pelo cenário, e o <code>const</code> para valores que definem as regras imutáveis do universo do seu jogo. Imagine que o computador precisa de um endereço para consultar, a cada fração de segundo, onde o jogador está ou quanta munição ele ainda possui.</p>
+        <p>No fluxo de desenvolvimento de um jogo web, você declarará essas variáveis geralmente no topo do seu arquivo JS para configurar o estado inicial da cena. O <code>const</code> deve ser sua primeira escolha para definir parâmetros globais, como a força da gravidade que puxa os objetos para baixo ou o caminho da pasta onde estão guardadas as imagens dos sprites. Já o <code>let</code> será usado exaustivamente dentro do seu "Game Loop" para atualizar coordenadas matemáticas dinamicamente.</p>
+        <p>A importância real deste tema reside no controle absoluto sobre a física e a lógica de tempo do seu projeto. Se você definir a gravidade como uma variável comum e, por erro, o código alterá-la no meio da partida, seu personagem pode sair flutuando sem controle, quebrando a experiência. Ao usar <code>const</code>, você garante que o jogo mantenha a mesma cadência visual do início ao fim.</p>
+        <div class="code-block"><pre><code>// Definindo regras fixas do mundo (Constantes)\nconst GRAVIDADE = 0.8; \nconst VELOCIDADE_SALTO = -15; \n\n// Armazenando estados que mudam (Variáveis)\nlet personagemX = 100; \nlet personagemY = 500; \nlet vidaAtual = 3; \n\n// O jogador sofre dano\nvidaAtual = vidaAtual - 1; \nconsole.log("Restam: " + vidaAtual);</code></pre></div>`,
 
     "Tipos de Dados Essenciais": `
-        <p>Os Numbers cuidam da matemática (velocidade, ângulo). Strings são sequências textuais (nome, diálogos). Booleans assumem true/false, funcionando como interruptores.</p>
-        <p>Numbers calculam colisões. Strings exibem mensagens de "Level Up!". Booleans controlam estados, impedindo pulos duplos infinitos se o herói não estiver no chão.</p>
-        <p>Entender a diferença evita tentar somar textos com números, garantindo que animações e inteligências artificiais operem com lógica de decisão humana perfeita.</p>
-        <div class="code-block"><pre><code>let pontuacao = 0;\nlet nomeJogador = "Arqueiro";\nlet estaNoChao = true;</code></pre></div>`,
+        <p>Os tipos de dados são as diferentes naturezas de informação que o JavaScript consegue processar. Os Numbers cuidam de toda a parte matemática, desde a velocidade de um projétil até o ângulo de rotação de uma nave. As Strings são sequências de caracteres usadas para toda a comunicação textual, como o nome que o jogador escolhe. Por fim, os Booleans são os tipos mais simples e poderosos, assumindo apenas <code>true</code> (verdadeiro) ou <code>false</code> (falso), funcionando como interruptores lógicos.</p>
+        <p>Na prática, você utilizará Numbers para calcular colisões e pontuações, garantindo que o placar suba quando um inimigo é derrotado. As Strings serão enviadas para a interface para exibir mensagens de "Level Up!" ou carregar nomes de arquivos. Os Booleans são indispensáveis para controlar os estados do personagem, como <code>estaNoChao</code>, para impedir pulos duplos infinitos.</p>
+        <p>Entender a diferença entre esses tipos evita bugs catastróficos, como tentar somar um número a um texto. A precisão dos Numbers permite animações corretas, Strings permitem internacionalização, e Booleans conectam a percepção visual do jogador com a execução lógica da máquina.</p>
+        <div class="code-block"><pre><code>let pontuacao = 0; // Number\nlet nomeJogador = "Arqueiro Verde"; // String\nlet estaNoChao = true; // Boolean\n\nif (estaNoChao === true) {\n    console.log(nomeJogador + " pode pular!");\n}</code></pre></div>`,
 
     "Operadores Matemáticos e Lógicos": `
-        <p>Matemáticos (+, -) atualizam coordenadas. Lógicos (&&, ||) combinam perguntas, simulando tomadas de decisão complexas antes de permitir um disparo ou pulo.</p>
-        <p>Para um pulo duplo, usamos && (Botão Pressionado E Contador Maior que zero). O || checa se caiu no buraco OU tocou no espinho para matar o herói.</p>
-        <p>É essa combinação que assegura que o mundo virtual tenha leis rígidas, tornando o jogo desafiador e mantendo a jogabilidade perfeitamente justa pro usuário.</p>
-        <div class="code-block"><pre><code>let apertouPulo = true;\nif (apertouPulo && estaNoChao) {\n    pular();\n}</code></pre></div>`,
+        <p>Operadores são os símbolos que permitem realizar cálculos e comparações, agindo como o motor que processa as regras de movimento. Os matemáticos (+, -, *, /) atualizam coordenadas a cada milissegundo. Já os operadores lógicos, como o && (E) e o || (OU), servem para combinar múltiplas perguntas em uma única instrução complexa, avaliando contextos inteiros.</p>
+        <p>A matemática está em toda parte: soma para mover para a direita e subtração para a esquerda. Para um "pulo duplo", você usaria && para verificar se o botão foi pressionado E se o contador de pulos é maior que zero. O || verifica se o jogador tocou em um espinho OU caiu em um buraco.</p>
+        <p>Sem eles, o cenário seria estático e as regras do jogo seriam limitadas. É através dessa combinação que você cria um mundo sólido, onde ações só produzem resultados se obedecerem a critérios rigorosos de gameplay e justiça.</p>
+        <div class="code-block"><pre><code>let playerX = 50;\nlet velocidade = 5;\nplayerX = playerX + velocidade; // Soma\n\nlet apertouPulo = true;\nlet estaNoChao = true;\n\nif (apertouPulo && estaNoChao) {\n    console.log("Pulo realizado com sucesso!");\n}</code></pre></div>`,
 
     "Estruturas Condicionais (if, else, else if)": `
-        <p>As bifurcações que fazem o jogo "pensar". O código pergunta e, se verdadeiro, executa um bloco. Sem isso, não há interatividade entre atacar ou fugir.</p>
-        <p>Controlam a vida constantemente: se cair abaixo de um, o else dispara a animação de morte. Decidem quando mostrar o menu de pausa ou efeitos visuais.</p>
-        <p>Definem as consequências reais dentro do seu mundo virtual. Conectam a física aos visuais dependendo puramente da entrada do usuário logado.</p>
-        <div class="code-block"><pre><code>if (vidaHeroi <= 0) {\n    console.log("Game Over!");\n} else {\n    console.log("Continuar lutando!");\n}</code></pre></div>`,
+        <p>Estruturas condicionais são bifurcações lógicas que permitem ao jogo "pensar". O código faz uma pergunta e, caso seja verdadeira, executa um bloco específico de instruções. Sem elas, o jogo seria incapaz de processar interatividade, pois não haveria como distinguir entre estar parado ou atacando.</p>
+        <p>Se o jogador pressionar "D", a condicional detecta e move o personagem; caso contrário, se for "A", move para a esquerda. Elas também monitoram a vida constantemente: se cair abaixo de um, dispara a animação de morte e reseta o nível.</p>
+        <p>A relevância é vital, pois definem as fronteiras virtuais. Decidem se deve exibir a animação de corrida ou pulo com base na velocidade. Sem o poder de decisão do if, o jogo não conseguiria validar se o jogador atingiu a pontuação para passar de fase.</p>
+        <div class="code-block"><pre><code>let vidaHeroi = 50;\nlet entrada = "DIREITA";\nlet posicaoX = 100;\n\nif (entrada === "DIREITA") {\n    posicaoX += 5; \n} else if (entrada === "ESQUERDA") {\n    posicaoX -= 5; \n}\n\nif (vidaHeroi <= 0) {\n    console.log("Game Over!");\n}</code></pre></div>`,
 
     "Estruturas de Repetição (for e while)": `
-        <p>Loops executam o mesmo código de forma automatizada dezenas de vezes. Geram cem estrelas de cenário num milissegundo. O while repete lógicas temporais.</p>
-        <p>Fundamentais para varrer listas de inimigos, desenhar blocos do chão ou aplicar física em cem partículas de explosão simultaneamente sem redigir linhas repetidas.</p>
-        <p>Garantem que a performance não caia e que grandes multidões de entidades operem de forma organizada nos mapas gigantes com baixíssimo custo do código.</p>
-        <div class="code-block"><pre><code>for (let i = 0; i < 5; i++) {\n    criarZumbiAleatorio();\n}</code></pre></div>`,
+        <p>Loops são mecanismos que executam o mesmo bloco de código múltiplas vezes de forma automatizada. Em vez de escrever cem linhas para criar cem estrelas no fundo, um loop for repete a ação. O while repete enquanto uma condição for verdadeira, ideal para filas de efeitos.</p>
+        <p>Eles são fundamentais para gerenciar grandes coleções de elementos na tela. Você usará para percorrer uma lista de inimigos e atualizar suas posições, ou para desenhar blocos de um tilemap. Em sistemas de partículas, um loop processa cada faísca de explosão individualmente.</p>
+        <p>A importância real está na escalabilidade. Eles permitem verificar colisões de uma horda inteira sem tratar zumbi por zumbi, mantendo a taxa de quadros estável. São o coração da automação procedural.</p>
+        <div class="code-block"><pre><code>let totalInimigos = 5;\nlet posicoes = [];\n\nfor (let i = 0; i < totalInimigos; i++) {\n    posicoes.push(Math.random() * 800);\n}\n\nlet escudo = 100;\nwhile (escudo > 0) {\n    escudo -= 25;\n}</code></pre></div>`,
 
     "Introdução às Funções": `
-        <p>Blocos modulares que agrupam comandos. "Receitas" prontas: define-se o cálculo de dano uma vez, e sempre que a granada estourar, a função é invocada pela engine.</p>
-        <p>Evitam "código espaguete". Ter uma aplicarGravidade() separada assegura que mexer no pulo não quebre acidentalmente a lógica do placar geral de vitórias.</p>
-        <p>Transformam scripts amadores em motores robustos, aplicando lógicas universais tanto a heróis quanto aos monstros num estalar de dedos.</p>
-        <div class="code-block"><pre><code>function causarDano(entidade, valor) {\n    entidade.vida -= valor;\n}</code></pre></div>`,
+        <p>Funções são blocos de construção modulares que agrupam comandos sob um nome, permitindo reutilizar lógica. São como "receitas": define-se uma vez como calcular dano de explosão e apenas se invoca a função quando necessário. Podem receber parâmetros e devolver resultados.</p>
+        <p>No fluxo do jogo, separam as responsabilidades. Você terá funções como aplicarGravidade(), verificarColeta() e renderizarMapa(), evitando o "código espaguete". Quando precisar ajustar o pulo, saberá exatamente onde mexer.</p>
+        <p>Permitem criar comportamentos genéricos. Uma função sofrerDano() serve tanto para o herói quanto para os monstros. Dominar funções é o segredo para transformar um script simples em um motor de jogo robusto.</p>
+        <div class="code-block"><pre><code>function calcularMovimento(posicao, velocidade) {\n    return posicao + velocidade;\n}\n\nfunction dispararAlerta(mensagem) {\n    console.log("[JOGO] " + mensagem);\n}\n\nlet x = 50;\nx = calcularMovimento(x, 10);\ndispararAlerta("Moveu para: " + x);</code></pre></div>`,
 
     "Arrays Simples (Listas)": `
-        <p>Arrays guardam múltiplos valores sequenciais (inventários). O acesso é rápido, e você pode adicionar itens coletados ao final da fila automaticamente (push).</p>
-        <p>Perfeitos para guardar nomes de arquivos (sprites) de uma animação, percorrendo-a para criar a ilusão gráfica, ou para checar a colisão contra mil objetos agrupados.</p>
-        <p>Lidam com o caos dos conteúdos dinâmicos que nascem e morrem, ordenando toda a informação caótica na memória RAM do PC durante a jogatina de longo prazo.</p>
-        <div class="code-block"><pre><code>let inventario = ["Espada", "Escudo"];\ninventario.push("Poção");</code></pre></div>`,
+        <p>Arrays permitem armazenar múltiplos valores em uma única variável, organizados por índices numéricos. Imagine um inventário: em vez de criar uma variável separada para cada item que o jogador apanha, um Array guarda todos numa lista ordenada. O acesso é instantâneo e podes empurrar (push) ou remover itens de forma muito dinâmica.</p>
+        <p>São ferramentas indispensáveis para gerenciar coleções no código visual, como a lista exata dos nomes dos ficheiros de imagem (sprites) de uma animação de corrida. Percorres a lista do Array quadro a quadro para criar a ilusão gráfica perfeita do movimento.</p>
+        <p>A grande magia dos Arrays é lidar com conteúdos caóticos que nascem e morrem. Sem eles, seria humanamente impossível desenhar uma chuva contínua, ou gerir dezenas de balas disparadas no ecrã. Trazem ordem aos dados pesados para que a física do teu jogo flua perfeitamente.</p>
+        <div class="code-block"><pre><code>let inventario = ["Espada", "Escudo"];\nconsole.log("Equipado: " + inventario[0]);\n\ninventario.push("Poção"); // Adiciona ao final\n\nconst frames = ["run1.png", "run2.png", "run3.png"];\nconsole.log("Próximo frame: " + frames[1]);</code></pre></div>`,
 
     "Objetos Básicos (Chave e Valor)": `
-        <p>Objetos tratam personagens como entidades complexas de ficha unida: Vida, Força e Velocidade guardados juntos. Diferente do array, cada valor tem uma "chave" nomeada.</p>
-        <p>Em vez de criar playerX e playerY soltos, criamos um bloco fechado que viaja pelo sistema. Fundamental para definir chefões, NPCs e engrenagens estáticas do mapa.</p>
-        <p>Garantem a evolução escalável. Adicionar um atributo de "Mana" não quebra a estrutura, pois tudo fica arrumado internamente na gaveta correta do vilão.</p>
-        <div class="code-block"><pre><code>const heroi = { nome: "Bárbaro", vida: 100, forca: 15 };\nheroi.vida -= 10;</code></pre></div>`,
+        <p>Os Objetos agrupam propriedades e ações relacionadas com uma entidade específica, através do sistema de "chave" e "valor". Enquanto o Array é apenas uma lista empilhada, o Objeto funciona como a ficha de personagem completa de RPG, guardando internamente o nome, a vida, a defesa e a velocidade no mesmo "pacote" lógico.</p>
+        <p>Em vez de teres dezenas de variáveis espalhadas pelo ficheiro principal (como playerX, playerY, playerVida), crias um Objeto central chamado "herói". Isto torna o código absurdamente mais limpo e intuitivo, permitindo-te passar este "pacote completo" de dados para dentro das tuas funções de cálculo de física num ápice.</p>
+        <p>Estes construtos refletem a realidade tridimensional dentro do jogo. Eles gerem estados complexos organizadamente. Se amanhã quiseres adicionar "estamina" ao jogador, basta incluíres essa nova chave dentro do objeto sem quebrar ou perturbar o resto da arquitetura que já estava pronta.</p>
+        <div class="code-block"><pre><code>const heroi = {\n    nome: "Valente",\n    vida: 100,\n    x: 50,\n    y: 300,\n    receberDano: function(qtd) {\n        this.vida -= qtd;\n    }\n};\n\nheroi.receberDano(20);\nheroi.x += 10;</code></pre></div>`,
 
     "Manipulação Básica do DOM (getElementById)": `
-        <p>O DOM é a ponte do JS alterando o HTML. O getElementById acha a barra de vida ou a tela do jogo e modifica seus tamanhos, cores ou imagens programaticamente.</p>
-        <p>Controla toda a interface do usuário (UI). Mostra telas de Vitória ou Derrota trocando textos dinâmicos de pontuação a cada milissegundo de acertos no jogo.</p>
-        <p>É o que mantém o jogador ciente do próprio estado, acoplando a matemática fria aos visuais quentes integrados perfeitos na aba limpa do navegador.</p>
-        <div class="code-block"><pre><code>const placar = document.getElementById("placar-ui");\nplacar.innerText = "Pontos: 1500";</code></pre></div>`,
+        <p>O Document Object Model (DOM) é a ponte mágica de comunicação entre o JavaScript invisível e o HTML visível. O teu código de JS precisa de encontrar elementos físicos desenhados no ecrã (como a barra de vida ou a tela do jogo em si). A ferramenta "getElementById" capta instantaneamente essa "div" exclusiva do HTML.</p>
+        <p>O uso clássico no desenvolvimento base prende-se a toda a gestão da Interface do Jogador (a UI). É com este comando que capturas as pontuações e injetas o novo número "Pontos: 1500" diretamente no parágrafo do HTML de forma cirúrgica e em tempo real a cada inimigo derrotado.</p>
+        <p>Esta é a técnica de conexão vital. A lógica do Game Loop roda na sombra, calculando perdas de vida e danos por colisão, mas é a manipulação do DOM que devolve ao jogador o feedback gráfico, vermelho e interativo de que ele está prestes a perder a partida.</p>
+        <div class="code-block"><pre><code>const canvas = document.getElementById("tela-jogo");\nconst placar = document.getElementById("placar");\n\nlet pontos = 0;\nfunction ganharPonto() {\n    pontos += 10;\n    placar.innerText = pontos; \n}</code></pre></div>`,
 
     "Eventos de Teclado e Mouse (addEventListener)": `
-        <p>Radares absolutos de interação! addEventListener escuta o keydown e converte a intenção física do dedo em pulo imediato ou disparo bélico das armas na mão.</p>
-        <p>Sem eles o jogo seria vídeo passivo. Respondem as reações em timing cirúrgico, interrompendo corridas caso as teclas sejam soltas, devolvendo inércia realística.</p>
-        <p>Implementação precisa elimina travamento de botões no momento crucial da batalha exigindo precisão e reflexos dos hardwares traduzidos aos softwares.</p>
-        <div class="code-block"><pre><code>document.addEventListener("keydown", (evento) => {\n    if (evento.key === " ") pular();\n});</code></pre></div>`,
+        <p>Os Eventos são radares absolutos configurados para vigiar as interações físicas do jogador no mundo real. O comando "addEventListener" atua como um escuta silencioso: vigia os botões e dispara as lógicas correspondentes. Captar um "keydown" converte a vontade de andar numa alteração matemática nos vetores.</p>
+        <p>Para criar controlos limpos e responsivos, ouves o "keydown" para mudar a velocidade para a frente e o "keyup" para voltar o boneco a parar. Se não tivesses ouvintes de elevação (quando o jogador solta a tecla), o teu herói iria deslizar infinitamente pela ecrã feito um bloco de gelo estúpido.</p>
+        <p>Estas antenas de comunicação são as veias da interatividade. O jogo deixa de ser um vídeo passivo. As esquivas dependem deste reflexo imediato para ligar os motores e ativar o combo de pancadaria sem qualquer atraso face aos cliques furiosos no rato.</p>
+        <div class="code-block"><pre><code>const teclas = { direita: false };\n\ndocument.addEventListener("keydown", (e) => {\n    if (e.key === "ArrowRight") teclas.direita = true;\n});\n\ndocument.addEventListener("keyup", (e) => {\n    if (e.key === "ArrowRight") teclas.direita = false;\n});</code></pre></div>`,
 
-    // INTERMEDIÁRIOS E AVANÇADOS...
-    "O Game Loop e requestAnimationFrame": `<p>A engrenagem do jogo. requestAnimationFrame repete o cálculo 60 vezes por segundo com fluidez perfeita sem engasgar o monitor, travando a leitura quando o jogador minimiza a aba poupando RAM.</p><div class="code-block"><pre><code>function loop() { \n  atualizar(); \n  requestAnimationFrame(loop); \n}\nloop();</code></pre></div>`,
-    "Delta Time (Movimento Suave)": `<p>Multiplica as posições pelo tempo corrido. Garante que um PC potente de 144Hz e um celular lento movam o personagem exatamente na mesma velocidade física sem dar vantagens.</p><div class="code-block"><pre><code>jogador.x += velocidade * deltaTime;</code></pre></div>`,
-    "Classes e Construtores (POO)": `<p>A planta baixa para clonar 50 inimigos rapidamente através do comando 'new Inimigo()', cada um possuindo sua própria vida encapsulada no chassi sem poluir o código global solto.</p><div class="code-block"><pre><code>const zumbi1 = new Zumbi();\nconst zumbi2 = new Zumbi();</code></pre></div>`,
-    "Física de Pulo e Gravidade": `<p>Aplicação de vetores decrescentes parabólicos (isGrounded) cravando os pés na altura da sprite correta impedindo a falha do boneco voar travado sem descer no eixo.</p><div class="code-block"><pre><code>velocidadeY += gravidade; \nif(y >= chao) isGrounded = true;</code></pre></div>`,
-    "Colisão Retangular (AABB)": `<p>Matemática de caixa delimitadora extremamente leve varrendo quem cruzou as linhas laterais um do outro processando o dano letal antes da imagem transpassar o corpo inimigo de fato.</p><div class="code-block"><pre><code>if (a.x < b.x + b.largura) { colidiu(); }</code></pre></div>`,
-    "Animação e Spritesheets": `<p>Corte metódico de imagens gigantes somando 0.1 segundos do Delta Time pulando quadro a quadro (frame++) gerando ciclos de caminhada perfeitos nos recortes 32x32px.</p><div class="code-block"><pre><code>tempo += delta; \nif(tempo > 0.1) frameAtual++;</code></pre></div>`,
-    "Controle de Estados Simples": `<p>Usa a Máquina de Estados blindando ações (Se estado == "MORTO", ignora teclado) impedindo que o boneco deslize batendo a espada flutuando de forma errada e amadora.</p><div class="code-block"><pre><code>if (estado === "MORTO") return;</code></pre></div>`,
-    "Vetores e Movimentação 2D": `<p>Cálculo de Pitágoras com Seno e Cosseno impedindo o herói correr mais rápido pela linha diagonal, estabilizando a cinemática bidirecional fluida dos 360 graus puros.</p><div class="code-block"><pre><code>x += Math.cos(angulo) * velMax;</code></pre></div>`,
-    "Arrays e Gerenciamento de Entidades": `<p>Acomodar os tiros ativos em listas (Arrays) lidos de trás pra frente no For, deletando apagados (splice) gerindo centenas de balas na cena sem travar ou bugar posições indexadas.</p><div class="code-block"><pre><code>arrayBalas.splice(index, 1);</code></pre></div>`,
-    "Modularização (Módulos JS)": `<p>Isolar IA inimiga do código físico em arquivos puros puxando apenas via "Import", livrando a dor de cabeça arquitetural gigantesca quando a expansão engolir proporções indies massivas.</p><div class="code-block"><pre><code>import { Inimigo } from './enemy.js';</code></pre></div>`,
+    // ==========================================
+    // === NÍVEL INTERMEDIÁRIO ===
+    // ==========================================
+    "O Game Loop e requestAnimationFrame": `
+        <p>O Game Loop é o coração pulsante de qualquer motor de jogo. Diferente de um site tradicional que reage apenas quando você clica em algo, um jogo precisa recalcular a gravidade, os tiros e os movimentos dos inimigos dezenas de vezes por segundo, mesmo que você solte o controle. É esse ciclo contínuo de "Atualizar Física -> Limpar a Tela -> Desenhar Tudo de Novo" que cria a ilusão fluida de que o seu cenário de plataforma está vivo e respirando no navegador.</p>
+        <p>Antigamente, usava-se o <code>setInterval</code> para forçar essa repetição, mas ele causava travamentos terríveis e "screen tearing" (cortes na imagem). A solução moderna é a função nativa <code>requestAnimationFrame</code>. Ela avisa o navegador que você deseja realizar uma animação e pede para que ele chame a função de atualização no exato momento em que o monitor do jogador estiver pronto para pintar o próximo quadro, sincronizando perfeitamente com a taxa de atualização (geralmente 60 FPS).</p>
+        <p>A maior vantagem do <code>requestAnimationFrame</code>, além da extrema fluidez visual, é a otimização de bateria e performance em projetos separados em pastas de arquitetura web. Se o jogador minimizar a aba do seu jogo para olhar o WhatsApp, o navegador pausa automaticamente o Game Loop. Isso impede que a CPU frite processando física de colisões em segundo plano e evita que o seu personagem morra enquanto o usuário não estava olhando.</p>
+        <div class="code-block"><pre><code>function gameLoop() {\n    // 1. Atualiza as variáveis matemáticas e posições\n    updateFisica(); \n    \n    // 2. Apaga o frame anterior e desenha o novo no Canvas\n    drawGraficos(); \n    \n    // 3. Pede ao navegador para repetir o ciclo no próximo frame\n    requestAnimationFrame(gameLoop);\n}\n\n// Dando o "Start" no motor pela primeira vez\nrequestAnimationFrame(gameLoop);</code></pre></div>`,
 
-    "Callbacks e Event Loop": `<p>Delega contadores demorados aos bastidores (setTimeout), para porta abrir após 3 segundos sem congelar o loop e a fluidez das animações dos NPCs presentes.</p>`,
-    "Promises (Promessas)": `<p>Blindam os pacotes pesados garantindo que texturas colossais foram absorvidas pela rede antes da Engine iniciar os frames visuais cortando falhas e imagens pretas na partida.</p>`,
-    "Async / Await": `<p>Limpeza cronológica das promises em código, ordenando Loading de contas antes de mapas, construindo roteiros legíveis puros do fluxo temporal sem teias infernais cegas lógicas.</p>`,
-    "Recursividade": `<p>As funções automáticas refratadas invocam a si mesmas gerando túneis imensos testados pelas IA varrendo algoritmos profundos procurando rotas em micro-segundos absolutos táticos.</p>`,
-    "Manipulação Avançada de Objetos": `<p>Fundem dezenas de magias em Armaduras Bases (Object.assign) num choque instantâneo gerindo metadados extensivos de craft limitando blocos inteiros redigidos manuais inúteis na fábrica.</p>`,
-    "APIs e Fetch": `<p>Ponte ao mundo global transferindo recordes absurdos direto pra AWS conectando pontuação isolada ao pódio de heróis mundiais online via requisições de servidor externas em nuvem.</p>`,
-    "Bitwise Operators (Operadores de Bit)": `<p>Ataques duplos compactam os debuffs da dor numa pancada inteira varrida com OR (|) cruzando status por bit escovando poder letal direto pro transistor poupando processamento máximo RAM.</p>`,
-    "Regular Expressions (Regex)": `<p>A foice detectora de invasões. Lâminas invisíveis rastreiam códigos e higienizam digitações de script impedindo corrupção nos chats e liberando trapaças formatadas no terminal local puro.</p>`,
-    "Memory Management (Garbage Collector)": `<p>Assassinos de referências inativas (= null) devolvem a memória ao ceifar o chefe derrotado extinguindo o monstro que sugava 2GB invisíveis arrastando o cache do computador inteiro.</p>`,
-    "Design Patterns (Padrões de Projeto)": `<p>Fôrmas de arquiteturas limpas sagradas estacando lógicas Observer e Singleton assegurando que seu programa cresça para além do infinito protegendo o núcleo original com blindagem arquitetural extrema.</p>`
+    "Delta Time (Movimento Suave)": `
+        <p>O Delta Time é o conceito matemático mais crucial para garantir que o seu jogo seja justo para todos os jogadores. Ele representa a diferença de tempo em milissegundos que se passou entre o desenho de um frame e o próximo. Como os computadores têm potências diferentes, um PC Gamer vai rodar seu código a 144 frames por segundo, enquanto um celular antigo pode sofrer para manter 30 frames. Sem o Delta Time, o herói do celular correria em câmera lenta, e o do PC Gamer voaria para fora da tela.</p>
+        <p>Para corrigir essa injustiça física, nós paramos de dizer ao código "mova o personagem 5 pixels por frame" e começamos a dizer "mova o personagem 50 pixels POR SEGUNDO". Ao multiplicar a velocidade base do personagem pelo Delta Time dentro da sua função de atualização, a distância percorrida se adapta dinamicamente: se o PC atrasar e demorar o dobro do tempo para renderizar o quadro, o personagem será teleportado o dobro da distância naquele ciclo compensando o lag perfeitamente.</p>
+        <p>Aplicar essa arquitetura no seu projeto de 9° ano vai dar a ele um polimento profissional absurdo. Você passará o tempo acumulado (timestamp) capturado pelo próprio <code>requestAnimationFrame</code> e calculará a subtração do tempo antigo. É essa técnica que garante que os seus timings de 0.1 segundos para animação das sprites e a força da gravidade funcionem identicamente, independente do hardware de quem estiver jogando a sua obra.</p>
+        <div class="code-block"><pre><code>let tempoAnterior = 0;\nlet posX = 10;\nconst velocidadePorSegundo = 100; // Pixels por segundo\n\nfunction loop(tempoAtual) {\n    // Converte a diferença para segundos (ex: 0.016s)\n    let deltaTime = (tempoAtual - tempoAnterior) / 1000;\n    tempoAnterior = tempoAtual;\n\n    // A física agora é fluida!\n    posX += velocidadePorSegundo * deltaTime;\n    requestAnimationFrame(loop);\n}</code></pre></div>`,
+
+    "Classes e Construtores (POO)": `
+        <p>Quando o seu jogo crescer e você precisar de 50 moedas espalhadas pelo mapa ou 10 inimigos patrulhando, criar variáveis individuais para cada um deles seria um pesadelo arquitetônico. As Classes resolvem isso: elas funcionam como a "planta baixa" de uma casa. Você escreve o molde de como um "Inimigo" deve se comportar uma única vez, e depois usa esse molde para gerar dezenas de clones independentes na tela, cada um com sua própria vida, posição e velocidade.</p>
+        <p>O método <code>constructor()</code> é a primeira coisa executada quando você invoca o comando mágico <code>new</code>. Ele é o responsável por inicializar as características básicas daquele clone assim que ele nasce no jogo. Além das propriedades (como x e y), a Classe abriga as funções de comportamento daquele objeto, chamadas de métodos, como <code>desenhar()</code> ou <code>tomarDano()</code>. Isso mantém o seu arquivo principal extremamente limpo, encapsulando a complexidade do monstro dentro do seu próprio módulo.</p>
+        <p>Essa é a base da Programação Orientada a Objetos (POO). Adotar essa organização em arquivos separados facilita absurdamente a manutenção. Se você quiser que todos os inimigos do jogo passem a piscar em vermelho ao levar dano, você altera apenas três linhas dentro da Classe matriz, e todos os clones gerados automaticamente herdarão essa nova mecânica de luz no próximo frame.</p>
+        <div class="code-block"><pre><code>class Inimigo {\n    constructor(startX, startY) {\n        this.x = startX;\n        this.y = startY;\n        this.vida = 100;\n    }\n    moverParaEsquerda() {\n        this.x -= 2;\n    }\n}\n\nconst orc1 = new Inimigo(500, 200);\nconst orc2 = new Inimigo(800, 200);\norc1.moverParaEsquerda(); // Move só o Orc 1!</code></pre></div>`,
+
+    "Física de Pulo e Gravidade": `
+        <p>Criar um pulo responsivo exige um controle rigoroso sobre os vetores de força e um entendimento afiado sobre o chão. A gravidade não é um puxão único, mas sim uma aceleração constante: a cada quadro do jogo, uma variável de <code>velocidadeY</code> é somada à posição vertical do herói, e a força da gravidade é somada a essa velocidade. Isso cria o efeito parabólico realista onde o pulo perde força no ar, chega no ápice (velocidade zero) e depois o personagem começa a cair cada vez mais rápido.</p>
+        <p>O maior inimigo dos jogos de plataforma indies é o infame bug do "personagem flutuando". Isso ocorre quando o sistema de colisão detecta o chão muito cedo, parando a gravidade antes dos pés tocarem no solo, ou permitindo que o usuário aperte espaço repetidamente no ar. Para resolver isso com precisão, você precisa de uma variável booleana essencial: <code>isGrounded</code> (está no chão).</p>
+        <p>Sempre que o personagem colide com o chão, você zera a <code>velocidadeY</code>, alinha fisicamente o pé da sprite exatamente no limite do piso, e liga a chave <code>isGrounded = true</code>. A lógica do pulo só deve responder se essa chave for verdadeira, aplicando uma força instantânea e negativa no vetor Y, desligando o contato com o chão imediatamente.</p>
+        <div class="code-block"><pre><code>let gravidade = 0.5;\nlet velocidadeY = 0;\nlet isGrounded = false;\n\nfunction atualizarFisica() {\n    velocidadeY += gravidade;\n    jogador.y += velocidadeY;\n\n    if (jogador.y >= 400) {\n        jogador.y = 400; // Crava o pé no chão!\n        velocidadeY = 0; \n        isGrounded = true;\n    }\n}\n\nfunction pular() {\n    if (isGrounded) {\n        velocidadeY = -12;\n        isGrounded = false;\n    }\n}</code></pre></div>`,
+
+    "Colisão Retangular (AABB)": `
+        <p>A sigla AABB significa "Axis-Aligned Bounding Box" e é o algoritmo matemático mais famoso, leve e eficiente para detectar colisões em jogos 2D. Em vez de calcular contornos curvos complexos de pixels que fritariam o processador do navegador, nós imaginamos um retângulo perfeitamente reto e invisível em volta do jogador, e outro em volta da parede ou do inimigo.</p>
+        <p>O truque desse algoritmo de quatro vias é testar onde as duas caixas NÃO estão colidindo. A matemática avalia simultaneamente: "O lado direito da caixa A cruzou o lado esquerdo da caixa B? E o lado esquerdo da A cruzou o direito da B? O topo cruzou a base?". Apenas se TODAS essas quatro afirmações espaciais sobrepostas no eixo X e Y forem simultaneamente verdadeiras, significa que um retângulo invadiu o território físico do outro.</p>
+        <p>Essa verificação brutalmente simples é tão leve que você pode rodá-la centenas de vezes por frame (varrendo o cenário inteiro e projéteis) sem causar lentidão. Quando a função retornar true, o seu sistema principal deve assumir o controle imediatamente, empurrando o jogador alguns pixels para trás (Resolução de Colisão) para evitar atravessar a parede.</p>
+        <div class="code-block"><pre><code>function verificarColisao(retA, retB) {\n    return (\n        retA.x < retB.x + retB.largura &&\n        retA.x + retA.largura > retB.x &&\n        retA.y < retB.y + retB.altura &&\n        retA.y + retA.altura > retB.y\n    );\n}\n\nif (verificarColisao(jogador, espinho)) {\n    jogador.sofrerDano();\n}</code></pre></div>`,
+
+    "Animação e Spritesheets": `
+        <p>Ao invés de carregar 20 arquivos de imagem separados (o que mataria a conexão da internet), jogos profissionais usam uma Spritesheet: uma única imagem grande que contém todos os quadros da animação enfileirados. A magia acontece utilizando os atributos de corte da função <code>drawImage</code> do Canvas HTML5, onde o JavaScript desenha apenas um pequeno quadrado daquela imagem gigante na tela por vez.</p>
+        <p>A complexidade surge ao tentar controlar a velocidade dessa ilusão de ótica. Se trocar a sprite a cada frame, o seu personagem vai piscar numa velocidade irreconhecível. É aqui que entra o seu temporizador clássico: estipular que cada quadro fique na tela por exatamente "0.1 segundos", somando os milissegundos do delta time e só avançando a imagem numerada quando esse contador bater a marca.</p>
+        <p>Ter os sprites já numerados e alinhados é o segredo para corrigir o erro de flutuação ao trocar as poses. Quando o índice da animação atinge o último quadro do ciclo, o código simplesmente reseta o valor para zero, gerando um loop visual infinito perfeitamente encaixado com o ritmo dos passos.</p>
+        <div class="code-block"><pre><code>let frameAtual = 0;\nlet tempoAcumulado = 0;\nconst tempoPorQuadro = 0.1;\n\nfunction animarSprite(deltaTime) {\n    tempoAcumulado += deltaTime;\n\n    if (tempoAcumulado >= tempoPorQuadro) {\n        frameAtual++;\n        tempoAcumulado = 0;\n        if (frameAtual > 5) frameAtual = 0;\n    }\n    \n    let corteX = frameAtual * 32;\n    // drawImage(spriteSheet, corteX, 0...);\n}</code></pre></div>`,
+
+    "Controle de Estados Simples": `
+        <p>Muitos bugs acontecem quando o jogador aperta múltiplos botões ao mesmo tempo, fazendo o personagem tocar a animação de atacar enquanto voa pelo ar na pose de corrida. Para blindar o código, usamos uma Máquina de Estados Finita. Em essência, é uma variável que dita rigidamente o que o personagem está fazendo naquele exato milissegundo: "PARADO", "CORRENDO", "PULANDO" ou "MORTO".</p>
+        <p>Em vez de verificar diretamente os botões para trocar os sprites gráficos, você checa os botões para trocar o ESTADO lógico. A sua função de renderização gráfica vai simplesmente olhar para a string do estado atual e desenhar o respectivo recorte da Spritesheet. Um estado blinda o outro: se o estado atual for "ATACANDO", o jogo temporariamente ignora a leitura das setas direcionais.</p>
+        <p>Adotar esse modelo facilita a construção do banco de animações detalhadas. Cada estado gerencia a sua própria lista de sprites e regras de física, eliminando para sempre as transições bizarras ou os "glitches" visuais em jogos de plataforma, tornando a reação nítida.</p>
+        <div class="code-block"><pre><code>const ESTADOS = { PARADO: 0, CORRENDO: 1, PULANDO: 2 };\nlet estadoAtual = ESTADOS.PARADO;\n\nfunction atualizarAcao() {\n    if (velocidadeY !== 0) {\n        estadoAtual = ESTADOS.PULANDO;\n    } else if (velocidadeX !== 0) {\n        estadoAtual = ESTADOS.CORRENDO;\n    } else {\n        estadoAtual = ESTADOS.PARADO;\n    }\n}</code></pre></div>`,
+
+    "Vetores e Movimentação 2D": `
+        <p>Em jogos espaciais com visão de topo ou Twin-stick shooters, abandonamos a movimentação dura em eixos travados e abraçamos os vetores direcionais. Um vetor é composto por Direção (um ângulo) e Magnitude (a velocidade bruta nesse ângulo). Isso elimina as travas direcionais de 4 vias (cima, baixo, esquerda, direita).</p>
+        <p>Mover-se na diagonal é um grande desafio matemático. Se somar 5 pixels pra Direita e 5 para Cima, a velocidade em diagonal através do Teorema de Pitágoras salta para 7.1 pixels! O personagem corre mais rápido na diagonal do que em linha reta. Normalizar o vetor usando as funções <code>Math.sin()</code> e <code>Math.cos()</code> corrige essa disparidade física milenar.</p>
+        <p>Ao converter o ângulo do mouse e aplicar Seno e Cosseno a uma velocidade fixa máxima, o seu código gera distribuições perfeitas para velocidadeX e velocidadeY. O projeto ganha um controle cinético suave, onde balas e asteróides viajam rotas impecáveis e realistas.</p>
+        <div class="code-block"><pre><code>let anguloRad = Math.atan2(alvoY - origemY, alvoX - origemX);\nlet velocidadeMax = 10;\n\n// Extrai frações perfeitas dos eixos!\nlet velocidadeX = Math.cos(anguloRad) * velocidadeMax;\nlet velocidadeY = Math.sin(anguloRad) * velocidadeMax;\n\nprojetil.x += velocidadeX;\nprojetil.y += velocidadeY;</code></pre></div>`,
+
+    "Arrays e Gerenciamento de Entidades": `
+        <p>Um mapa vazio não é um jogo. O ambiente ganha vida quando introduzimos "Entidades", um termo que abrange projéteis voando, poções flutuando, inimigos patrulhando ou moedas girando. Para ter controle total, todas essas instâncias são gerenciadas dinamicamente dentro de gigantescos Arrays centrais.</p>
+        <p>Quando o jogador atira, o código executa um <code>push()</code> inserindo um objeto "Bala" na lista global <code>listaProjeteis</code>. No Game Loop, um loop <code>for</code> reverso itera sobre esta matriz ordenando que todas avancem. Operar a matriz de forma invertida impede que apagar balas da matriz cause bugs na contagem do código original.</p>
+        <p>Essa orquestração separa logicamente a criação e a destruição da física. É graças a essa esteira mecânica contínua que os motores conseguem simular chuvas intensas de elementos complexos na tela sem causar instabilidades nas alocações dinâmicas de memória.</p>
+        <div class="code-block"><pre><code>let tiros = [{x: 10, vivo: true}, {x: 20, vivo: false}];\n\n// Loop de trás para frente (Seguro)\nfor (let i = tiros.length - 1; i >= 0; i--) {\n    if (!tiros[i].vivo) {\n        tiros.splice(i, 1); // Remove com segurança\n    }\n}</code></pre></div>`,
+
+    "Modularização (Módulos JS)": `
+        <p>O poder real de arquiteturas sólidas em código não mora num único arquivo de mil linhas, mas na Modularização ES6 (Export / Import). Ela permite que o seu código matemático resida isolado no arquivo Física.js, enquanto o processamento das setas do teclado more confortavelmente trancado no arquivo Controles.js.</p>
+        <p>No arquivo principal (Game Loop), você utiliza a sintaxe de <code>import</code> para costurar esse Frankenstein perfeitamente. Usando a propriedade <code>type="module"</code> no HTML, o navegador bloqueia poluição global de variáveis: um "let vida" esquecido no inimigo nunca vai invadir ou estragar a "let vida" desenhada no layout base do Herói.</p>
+        <p>Manter o jogo fatiado garante escalabilidade imortal. Se for adicionar um Boss gigantesco com inteligência artificial enorme em novembro, ele será uma classe trancada do outro lado da pasta. Se ele quebrar, o menu principal de controle do jogo inteiro não trava junto, blindando seu esforço incansável de depuração.</p>
+        <div class="code-block"><pre><code>// Dentro de Inimigo.js (Exporta)\nexport class Zumbi { ... }\n\n// Dentro do Main.js (Importa a Classe)\nimport { Zumbi } from './Inimigo.js';\n\nlet horda = [];\nhorda.push(new Zumbi());</code></pre></div>`,
+
+    // ==========================================
+    // === NÍVEL AVANÇADO ===
+    // ==========================================
+    "Callbacks e Event Loop": `
+        <p>O JavaScript funciona em uma única via principal (single-threaded), executando apenas um comando por vez, como um trem em um trilho único. Para não congelar a tela inteira enquanto espera uma tarefa longa terminar, ele utiliza o brilhante sistema do Event Loop aliado aos Callbacks. O Event Loop é um maestro invisível que gerencia tarefas secundárias nos bastidores.</p>
+        <p>Na arquitetura de um jogo web, aplicamos Callbacks para aguardar temporizadores longos. Se o herói aciona um botão que leva três segundos para abrir uma pesada porta trancada, você não pode fazer o código parar brutalmente e "dormir", senão as animações no cenário congelariam no ar, estragando a fluidez.</p>
+        <p>Em vez disso, delegamos esse tempo e fornecemos um Callback: "Assim que 3 segundos se passarem lá no relógio interno oculto, abra a porta de fato". O Event Loop garante que a tela continue desenhando inimigos a 60 FPS sem engasgos de processamento. A ilusão de funções paralelas que rodam sem atrapalhar a física primária nasce daqui.</p>
+        <div class="code-block"><pre><code>function pisarNaArmadilha() {\n    console.log("Clique! Mecanismo ativado...");\n    \n    // Delega o tempo ao Event Loop via Callback\n    setTimeout(() => {\n        console.log("Os espinhos saíram do chão!");\n    }, 2000); \n\n    // O código aqui roda imediatamente, sem congelar\n}</code></pre></div>`,
+
+    "Promises (Promessas)": `
+        <p>Uma Promise (Promessa) é a evolução técnica e organizada dos Callbacks antigos, atuando como um contrato digital puro de que uma informação pesada e demorada será entregue no futuro com sucesso ou falha total. Enquanto espera os dados chegarem, o motor do jogo continua a desenhar a interface de Loading pacificamente sem ficar de ecrã travado no vazio negro.</p>
+        <p>O seu uso primordial em jogos complexos é pré-carregar os assets absurdamente pesados. Em vez de injetar personagens na fase com polígonos que não baixaram, constróis promessas robustas na lógica interna. Apenas quando as respostas das requisições derem o aval verde ao código <code>.then()</code> de sucesso das imagens, a engine limpa a barra de load e larga as correntes para o utilizador iniciar.</p>
+        <p>Elas exterminam a terrível arquitetura dos anos passados (Callback Hell), pois usam comandos limpos <code>.catch()</code> que detetam o falhanço numa imagem vital e impedem que os gráficos do motor comecem a corromper as coordenadas de colisão com eixos inexistentes por parte de um mapa desenhado com lacunas negras.</p>
+        <div class="code-block"><pre><code>function carregarTextura() {\n    return new Promise((resolve, reject) => {\n        let baixou = true;\n        if (baixou) resolve("Textura Pronta!");\n        else reject("Erro 404.");\n    });\n}\n\ncarregarTextura()\n    .then(sucesso => console.log(sucesso))\n    .catch(erro => console.error(erro));</code></pre></div>`,
+
+    "Async / Await": `
+        <p>O conjunto semântico <code>async</code> e <code>await</code> obriga as lógicas assíncronas espalhadas pelas redes mundiais demoradas a parecerem limpas e sequenciais (síncronas). Quando defines uma função como async, assumes perante o interpretador nativo que ali residem ações de tempo vago. O await funciona como um botão de pausa pontual de uma instrução solitária no meio de promessas pesadas que seriam caóticas escritas lado a lado.</p>
+        <p>Na coreografia dramática das cenas introdutórias ou ligações longas na nuvem de pontuação (Database), isto ordena perfeitamente as pilhas do código sem emaranhar as conexões. Diz abertamente "aguarde o download do utilizador terminar as suas definições antes de gerar as florestas poligonais" sem nunca parar o relógio do ecossistema geral de renderização.</p>
+        <p>Aumenta maravilhosamente a estabilidade de manutenção. Ler dez blocos visuais descritivos sequenciais ao lado das instruções impede acidentes colaterais no teu projeto modular futuro. As ordens ficam blindadas para só nascer o Inimigo Dois quando o ficheiro visual Um tiver completado e cimentado os seus bytes vitais em memória RAM alocada e limpa pelo JS.</p>
+        <div class="code-block"><pre><code>const baixarDados = () => new Promise(res => setTimeout(() => res("OK"), 1000));\n\nasync function carregarFase() {\n    console.log("Loading...");\n    const passo1 = await baixarDados();\n    console.log("Fase Gerada: " + passo1);\n}</code></pre></div>`,
+
+    "Recursividade": `
+        <p>A recursividade é uma técnica conceptual fantástica onde uma função tenta resolver um grande problema ao convocar e executar a si própria infinitamente até atingir uma condição de bloqueio (fuga) rígida. Se falhares a implementação do travão absoluto central, a função entrará em colapso engolindo processamento, memória vital e acabará no mortal "Stack Overflow".</p>
+        <p>O panteão de utilização no Gamedev reside majestosamente nos sistemas de "Busca Espacial" como encontrar buracos num Campo Minado. Quando carregas na casa vazia, a recursividade expande nas oitos casas do lado invocando funções internas nelas mesmas, limpando grandes extensões de terreno verde sem uma centena de voltas de ciclos no código sujo que gastariam kilobytes inteiros forçados em texto repetitivo condicional.</p>
+        <p>A Inteligência Artificial dos Chefões de fase aplica o Pathfinding (busca em labirintos). Uma aranha gigante envia simulações da sua função nas paredes verificando colisões em ramos paralelos no abismo da recursão para gerar o trilho sem erros pelas armadilhas visando rasgar a tua armadura sem errar nos obstáculos.</p>
+        <div class="code-block"><pre><code>function buscarSaida(corredorAtual) {\n    if (corredorAtual === 5) { // CONDIÇÃO PARADA\n        return "Saída Encontrada!"; \n    }\n    return buscarSaida(corredorAtual + 1); // CHAMA A SI MESMA\n}\n\nconsole.log(buscarSaida(1));</code></pre></div>`,
+
+    "Manipulação Avançada de Objetos": `
+        <p>A manipulação de ponta mergulha profundamente no DNA e chassi basal estrutural dos elementos. Métodos robustos do núcleo lógico (<code>Object.assign</code> e <code>Object.keys</code>) extraem a essência crua dos valores isolados destrinchando armaduras em números manipuláveis sem teres de adivinhar as propriedades escritas semanas atrás.</p>
+        <p>É a dádiva sagrada para desenvolver o Crafting. Se queres colar uma "Pedra Flamejante" venenosa na "Lança Padrão", o <code>assign</code> varre ambos os objetos separadamente absorvendo a letalidade combinada injetada numa arma clonada e perfeitamente simbiótica pronta a ceifar nos inventários base da interface.</p>
+        <p>Puxando pelo <code>keys</code> listas automáticas com chaves de controlo dinâmicas desenham menus gigantes. Permitem polular dados dinâmicos em lojas onde amanhã crias o machado sagrado, ele extrai os atributos invisíveis de força e empacota num div bonito preenchendo todos os vazios visuais perfeitamente alinhados na tabela de vendas de ouro ao mercador sem refazer nada no teu DOM estruturalmente central.</p>
+        <div class="code-block"><pre><code>const base = { atk: 10 };\nconst fogo = { magia: 25, dot: "Queimar" };\n\n// Fusão Perfeita de Itens\nconst espadaFogo = Object.assign({}, base, fogo);\n\n// Puxa atributos para mostrar na tela de status\nconst statusNomes = Object.keys(espadaFogo);\nconsole.log("Atributos: " + statusNomes.join(", "));</code></pre></div>`,
+
+    "APIs e Fetch": `
+        <p>A requisição Fetch (buscadora do HTTPS) transmutou o mundo solitário offline permitindo que as tuas aplicações interajam com as teias nervosas de bancos de dados mastodônticos na internet mundial em segundos de frações. Abre comunicações puras nos servidores online convertendo os resultados fechados isolados na aba para os pódios eternos alojados e arquivados no teu backend invisível ou na Nuvem global das leaderboards.</p>
+        <p>Com um POST passas o recorde brutal do herói local depois deste matar um boss com 50 golpes. Ao mesmo tempo um GET faz download puro JSON e popula na hora o rank visual em primeiro, destruindo corações a outros concorrentes no seu navegador atualizando os Top 10 em lista imersiva no seu ecossistema sem sair da jogatina atual pausada lá fora da rede tridimensional do cenário de sprites vivos.</p>
+        <p>Estes construtos elevam experiências fechadas a metrópoles vivas diárias interligando o multiplayer social assíncrono perante eventos massivos, garantindo cálculos isolados pesados do lado do servidor longe de possíveis hackeamentos client-side e assegurando os prémios exatos e purificados imaculados pro jogador honrado num combate cibernético real.</p>
+        <div class="code-block"><pre><code>async function salvarRecorde() {\n    try {\n        const res = await fetch("https://api.meujogo.com/rank");\n        const dados = await res.json();\n        console.log("Top 1 Mundial: " + dados[0].nome);\n    } catch (e) {\n        console.log("Modo Offline ativado.");\n    }\n}</code></pre></div>`,
+
+    "Bitwise Operators (Operadores de Bit)": `
+        <p>Os Operadores Bitwise assumem os lugares divinos da programação onde intervimos no mais baixo nível concebível de energia purificada: a manipulação bruta de zeros e uns (bits) literais do processador. Estes símbolos crípticos transmutam montanhas pesadas de lógicas encadeadas em micro-comandos de processamentos milissegundos sem qualquer esforço ao computador final.</p>
+        <p>Para controlar os debuffs e maldições simultâneas em chefões usamos isto como Collision Masks perfeitas (Mascaras lógicas encadeadas). Juntar com (AND & e OR |) funde o estado venenoso com o escudo de pedra pesado em apenas um byte encolhido compacto validando o IF principal absoluto de cálculo físico antes da espada desferir qualquer frame que pese memória matemática no browser limitando loops em laços massivos da colisão.</p>
+        <p>Sustentam sessenta quadros perfeitos perante cem zumbis lançando três feitiços caóticos em aparelhos ultrapassados reduzindo brutalmente gastos térmicos do celular rodando sem travamentos a tela pesada de fogo cruzado blindada e fluida na engrenagem suprema invisível calculando fraquezas sem sobrecargas nocivas sistêmicas.</p>
+        <div class="code-block"><pre><code>const ST_NORMAL = 0;\nconst ST_FOGO = 1;     // 0001\nconst ST_GELO = 2;     // 0010\n\nlet estado = ST_NORMAL;\nestado = ST_FOGO | ST_GELO; // Queimando e Congelado!\n\nif (estado & ST_GELO) {\n    console.log("Herói preso. Movimento cortado.");\n}</code></pre></div>`,
+
+    "Regular Expressions (Regex)": `
+        <p>Regex são foices ocultas abstratas que desbravam densas barreiras de informações em grandes cordões e longas strings varrendo identificações perfeitamente numa miríade textual onde loops e condicionais se debateriam dolorosamente devagar. A sua presença é indispensável a ler logs e sanear comandos vindos do caos de inputs da interface exterior crivada de dados cruciais sensíveis e desordenados nos quadros lidos em puro JavaScript nativo.</p>
+        <p>Se tens um Chat online aberto entre equipas, ou abres linhas de comando pra inserir Cheats na aventura, a Regex rastreia códigos injetados cirurgicamente validando "invocar_Ouro_500" isolando palavras cortadas exatas nas variáveis corretas de entidade (Ouro) e números de somatórios (500) blindando comandos contra caracteres letais vindos de hackers ardilosos no painel console manipulados na injeção perigosa dos teus forms da partida central em atividade exposta.</p>
+        <p>Defendem integralmente o núcleo lógico base garantindo purificação nas texturas lidas nos painéis complexos e formatando valores de tempos estragados protegendo os componentes vitais sem estragar conexões diretas nos eventos paralelos ocorridos no cenário tridimensional de combate atrás dos fundos obscuros matemáticos base.</p>
+        <div class="code-block"><pre><code>const comando = "/invocar Dragao 100";\nconst expressao = /^\\/([a-zA-Z]+)\\s+([a-zA-Z]+)\\s+(\\d+)$/;\n\nconst dadosLimpos = comando.match(expressao);\nif (dadosLimpos) {\n    console.log(\`Ação: \${dadosLimpos[1]} | Qtd: \${dadosLimpos[3]}\`);\n}</code></pre></div>`,
+
+    "Memory Management (Garbage Collector)": `
+        <p>Gestão avançada assenta a paz perante os vazamentos terríveis de RAM (Memory Leaks). A máquina virtual de base oculta um fiscal interno: O "Garbage Collector" (Lixeiro de Memória) caçando estâncias órfãs destruídas para libertar o processador e reciclar gigabytes sugados pela renderização constante invisivelmente mantendo as barreiras técnicas firmes sem rebentar os celulares do jogador após duas horas jogadas nos chefes longos.</p>
+        <p>Quando um vilão repleto de animações 4K perece sob o machado e evapora do cenário desenhado, as suas conexões a arrays e os listeners trancados mantêm-no escondido alimentando-se ativamente de processamento morto estourando o limite técnico engolindo o painel e desligando agressivamente a tela com ecrã negro terminando tragicamente a vida e progressão contínua ali executada no loop eterno da arena gerada.</p>
+        <p>Apagar ativamente matrizes densas e definir referências gigantes do cache para "Null" logo ao finalizar níveis expulsa o monstro e os seus lixos alocados, esvaziando o cenário pesado do sistema operativo devolvendo estabilidade máxima respiratória a aplicação complexa que lida no cerne arquitetônico da obra épica sustentando a perfeição industrial base duradora impecável nos dispositivos modestos e absolutos presentes online nos jogadores em foco principal das campanhas lançadas por vocês de jogos independentes grandiosos criados no front end liso estruturado no browser limpo.</p>
+        <div class="code-block"><pre><code>let bossTexturas = { sprites: new Array(10000).fill("img.png") };\n\nfunction matarBoss() {\n    // A imagem sumiu da tela, mas a RAM continua cheia.\n    // Precisamos de forçar a libertação de memória:\n    bossTexturas = null;\n    console.log("RAM limpa. O Garbage Collector pode reciclar os MB!");\n}</code></pre></div>`,
+
+    "Design Patterns (Padrões de Projeto)": `
+        <p>O Design Patterns é o apogeu sagrado na engenharia limpa impedindo torres enormes caírem com seus remendos isolados insustentáveis enraizados entre bases frouxas amontoadas sob desculpas fáceis temporárias destruídas e caídas aos abalos sistêmicos criados sob os próprios desenvolvimentos desgovernados nos DLCs vindouros e expansões pesadas anexadas nos alicerces já antigos.</p>
+        <p>Utilizar padrões rigorosos como "State Pattern" ou "Singleton" isola engrenagens pesadas como "pulo" ou "correr" para longe de Ifs infindos confusos da sua engine. A State tranca em blocos blindados autónomos e indestrutíveis os fluxos onde saltar jamais quebra ações de golpear, protegendo a pureza sistêmica em pastas modulares separadas intocadas por corrupção acidental que geraria mortes infinitas no boneco flutuando nas lógicas corrompidas de falhas.</p>
+        <p>Absorver moldes provados a nível mundial na formatação tática de acoplar blocos em código transforma sistemas rudes de amadores perdidos para motores profissionais infalíveis de manutenção instantânea e blindagens perfeitas onde tudo opera orquestrado perfeitamente na perfeição garantida das mecânicas fluidas indestrutíveis prontas aos abalos do mercado robustos das produções colossais.</p>
+        <div class="code-block"><pre><code>const Acoes = {\n    CORRER: () => console.log("Lógica Limpa da Corrida isolada."), \n    PULAR: () => console.log("Lógica Livre de Gravidade Pura.")\n};\n\nlet maquinaEstadoAtual = Acoes.CORRER;\nmaquinaEstadoAtual(); // Executa apenas o estado seguro.</code></pre></div>`
 };
-
-// ==========================================
-// 3. ESTRUTURA DO MOTOR E GRELHA
-// ==========================================
-const db = {
-    html: {
-        iniciante: ["Conceito de Tags", "Estrutura Global", "Tags de Texto", "Meta Tags Técnicas", "Atributos e IDs", "Links e Navegação", "Listas de Inventário", "Inserção de Mídia", "Containers Div", "Comentários de Código"],
-        intermediario: ["Elementos Semânticos (Header, Nav, Footer)", "Seções de Conteúdo (Section, Article, Aside)", "Estrutura de Tabelas Simples (Table, Tr, Td)", "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)", "Formulários Básicos (Form, Input, Label)", "Tipos de Input (Text, Password, Email, Button)", "Seleções em Formulários (Radio, Checkbox, Select)", "Validação Nativa de Formulários", "Introdução à Acessibilidade (Atributos ARIA)", "A tag <dialog> (Modais Nativos)"],
-        avancado: ["A tag <canvas> (O Palco dos Jogos)", "SVG inline (<svg> e <path>)", "Imagens Responsivas (<picture> e srcset)", "Áudios Avançados (Atributos e Eventos de <audio>)", "Pré-carregamento de Assets (preload e prefetch)", "Iframe Avançado (<iframe> e Sandbox)", "Manipulação de Templates (<template> e <slot>)", "Armazenamento no Navegador (O papel técnico do HTML5)", "Componentes Web Nativos (Custom Elements)", "Acessibilidade de Teclado Avançada (tabindex e Foco)"]
-    },
-    css: { 
-        iniciante: [], intermediario: [], avancado: [] 
-    },
-    js: { 
-        iniciante: ["Variáveis e Constantes (let e const)", "Tipos de Dados Essenciais", "Operadores Matemáticos e Lógicos", "Estruturas Condicionais (if, else, else if)", "Estruturas de Repetição (for e while)", "Introdução às Funções", "Arrays Simples (Listas)", "Objetos Básicos (Chave e Valor)", "Manipulação Básica do DOM (getElementById)", "Eventos de Teclado e Mouse (addEventListener)"], 
-        intermediario: ["O Game Loop e requestAnimationFrame", "Delta Time (Movimento Suave)", "Classes e Construtores (POO)", "Física de Pulo e Gravidade", "Colisão Retangular (AABB)", "Animação e Spritesheets", "Controle de Estados Simples", "Vetores e Movimentação 2D", "Arrays e Gerenciamento de Entidades", "Modularização (Módulos JS)"], 
-        avancado: ["Callbacks e Event Loop", "Promises (Promessas)", "Async / Await", "Recursividade", "Manipulação Avançada de Objetos", "APIs e Fetch", "Bitwise Operators (Operadores de Bit)", "Regular Expressions (Regex)", "Memory Management (Garbage Collector)", "Design Patterns (Padrões de Projeto)"] 
-    }
-};
-
-let currentTech = 'html';
-let currentLevel = 'iniciante';
-
-function setTech(tech) {
-    currentTech = tech;
-    document.querySelectorAll('.main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
-    const btn = document.getElementById('btn-' + tech);
-    if (btn) btn.classList.add('active-' + tech);
-    if (currentTech === 'js' && currentLevel === 'intermediario') currentLevel = 'iniciante'; 
-    setLevel(currentLevel);
-}
-
-function setLevel(lvl) {
-    currentLevel = lvl;
-    document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active-lvl'));
-    const btn = document.getElementById('lvl-' + lvl);
-    if (btn) btn.classList.add('active-lvl');
-    renderEncGrid();
-}
-
-function renderEncGrid() {
-    const grid = document.getElementById('topics-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    const topics = db[currentTech][currentLevel] || [];
-    
-    topics.forEach(topic => {
-        const card = document.createElement('div');
-        card.className = 'topic-card';
-        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        card.innerHTML = `<h3>${safeTitle}</h3>`;
-        card.onclick = () => openModal(topic);
-        grid.appendChild(card);
-    });
-}
-
-function openModal(topic) {
-    const overlay = document.getElementById('reader');
-    const container = document.getElementById('reader-body');
-    let content = "<p>Conteúdo em fase de produção.</p>";
-
-    if (currentTech === 'html' && conteudosHTML[topic]) {
-        content = conteudosHTML[topic];
-    } else if (currentTech === 'js' && conteudosJS[topic]) {
-        content = conteudosJS[topic];
-    }
-    
-    if (overlay && container) {
-        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        container.innerHTML = `<h2>${safeTitle}</h2>${content}`;
-        overlay.style.display = 'flex';
-        setTimeout(() => overlay.classList.add('active'), 10);
-        document.body.style.overflow = 'hidden'; 
-    }
-}
-
-function closeModal() {
-    const overlay = document.getElementById('reader');
-    if (overlay) {
-        overlay.classList.remove('active');
-        setTimeout(() => {
-            overlay.style.display = 'none';
-            document.body.style.overflow = 'auto'; 
-        }, 200);
-    }
-}
-
-window.addEventListener('click', (e) => {
-    const overlay = document.getElementById('reader');
-    if (e.target === overlay) closeModal();
-});
-
-// A VANTAGEM DE TER TUDO JUNTO: Não precisa esperar a internet!
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    renderEncGrid();
-} else {
-    document.addEventListener('DOMContentLoaded', renderEncGrid);
-}
