@@ -20,7 +20,6 @@ let currentLevel = 'iniciante';
 let currentExTech = 'html';
 let currentExLevel = 'iniciante';
 
-// Lógica da Aba Enciclopédia
 function setTech(tech) {
     currentTech = tech;
     document.querySelectorAll('#view-enciclopedia .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
@@ -52,7 +51,6 @@ function renderEncGrid() {
     });
 }
 
-// Lógica da Aba Exercícios
 function setExTech(tech) {
     currentExTech = tech;
     document.querySelectorAll('#view-exercicios .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
@@ -85,7 +83,7 @@ function renderExGrid() {
         card.className = 'topic-card';
         card.style.borderColor = '#f59e0b';
         
-        // Se já foi concluído (checa o progresso local), pinta de verde
+        // Verde se já completou
         if (window.usuarioLogado && window.usuarioLogado.progresso && window.usuarioLogado.progresso.includes(topic)) {
             card.style.borderColor = '#10b981';
             card.style.background = 'rgba(16, 185, 129, 0.1)';
@@ -98,7 +96,6 @@ function renderExGrid() {
     });
 }
 
-// Modal Universal e Verificação
 function openModal(topic, tipo) {
     const overlay = document.getElementById('reader');
     const container = document.getElementById('reader-body');
@@ -111,16 +108,35 @@ function openModal(topic, tipo) {
         container.innerHTML = `<h2>${topic}</h2>${content}`;
     } 
     else if (tipo === 'exercicio') {
-        let exercicioObj = null;
+        let ex = null;
         if (currentExTech === 'html' && window.exerciciosHTML && window.exerciciosHTML[currentExLevel]) {
-            exercicioObj = window.exerciciosHTML[currentExLevel][topic];
+            ex = window.exerciciosHTML[currentExLevel][topic];
         }
 
-        if (exercicioObj) {
+        if (ex) {
+            // Desenha a Interface das Duas Etapas
             content = `
-                ${exercicioObj.enunciado}
-                <textarea id="input-resposta" class="caixa-resposta">${exercicioObj.codigoInicial || ""}</textarea>
-                <button class="btn-verificar" onclick="processarResposta('${topic}')">Verificar Resposta</button>
+                <div style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #38bdf8;">
+                    <h3 style="margin-top: 0; color: #38bdf8;">Parte 1: Missão Teórica</h3>
+                    <p style="font-size: 14px;">${ex.enunciado1}</p>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px;">
+                        ${ex.opcoes.map((opt, i) => `
+                            <label style="cursor: pointer; font-size: 14px; color: #cbd5e1; display: flex; align-items: center; gap: 10px;">
+                                <input type="radio" name="opt-teoria" value="${i}" style="accent-color: #38bdf8; width: 16px; height: 16px;">
+                                ${opt}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div style="background: rgba(245, 158, 11, 0.05); padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <h3 style="margin-top: 0; color: #f59e0b;">Parte 2: Missão Prática</h3>
+                    <p style="font-size: 14px; color: #94a3b8; font-style: italic;">${ex.enunciado2}</p>
+                    <p style="font-size: 14px;"><strong>Desafio:</strong> ${ex.questaoPratica}</p>
+                    <textarea id="input-resposta" class="caixa-resposta" style="margin-top: 10px;">${ex.codigoInicial || ""}</textarea>
+                </div>
+
+                <button class="btn-verificar" onclick="processarResposta('${topic}')" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 16px;">Verificar Missão Completa</button>
             `;
         }
         container.innerHTML = `<h2>Missão: ${topic}</h2>${content}`;
@@ -133,37 +149,48 @@ function openModal(topic, tipo) {
     }
 }
 
-// Função que o botão do Modal chama
+// Lógica dupla de Verificação
 window.processarResposta = async (topic) => {
-    const respostaInput = document.getElementById('input-resposta').value.trim();
-    let exercicioObj = null;
+    let ex = null;
+    if (currentExTech === 'html') ex = window.exerciciosHTML[currentExLevel][topic];
+    if (!ex) return;
 
-    if (currentExTech === 'html') exercicioObj = window.exerciciosHTML[currentExLevel][topic];
-
-    if (!exercicioObj) return;
-
-    // Compara ignorando espaços duplos e maiúsculas
-    if (respostaInput.toLowerCase().replace(/\s+/g, ' ') === exercicioObj.correta.toLowerCase().replace(/\s+/g, ' ')) {
-        alert("🎉 Missão Concluída! Resposta certa.");
-        
-        // Atualiza na interface
-        if (window.usuarioLogado) {
-            if (!window.usuarioLogado.progresso) window.usuarioLogado.progresso = [];
-            if (!window.usuarioLogado.progresso.includes(topic)) {
-                window.usuarioLogado.progresso.push(topic);
-            }
-        }
-        
-        // Chama o Firebase
-        if (window.salvarProgressoNuvem) {
-            await window.salvarProgressoNuvem(topic);
-        }
-        
-        closeModal();
-        renderExGrid(); // Recarrega a grade para pintar de verde
-    } else {
-        alert("❌ Resposta Incorreta. Continue tentando!");
+    // 1. Validar a Teoria
+    const opcaoSelecionada = document.querySelector('input[name="opt-teoria"]:checked');
+    if (!opcaoSelecionada) {
+        return alert("⚠️ Por favor, escolha uma opção na Parte 1 (Teórica) antes de verificar!");
     }
+    
+    const indiceEscolhido = parseInt(opcaoSelecionada.value);
+    if (indiceEscolhido !== ex.respostaMultipla) {
+        return alert("❌ A resposta da Parte Teórica está incorreta. Revise o material e tente novamente!");
+    }
+
+    // 2. Validar a Prática
+    const respostaPratica = document.getElementById('input-resposta').value.trim();
+    const str1 = respostaPratica.toLowerCase().replace(/\s+/g, ' ');
+    const str2 = ex.correta.toLowerCase().replace(/\s+/g, ' ');
+
+    if (str1 !== str2) {
+        return alert("❌ A teoria está certa, mas o código prático está incorreto! Dê uma olhada no fechamento de tags e nos atributos.");
+    }
+
+    // Se passou pelas duas barreiras:
+    alert("🎉 Missão Concluída com Perfeição! Teoria e Prática corretas.");
+    
+    if (window.usuarioLogado) {
+        if (!window.usuarioLogado.progresso) window.usuarioLogado.progresso = [];
+        if (!window.usuarioLogado.progresso.includes(topic)) {
+            window.usuarioLogado.progresso.push(topic);
+        }
+    }
+    
+    if (window.salvarProgressoNuvem) {
+        await window.salvarProgressoNuvem(topic);
+    }
+    
+    closeModal();
+    renderExGrid();
 };
 
 function closeModal() {
@@ -182,7 +209,6 @@ window.addEventListener('click', (e) => {
     if (e.target === overlay) closeModal();
 });
 
-// Inicialização segura
 function aguardarDadosERenderizar() {
     if (typeof window.conteudosHTML !== 'undefined' && typeof window.exerciciosHTML !== 'undefined') {
         renderEncGrid();
