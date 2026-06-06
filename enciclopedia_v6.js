@@ -75,10 +75,8 @@ function renderExGrid() {
     document.getElementById('ex-topics-grid-css').style.display = 'none';
     document.getElementById('ex-topics-grid-js').style.display = 'none';
     grid.style.display = 'grid';
-
     grid.innerHTML = '';
     
-    // Puxa a lista de exercícios do objeto carregado globalmente na pasta /exercicios
     const dataObj = (currentExTech === 'html') ? window.exerciciosHTML : null;
     const topics = (dataObj && dataObj[currentExLevel]) ? Object.keys(dataObj[currentExLevel]) : [];
     
@@ -86,6 +84,13 @@ function renderExGrid() {
         const card = document.createElement('div');
         card.className = 'topic-card';
         card.style.borderColor = '#f59e0b';
+        
+        // Se já foi concluído (checa o progresso local), pinta de verde
+        if (window.usuarioLogado && window.usuarioLogado.progresso && window.usuarioLogado.progresso.includes(topic)) {
+            card.style.borderColor = '#10b981';
+            card.style.background = 'rgba(16, 185, 129, 0.1)';
+        }
+
         const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         card.innerHTML = `<h3>Desafio:<br>${safeTitle}</h3>`;
         card.onclick = () => openModal(topic, 'exercicio');
@@ -93,7 +98,7 @@ function renderExGrid() {
     });
 }
 
-// Modal Universal (Serve para Leitura e para Exercícios)
+// Modal Universal e Verificação
 function openModal(topic, tipo) {
     const overlay = document.getElementById('reader');
     const container = document.getElementById('reader-body');
@@ -102,21 +107,64 @@ function openModal(topic, tipo) {
     if (tipo === 'estudo') {
         if (currentTech === 'html' && window.conteudosHTML) content = window.conteudosHTML[topic] || content;
         else if (currentTech === 'js' && window.conteudosJS) content = window.conteudosJS[topic] || content;
-    } else if (tipo === 'exercicio') {
+        
+        container.innerHTML = `<h2>${topic}</h2>${content}`;
+    } 
+    else if (tipo === 'exercicio') {
+        let exercicioObj = null;
         if (currentExTech === 'html' && window.exerciciosHTML && window.exerciciosHTML[currentExLevel]) {
-            content = window.exerciciosHTML[currentExLevel][topic] || content;
+            exercicioObj = window.exerciciosHTML[currentExLevel][topic];
         }
+
+        if (exercicioObj) {
+            content = `
+                ${exercicioObj.enunciado}
+                <textarea id="input-resposta" class="caixa-resposta">${exercicioObj.codigoInicial || ""}</textarea>
+                <button class="btn-verificar" onclick="processarResposta('${topic}')">Verificar Resposta</button>
+            `;
+        }
+        container.innerHTML = `<h2>Missão: ${topic}</h2>${content}`;
     }
     
     if (overlay && container) {
-        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        const tituloPrefixo = tipo === 'exercicio' ? 'Missão: ' : '';
-        container.innerHTML = `<h2>${tituloPrefixo}${safeTitle}</h2>${content}`;
         overlay.style.display = 'flex';
         setTimeout(() => overlay.classList.add('active'), 10);
         document.body.style.overflow = 'hidden'; 
     }
 }
+
+// Função que o botão do Modal chama
+window.processarResposta = async (topic) => {
+    const respostaInput = document.getElementById('input-resposta').value.trim();
+    let exercicioObj = null;
+
+    if (currentExTech === 'html') exercicioObj = window.exerciciosHTML[currentExLevel][topic];
+
+    if (!exercicioObj) return;
+
+    // Compara ignorando espaços duplos e maiúsculas
+    if (respostaInput.toLowerCase().replace(/\s+/g, ' ') === exercicioObj.correta.toLowerCase().replace(/\s+/g, ' ')) {
+        alert("🎉 Missão Concluída! Resposta certa.");
+        
+        // Atualiza na interface
+        if (window.usuarioLogado) {
+            if (!window.usuarioLogado.progresso) window.usuarioLogado.progresso = [];
+            if (!window.usuarioLogado.progresso.includes(topic)) {
+                window.usuarioLogado.progresso.push(topic);
+            }
+        }
+        
+        // Chama o Firebase
+        if (window.salvarProgressoNuvem) {
+            await window.salvarProgressoNuvem(topic);
+        }
+        
+        closeModal();
+        renderExGrid(); // Recarrega a grade para pintar de verde
+    } else {
+        alert("❌ Resposta Incorreta. Continue tentando!");
+    }
+};
 
 function closeModal() {
     const overlay = document.getElementById('reader');
@@ -134,8 +182,8 @@ window.addEventListener('click', (e) => {
     if (e.target === overlay) closeModal();
 });
 
+// Inicialização segura
 function aguardarDadosERenderizar() {
-    // Verifica se os arquivos de conteúdo E o de exercícios foram carregados
     if (typeof window.conteudosHTML !== 'undefined' && typeof window.exerciciosHTML !== 'undefined') {
         renderEncGrid();
         renderExGrid();
