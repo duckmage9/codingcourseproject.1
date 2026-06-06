@@ -68,25 +68,24 @@ function setExLevel(lvl) {
 }
 
 function renderExGrid() {
-    // Busca a grade correta baseada na tecnologia (html, css ou js)
     const grid = document.getElementById('ex-topics-grid-' + currentExTech);
     if (!grid) return;
     
-    // Esconde as outras grades e mostra a atual
     document.getElementById('ex-topics-grid-html').style.display = 'none';
     document.getElementById('ex-topics-grid-css').style.display = 'none';
     document.getElementById('ex-topics-grid-js').style.display = 'none';
-    grid.style.display = 'grid'; // Usa o display grid original do CSS
+    grid.style.display = 'grid';
 
     grid.innerHTML = '';
     
-    // Puxa a mesma lista de tópicos da Enciclopédia para montar os botões de exercícios
-    const topics = db[currentExTech][currentExLevel] || [];
+    // Puxa a lista de exercícios do objeto carregado globalmente na pasta /exercicios
+    const dataObj = (currentExTech === 'html') ? window.exerciciosHTML : null;
+    const topics = (dataObj && dataObj[currentExLevel]) ? Object.keys(dataObj[currentExLevel]) : [];
     
     topics.forEach(topic => {
         const card = document.createElement('div');
         card.className = 'topic-card';
-        card.style.borderColor = '#f59e0b'; // Cor diferente para destacar que é exercício
+        card.style.borderColor = '#f59e0b';
         const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         card.innerHTML = `<h3>Desafio:<br>${safeTitle}</h3>`;
         card.onclick = () => openModal(topic, 'exercicio');
@@ -136,9 +135,10 @@ window.addEventListener('click', (e) => {
 });
 
 function aguardarDadosERenderizar() {
-    if (typeof window.conteudosHTML !== 'undefined' && typeof window.conteudosJS !== 'undefined') {
+    // Verifica se os arquivos de conteúdo E o de exercícios foram carregados
+    if (typeof window.conteudosHTML !== 'undefined' && typeof window.exerciciosHTML !== 'undefined') {
         renderEncGrid();
-        renderExGrid(); // Desenha a grade de exercícios ao carregar
+        renderExGrid();
     } else {
         setTimeout(aguardarDadosERenderizar, 100);
     }
