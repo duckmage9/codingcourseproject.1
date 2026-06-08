@@ -7,7 +7,11 @@ const db = {
         intermediario: ["Elementos Semânticos (Header, Nav, Footer)", "Seções de Conteúdo (Section, Article, Aside)", "Estrutura de Tabelas Simples (Table, Tr, Td)", "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)", "Formulários Básicos (Form, Input, Label)", "Tipos de Input (Text, Password, Email, Button)", "Seleções em Formulários (Radio, Checkbox, Select)", "Validação Nativa de Formulários", "Introdução à Acessibilidade (Atributos ARIA)", "A tag <dialog> (Modais Nativos)"],
         avancado: ["A tag <canvas> (O Palco dos Jogos)", "SVG inline (<svg> e <path>)", "Imagens Responsivas (<picture> e srcset)", "Áudios Avançados (Atributos e Eventos de <audio>)", "Pré-carregamento de Assets (preload e prefetch)", "Iframe Avançado (<iframe> e Sandbox)", "Manipulação de Templates (<template> e <slot>)", "Armazenamento no Navegador (O papel técnico do HTML5)", "Componentes Web Nativos (Custom Elements)", "Acessibilidade de Teclado Avançada (tabindex e Foco)"]
     },
-    css: { iniciante: [], intermediario: [], avancado: [] },
+    css: { 
+        iniciante: ["1. Seletores Básicos e Combinadores", "2. O Box Model (Modelo de Caixa)", "3. Cores e Backgrounds", "4. Tipografia Web", "5. Unidades de Medida", "6. Display Básico", "7. Bordas e Arredondamentos", "8. Sombras Simples", "9. Estados Básicos (Pseudo-classes)", "10. Variáveis CSS Nativas (Básico)"], 
+        intermediario: ["11. Posicionamento (Position) e z-index", "12. Fundamentos do Flexbox", "13. Flexbox Avançado", "14. Fundamentos do CSS Grid", "15. Pseudo-elementos (::before e ::after)", "16. Transições Suaves (Transitions)", "17. Transformações 2D (Transforms)", "18. Design Responsivo (Media Queries)", "19. Pseudo-classes Avançadas", "20. Filtros Gráficos (Filters e Blend Modes)"], 
+        avancado: ["21. Animações Complexas com Keyframes", "22. Transformações 3D", "23. CSS Grid Layout Avançado", "24. Funções Matemáticas", "25. Clip-path e Formas Complexas", "26. Scroll Snapping e Scrollbars Estilizadas", "27. Container Queries (@container)", "28. Arquitetura CSS (Metodologia BEM)", "29. Efeitos Visuais Modernos (Glassmorphism e Neumorphism)", "30. Integração de Variáveis CSS com JavaScript"] 
+    },
     js: { 
         iniciante: ["Variáveis e Constantes (let e const)", "Tipos de Dados Essenciais", "Operadores Matemáticos e Lógicos", "Estruturas Condicionais (if, else, else if)", "Estruturas de Repetição (for e while)", "Introdução às Funções", "Arrays Simples (Listas)", "Objetos Básicos (Chave e Valor)", "Manipulação Básica do DOM (getElementById)", "Eventos de Teclado e Mouse (addEventListener)"], 
         intermediario: ["O Game Loop e requestAnimationFrame", "Delta Time (Movimento Suave)", "Classes e Construtores (POO)", "Física de Pulo e Gravidade", "Colisão Retangular (AABB)", "Animação e Spritesheets", "Controle de Estados Simples", "Vetores e Movimentação 2D", "Arrays e Gerenciamento de Entidades", "Modularização (Módulos JS)"], 
@@ -103,6 +107,11 @@ function openModal(topic, tipo) {
 
     if (tipo === 'estudo') {
         if (currentTech === 'html' && window.conteudosHTML) content = window.conteudosHTML[topic] || content;
+        // NOVA LÓGICA DO CSS AQUI
+        else if (currentTech === 'css' && window.conteudos && window.conteudos.css) {
+            const item = window.conteudos.css[currentLevel].find(c => c.titulo === topic);
+            content = item ? item.conteudo : content;
+        }
         else if (currentTech === 'js' && window.conteudosJS) content = window.conteudosJS[topic] || content;
         
         container.innerHTML = `<h2>${topic}</h2>${content}`;
@@ -114,7 +123,6 @@ function openModal(topic, tipo) {
         }
 
         if (ex) {
-            // Desenha a Interface das Duas Etapas
             content = `
                 <div style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #38bdf8;">
                     <h3 style="margin-top: 0; color: #38bdf8;">Parte 1: Missão Teórica</h3>
@@ -155,7 +163,6 @@ window.processarResposta = async (topic) => {
     if (currentExTech === 'html') ex = window.exerciciosHTML[currentExLevel][topic];
     if (!ex) return;
 
-    // 1. Validar a Teoria
     const opcaoSelecionada = document.querySelector('input[name="opt-teoria"]:checked');
     if (!opcaoSelecionada) {
         return alert("⚠️ Por favor, escolha uma opção na Parte 1 (Teórica) antes de verificar!");
@@ -166,7 +173,6 @@ window.processarResposta = async (topic) => {
         return alert("❌ A resposta da Parte Teórica está incorreta. Revise o material e tente novamente!");
     }
 
-    // 2. Validar a Prática
     const respostaPratica = document.getElementById('input-resposta').value.trim();
     const str1 = respostaPratica.toLowerCase().replace(/\s+/g, ' ');
     const str2 = ex.correta.toLowerCase().replace(/\s+/g, ' ');
@@ -175,7 +181,6 @@ window.processarResposta = async (topic) => {
         return alert("❌ A teoria está certa, mas o código prático está incorreto! Dê uma olhada no fechamento de tags e nos atributos.");
     }
 
-    // Se passou pelas duas barreiras:
     alert("🎉 Missão Concluída com Perfeição! Teoria e Prática corretas.");
     
     if (window.usuarioLogado) {
