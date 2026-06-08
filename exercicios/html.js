@@ -71,7 +71,7 @@ window.exerciciosHTML = {
             ],
             respostaMultipla: 2, // Letra C
             enunciado2: "Atributos fornecem informações ou comportamentos adicionais aos elementos. O atributo id funciona como se fosse o 'CPF' de um elemento na página. Para que o CSS ou o JavaScript consigam encontrar um elemento específico com precisão, esse identificador deve ser exclusivo.",
-            questaoPratica: "No sistema abaixo, temos três caixas de alerta diferentes. O desenvolvedor tentou dar identificadores para elas, mas cometeu um erro lógico conceitual grave sobre o uso de IDs. Corrija o código atribuindo IDs únicos ou substituindo por atributos de classe, caso façam parte de um grupo:",
+            questaoPratica: "No sistema abaixo, temos três caixas de alerta diferentes. O desenvolvedor tentou dar identificadores para elas, mas cometeu um erro lógico conceitual grave sobre o uso de IDs. Corrija o código atribuindo IDs únicos:",
             codigoInicial: "<div id=\"caixa-alerta\">\n  <p>Sucesso: Usuário cadastrado!</p>\n</div>\n<div id=\"caixa-alerta\">\n  <p>Aviso: Verifique seu e-mail.</p>\n</div>\n<div id=\"caixa-alerta\">\n  <p>Erro: Senha incorreta.</p>\n</div>",
             correta: "<div id=\"alerta-sucesso\">\n  <p>Sucesso: Usuário cadastrado!</p>\n</div>\n<div id=\"alerta-aviso\">\n  <p>Aviso: Verifique seu e-mail.</p>\n</div>\n<div id=\"alerta-erro\">\n  <p>Erro: Senha incorreta.</p>\n</div>"
         },
