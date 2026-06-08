@@ -1,37 +1,44 @@
-// ==========================================
-// BANCOS DE DADOS GLOBAIS DA ENCICLOPÉDIA
-// ==========================================
+// ========================================================
+// BANCO DE DADOS DA ENCICLOPÉDIA E DESAFIOS (EXERCÍCIOS ANTIGOS)
+// ========================================================
 const db = {
     html: {
         iniciante: ["Conceito de Tags", "Estrutura Global", "Tags de Texto", "Meta Tags Técnicas", "Atributos e IDs", "Links e Navegação", "Listas de Inventário", "Inserção de Mídia", "Containers Div", "Comentários de Código"],
-        intermediario: ["Elementos Semânticos (Header, Nav, Footer)", "Seções de Conteúdo (Section, Article, Aside)", "Estrutura de Tabelas Simples (Table, Tr, Td)", "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)", "Formulários Básicos (Form, Input, Label)", "Tipos de Input (Text, Password, Email, Button)", "Seleções em Formulários (Radio, Checkbox, Select)", "Validação Nativa de Formulários", "Introdução à Acessibilidade (Atributos ARIA)", "A tag <dialog> (Modais Nativos)"],
-        avancado: ["A tag <canvas> (O Palco dos Jogos)", "SVG inline (<svg> e <path>)", "Imagens Responsivas (<picture> e srcset)", "Áudios Avançados (Atributos e Eventos de <audio>)", "Pré-carregamento de Assets (preload e prefetch)", "Iframe Avançado (<iframe> e Sandbox)", "Manipulação de Templates (<template> e <slot>)", "Armazenamento no Navegador (O papel técnico do HTML5)", "Componentes Web Nativos (Custom Elements)", "Acessibilidade de Teclado Avançada (tabindex e Foco)"]
+        intermediario: ["Elements Semânticos", "Seções de Conteúdo", "Formulários Básicos", "Validação Nativa"],
+        avancado: ["A tag <canvas>", "SVG inline", "Componentes Web Nativos"]
     },
     css: { 
-        iniciante: ["1. Seletores Básicos e Combinadores", "2. O Box Model (Modelo de Caixa)", "3. Cores e Backgrounds", "4. Tipografia Web", "5. Unidades de Medida", "6. Display Básico", "7. Bordas e Arredondamentos", "8. Sombras Simples", "9. Estados Básicos (Pseudo-classes)", "10. Variáveis CSS Nativas (Básico)"], 
-        intermediario: ["11. Posicionamento (Position) e z-index", "12. Fundamentos do Flexbox", "13. Flexbox Avançado", "14. Fundamentos do CSS Grid", "15. Pseudo-elementos (::before e ::after)", "16. Transições Suaves (Transitions)", "17. Transformações 2D (Transforms)", "18. Design Responsivo (Media Queries)", "19. Pseudo-classes Avançadas", "20. Filtros Gráficos (Filters e Blend Modes)"], 
-        avancado: ["21. Animações Complexas com Keyframes", "22. Transformações 3D", "23. CSS Grid Layout Avançado", "24. Funções Matemáticas", "25. Clip-path e Formas Complexas", "26. Scroll Snapping e Scrollbars Estilizadas", "27. Container Queries (@container)", "28. Arquitetura CSS (Metodologia BEM)", "29. Efeitos Visuais Modernos (Glassmorphism e Neumorphism)", "30. Integração de Variáveis CSS com JavaScript"] 
+        iniciante: ["1. Seletores Básicos", "2. O Box Model", "3. Cores e Backgrounds"], 
+        intermediario: ["11. Posicionamento", "12. Fundamentos do Flexbox", "14. Fundamentos do CSS Grid"], 
+        avancado: ["21. Animações Complexas", "24. Funções Matemáticas"] 
     },
     js: { 
-        iniciante: ["Variáveis e Constantes (let e const)", "Tipos de Dados Essenciais", "Operadores Matemáticos e Lógicos", "Estruturas Condicionais (if, else, else if)", "Estruturas de Repetição (for e while)", "Introdução às Funções", "Arrays Simples (Listas)", "Objetos Básicos (Chave e Valor)", "Manipulação Básica do DOM (getElementById)", "Eventos de Teclado e Mouse (addEventListener)"], 
-        intermediario: ["O Game Loop e requestAnimationFrame", "Delta Time (Movimento Suave)", "Classes e Construtores (POO)", "Física de Pulo e Gravidade", "Colisão Retangular (AABB)", "Animação e Spritesheets", "Controle de Estados Simples", "Vetores e Movimentação 2D", "Arrays e Gerenciamento de Entidades", "Modularização (Módulos JS)"], 
-        avancado: ["Callbacks e Event Loop", "Promises (Promessas)", "Async / Await", "Recursividade", "Manipulação Avançada de Objetos", "APIs e Fetch", "Bitwise Operators (Operadores de Bit)", "Regular Expressions (Regex)", "Memory Management (Garbage Collector)", "Design Patterns (Padrões de Projeto)"] 
+        iniciante: ["Variáveis e Constantes", "Estruturas Condicionais", "Estruturas de Repetição"], 
+        intermediario: ["O Game Loop", "Física de Pulo e Gravidade", "Colisão Retangular"], 
+        avancado: ["Promises (Promessas)", "Async / Await", "Design Patterns"] 
     }
+};
+
+// Bancos auxiliares para os Desafios Práticos Antigos (Renomeados)
+window.conteudosDesafiosAntigos = {
+    "Conceito de Tags": { instrucoes: "Crie uma tag de parágrafo contendo o texto 'Ola'.", correta: "<p>Ola</p>" },
+    "1. Seletores Básicos": { instrucoes: "Defina a cor de fundo do body como preto no CSS.", correta: "body{background:black;}" },
+    "Variáveis e Constantes": { instrucoes: "Declare uma constante chamada total igual a 100.", correta: "consttotal=100;" }
 };
 
 let currentTech = 'html';
 let currentLevel = 'iniciante';
-let currentExTech = 'html';
-let currentExLevel = 'iniciante';
 
+let currentDesafioTech = 'html';
+let currentDesafioLevel = 'iniciante';
+
+// Controles Globais de Navegação da Enciclopédia
 function setTech(tech) {
     currentTech = tech;
     document.querySelectorAll('#view-enciclopedia .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
     document.getElementById('btn-' + tech).classList.add('active-' + tech);
-    if (currentTech === 'js' && currentLevel === 'intermediario' && db.js.intermediario.length === 0) currentLevel = 'iniciante';
-    setLevel(currentLevel);
+    renderEncGrid();
 }
-
 function setLevel(lvl) {
     currentLevel = lvl;
     document.querySelectorAll('#view-enciclopedia .lvl-btn').forEach(b => b.classList.remove('active-lvl'));
@@ -39,192 +46,192 @@ function setLevel(lvl) {
     renderEncGrid();
 }
 
+// Controles Globais de Navegação dos Desafios (Exercícios Antigos)
+function setDesafioTech(tech) {
+    currentDesafioTech = tech;
+    document.querySelectorAll('#view-desafios .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
+    document.getElementById('desafio-btn-' + tech).classList.add('active-' + tech);
+    renderDesafiosGrid();
+}
+function setDesafioLevel(lvl) {
+    currentDesafioLevel = lvl;
+    document.querySelectorAll('#view-desafios .lvl-btn').forEach(b => b.classList.remove('active-lvl'));
+    document.getElementById('lvl-desafio-' + lvl).classList.add('active-lvl');
+    renderDesafiosGrid();
+}
+
+// RENDERIZAR GRIDS
 function renderEncGrid() {
     const grid = document.getElementById('topics-grid');
     if (!grid) return;
     grid.innerHTML = '';
     const topics = db[currentTech][currentLevel] || [];
-    
     topics.forEach(topic => {
         const card = document.createElement('div');
         card.className = 'topic-card';
-        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        card.innerHTML = `<h3>${safeTitle}</h3>`;
+        card.innerHTML = `<h3>${topic}</h3>`;
         card.onclick = () => openModal(topic, 'estudo');
         grid.appendChild(card);
     });
 }
 
-function setExTech(tech) {
-    currentExTech = tech;
-    document.querySelectorAll('#view-exercicios .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
-    document.getElementById('btn-ex-' + tech).classList.add('active-' + tech);
-    renderExGrid();
-}
-
-function setExLevel(lvl) {
-    currentExLevel = lvl;
-    document.querySelectorAll('#view-exercicios .lvl-btn').forEach(b => b.classList.remove('active-lvl'));
-    document.getElementById('lvl-ex-' + lvl).classList.add('active-lvl');
-    renderExGrid();
-}
-
-function renderExGrid() {
-    const grid = document.getElementById('ex-topics-grid-' + currentExTech);
+function renderDesafiosGrid() {
+    const grid = document.getElementById('desafios-grid');
     if (!grid) return;
-    
-    document.getElementById('ex-topics-grid-html').style.display = 'none';
-    document.getElementById('ex-topics-grid-css').style.display = 'none';
-    document.getElementById('ex-topics-grid-js').style.display = 'none';
-    grid.style.display = 'grid';
     grid.innerHTML = '';
-    
-    const dataObj = (currentExTech === 'html') ? window.exerciciosHTML : null;
-    const topics = (dataObj && dataObj[currentExLevel]) ? Object.keys(dataObj[currentExLevel]) : [];
+    const topics = db[currentDesafioTech][currentDesafioLevel] || [];
     
     topics.forEach(topic => {
         const card = document.createElement('div');
         card.className = 'topic-card';
-        card.style.borderColor = '#f59e0b';
+        card.style.borderColor = '#e2e8f0';
         
-        // Verde se já completou
         if (window.usuarioLogado && window.usuarioLogado.progresso && window.usuarioLogado.progresso.includes(topic)) {
             card.style.borderColor = '#10b981';
             card.style.background = 'rgba(16, 185, 129, 0.1)';
         }
-
-        const safeTitle = topic.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        card.innerHTML = `<h3>Desafio:<br>${safeTitle}</h3>`;
-        card.onclick = () => openModal(topic, 'exercicio');
+        card.innerHTML = `<h3>Desafio:<br>${topic}</h3>`;
+        card.onclick = () => openModal(topic, 'desafio-antigo');
         grid.appendChild(card);
     });
 }
 
-function openModal(topic, tipo) {
-    const overlay = document.getElementById('reader');
-    const container = document.getElementById('reader-body');
-    let content = "<p>Conteúdo em fase de produção.</p>";
-
-    if (tipo === 'estudo') {
-        if (currentTech === 'html' && window.conteudosHTML) content = window.conteudosHTML[topic] || content;
-        // NOVA LÓGICA DO CSS AQUI
-        else if (currentTech === 'css' && window.conteudos && window.conteudos.css) {
-            const item = window.conteudos.css[currentLevel].find(c => c.titulo === topic);
-            content = item ? item.conteudo : content;
-        }
-        else if (currentTech === 'js' && window.conteudosJS) content = window.conteudosJS[topic] || content;
-        
-        container.innerHTML = `<h2>${topic}</h2>${content}`;
-    } 
-    else if (tipo === 'exercicio') {
-        let ex = null;
-        if (currentExTech === 'html' && window.exerciciosHTML && window.exerciciosHTML[currentExLevel]) {
-            ex = window.exerciciosHTML[currentExLevel][topic];
-        }
-
-        if (ex) {
-            content = `
-                <div style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #38bdf8;">
-                    <h3 style="margin-top: 0; color: #38bdf8;">Parte 1: Missão Teórica</h3>
-                    <p style="font-size: 14px;">${ex.enunciado1}</p>
-                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px;">
-                        ${ex.opcoes.map((opt, i) => `
-                            <label style="cursor: pointer; font-size: 14px; color: #cbd5e1; display: flex; align-items: center; gap: 10px;">
-                                <input type="radio" name="opt-teoria" value="${i}" style="accent-color: #38bdf8; width: 16px; height: 16px;">
-                                ${opt}
-                            </label>
-                        `).join('')}
-                    </div>
-                </div>
-
-                <div style="background: rgba(245, 158, 11, 0.05); padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                    <h3 style="margin-top: 0; color: #f59e0b;">Parte 2: Missão Prática</h3>
-                    <p style="font-size: 14px; color: #94a3b8; font-style: italic;">${ex.enunciado2}</p>
-                    <p style="font-size: 14px;"><strong>Desafio:</strong> ${ex.questaoPratica}</p>
-                    <textarea id="input-resposta" class="caixa-resposta" style="margin-top: 10px;">${ex.codigoInicial || ""}</textarea>
-                </div>
-
-                <button class="btn-verificar" onclick="processarResposta('${topic}')" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 16px;">Verificar Missão Completa</button>
-            `;
-        }
-        container.innerHTML = `<h2>Missão: ${topic}</h2>${content}`;
-    }
+function renderMissoesGrid() {
+    const grid = document.getElementById('missoes-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
     
-    if (overlay && container) {
-        overlay.style.display = 'flex';
-        setTimeout(() => overlay.classList.add('active'), 10);
-        document.body.style.overflow = 'hidden'; 
-    }
+    const missoes = window.missoesProjetos || [];
+    let anteriorConcluido = true; // A primeira missão sempre está liberada
+    
+    missoes.forEach((missao, index) => {
+        const card = document.createElement('div');
+        card.className = 'topic-card';
+        
+        const jaConcluiu = window.usuarioLogado && window.usuarioLogado.progresso && window.usuarioLogado.progresso.includes(missao.titulo);
+        const estaBloqueada = !anteriorConcluido;
+
+        if (estaBloqueada) {
+            card.style.borderColor = '#475569';
+            card.style.opacity = '0.4';
+            card.innerHTML = `<h3>🔒 ${missao.titulo}</h3><p style="font-size:11px; color:#64748b; margin-top:5px;">Bloqueado</p>`;
+            card.onclick = () => alert("🔒 Esta missão está bloqueada! Conclua todas as missões anteriores primeiro.");
+        } else {
+            if (jaConcluiu) {
+                card.style.borderColor = '#10b981';
+                card.style.background = 'rgba(16, 185, 129, 0.1)';
+                card.innerHTML = `<h3>✅ ${missao.titulo}</h3>`;
+            } else {
+                card.style.borderColor = '#f59e0b';
+                card.innerHTML = `<h3>🚀 ${missao.titulo}</h3>`;
+            }
+            card.onclick = () => openModal(missao.titulo, 'missao-nova', index);
+        }
+        
+        // Para a próxima iteração, checa se a atual foi feita
+        anteriorConcluido = jaConcluiu;
+        grid.appendChild(card);
+    });
 }
 
-// Lógica dupla de Verificação
-window.processarResposta = async (topic) => {
-    let ex = null;
-    if (currentExTech === 'html') ex = window.exerciciosHTML[currentExLevel][topic];
-    if (!ex) return;
+// GERENCIAMENTO DE MODAL
+function openModal(topic, tipo, index = null) {
+    const overlay = document.getElementById('reader');
+    const container = document.getElementById('reader-body');
+    const title = document.getElementById('reader-title');
+    
+    title.innerText = topic;
+    container.innerHTML = "";
 
-    const opcaoSelecionada = document.querySelector('input[name="opt-teoria"]:checked');
-    if (!opcaoSelecionada) {
-        return alert("⚠️ Por favor, escolha uma opção na Parte 1 (Teórica) antes de verificar!");
+    if (tipo === 'estudo') {
+        container.innerHTML = `<p>Conteúdo teórico do tópico <b>${topic}</b> em desenvolvimento.</p>`;
+    } 
+    else if (tipo === 'desafio-antigo') {
+        const ex = window.conteudosDesafiosAntigos[topic] || { instrucoes: "Escreva o código correto para este desafio.", correta: "" };
+        container.innerHTML = `
+            <p style="color:#f59e0b;"><b>Instruções do Desafio Técnico:</b></p>
+            <div style="background:#020617; padding:15px; border-radius:5px; margin-bottom:15px;">${ex.instrucoes}</div>
+            <textarea id="input-resposta" class="caixa-resposta" placeholder="Digite seu código aqui..."></textarea>
+            <button class="btn-verificar" onclick="validarDesafioAntigo('${topic}', '${ex.correta}')">Validar Desafio</button>
+        `;
+    }
+    else if (tipo === 'missao-nova') {
+        const missao = window.missoesProjetos[index];
+        container.innerHTML = `
+            <div style="background: rgba(56, 189, 248, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #38bdf8;">
+                <h3 style="margin-top:0; color:#38bdf8;">📜 Instruções de Desenvolvimento</h3>
+                <div style="font-size:14px; line-height:1.6;">${missao.instrucoes}</div>
+            </div>
+            <div style="background: rgba(245, 158, 11, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                <h3 style="margin-top:0; color:#f59e0b;">💻 Ambiente Unificado de Código</h3>
+                <textarea id="input-resposta" class="caixa-resposta" style="height:300px; font-family:monospace;">${missao.codigoInicial}</textarea>
+            </div>
+            <button class="btn-verificar" onclick="validarMissaoNova(${index})" style="width:100%; margin-top:15px; padding:12px;">Submeter Projeto Completo</button>
+        `;
     }
     
-    const indiceEscolhido = parseInt(opcaoSelecionada.value);
-    if (indiceEscolhido !== ex.respostaMultipla) {
-        return alert("❌ A resposta da Parte Teórica está incorreta. Revise o material e tente novamente!");
-    }
+    overlay.style.display = 'flex';
+    setTimeout(() => overlay.classList.add('active'), 10);
+}
 
-    const respostaPratica = document.getElementById('input-resposta').value.trim();
-    const str1 = respostaPratica.toLowerCase().replace(/\s+/g, ' ');
-    const str2 = ex.correta.toLowerCase().replace(/\s+/g, ' ');
-
-    if (str1 !== str2) {
-        return alert("❌ A teoria está certa, mas o código prático está incorreto! Dê uma olhada no fechamento de tags e nos atributos.");
+// MOTORES DE VALIDAÇÃO (LIMPEZA MÁXIMA DE ESPAÇOS/QUEBRAS)
+window.validarDesafioAntigo = async (topic, stringCorreta) => {
+    const input = document.getElementById('input-resposta').value;
+    if (cleanString(input) === cleanString(stringCorreta)) {
+        alert("🎉 Desafio Concluído!");
+        await salvarEAtualizar(topic);
+    } else {
+        alert("❌ Resposta incorreta. Verifique a sintaxe.");
     }
-
-    alert("🎉 Missão Concluída com Perfeição! Teoria e Prática corretas.");
-    
-    if (window.usuarioLogado) {
-        if (!window.usuarioLogado.progresso) window.usuarioLogado.progresso = [];
-        if (!window.usuarioLogado.progresso.includes(topic)) {
-            window.usuarioLogado.progresso.push(topic);
-        }
-    }
-    
-    if (window.salvarProgressoNuvem) {
-        await window.salvarProgressoNuvem(topic);
-    }
-    
-    closeModal();
-    renderExGrid();
 };
+
+window.validarMissaoNova = async (index) => {
+    const missao = window.missoesProjetos[index];
+    const input = document.getElementById('input-resposta').value;
+    
+    if (cleanString(input).includes(cleanString(missao.correta)) || cleanString(input) === cleanString(missao.correta)) {
+        alert("🎉 Espetacular! Missão cumprida com sucesso. Próximo projeto desbloqueado!");
+        await salvarEAtualizar(missao.titulo);
+    } else {
+        alert("❌ Seu código ainda não atende a todos os requisitos descritos no guia. Revise as funções e IDs!");
+    }
+};
+
+function cleanString(str) {
+    if (!str) return "";
+    return str.toLowerCase().replace(/\s+/g, '').replace(/;/g, '').replace(/['"]/g, '');
+}
+
+async function salvarEAtualizar(item) {
+    if (window.usuarioLogado) {
+        if (!window.usuarioLogado.progresso.includes(item)) window.usuarioLogado.progresso.push(item);
+        if (window.salvarProgressoNuvem) await window.salvarProgressoNuvem(item);
+    }
+    closeModal();
+    renderDesafiosGrid();
+    renderMissoesGrid();
+}
 
 function closeModal() {
     const overlay = document.getElementById('reader');
     if (overlay) {
         overlay.classList.remove('active');
-        setTimeout(() => {
-            overlay.style.display = 'none';
-            document.body.style.overflow = 'auto'; 
-        }, 200);
+        setTimeout(() => { overlay.style.display = 'none'; }, 200);
     }
 }
 
 window.addEventListener('click', (e) => {
-    const overlay = document.getElementById('reader');
-    if (e.target === overlay) closeModal();
+    if (e.target === document.getElementById('reader')) closeModal();
 });
 
-function aguardarDadosERenderizar() {
-    if (typeof window.conteudosHTML !== 'undefined' && typeof window.exerciciosHTML !== 'undefined') {
-        renderEncGrid();
-        renderExGrid();
-    } else {
-        setTimeout(aguardarDadosERenderizar, 100);
-    }
+function inicializarAppCompleto() {
+    renderEncGrid();
+    renderDesafiosGrid();
+    renderMissoesGrid();
 }
 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    aguardarDadosERenderizar();
+    setTimeout(inicializarAppCompleto, 500);
 } else {
-    document.addEventListener('DOMContentLoaded', aguardarDadosERenderizar);
+    document.addEventListener('DOMContentLoaded', inicializarAppCompleto);
 }
