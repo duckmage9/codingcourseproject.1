@@ -8,9 +8,10 @@ const db = {
         avancado: ["A tag <canvas> (O Palco dos Jogos)", "SVG inline (<svg> e <path>)", "Imagens Responsivas (<picture> e srcset)", "Áudios Avançados (Atributos e Eventos de <audio>)", "Pré-carregamento de Assets (preload e prefetch)", "Iframe Avançado (<iframe> e Sandbox)", "Manipulação de Templates (<template> e <slot>)", "Armazenamento no Navegador (O papel técnico do HTML5)", "Componentes Web Nativos (Custom Elements)", "Acessibilidade de Teclado Avançada (tabindex e Foco)"]
     },
     css: { 
-        iniciante: ["1. Seletores Básicos e Combinadores", "2. O Box Model (Modelo de Caixa)", "3. Cores e Backgrounds", "4. Tipografia Web", "5. Unidades de Medida", "6. Display Básico", "7. Bordas e Arredondamentos", "8. Sombras Simples", "9. Estados Básicos (Pseudo-classes)", "10. Variáveis CSS Nativas (Básico)"], 
-        intermediario: ["11. Posicionamento (Position) e z-index", "12. Fundamentos do Flexbox", "13. Flexbox Avançado", "14. Fundamentos do CSS Grid", "15. Pseudo-elementos (::before e ::after)", "16. Transições Suaves (Transitions)", "17. Transformações 2D (Transforms)", "18. Design Responsivo (Media Queries)", "19. Pseudo-classes Avançadas", "20. Filtros Gráficos (Filters e Blend Modes)"], 
-        avancado: ["21. Animações Complexas com Keyframes", "22. Transformações 3D", "23. CSS Grid Layout Avançado", "24. Funções Matemáticas", "25. Clip-path e Formas Complexas", "26. Scroll Snapping e Scrollbars Estilizadas", "27. Container Queries (@container)", "28. Arquitetura CSS (Metodologia BEM)", "29. Efeitos Visuais Modernos (Glassmorphism e Neumorphism)", "30. Integração de Variáveis CSS com JavaScript"] 
+        // NÚMEROS REMOVIDOS AQUI COMO PEDIDO
+        iniciante: ["Seletores Básicos e Combinadores", "O Box Model (Modelo de Caixa)", "Cores e Backgrounds", "Tipografia Web", "Unidades de Medida", "Display Básico", "Bordas e Arredondamentos", "Sombras Simples", "Estados Básicos (Pseudo-classes)", "Variáveis CSS Nativas (Básico)"], 
+        intermediario: ["Posicionamento (Position) e z-index", "Fundamentos do Flexbox", "Flexbox Avançado", "Fundamentos do CSS Grid", "Pseudo-elementos (::before e ::after)", "Transições Suaves (Transitions)", "Transformações 2D (Transforms)", "Design Responsivo (Media Queries)", "Pseudo-classes Avançadas", "Filtros Gráficos (Filters e Blend Modes)"], 
+        avancado: ["Animações Complexas com Keyframes", "Transformações 3D", "CSS Grid Layout Avançado", "Funções Matemáticas", "Clip-path e Formas Complexas", "Scroll Snapping e Scrollbars Estilizadas", "Container Queries (@container)", "Arquitetura CSS (Metodologia BEM)", "Efeitos Visuais Modernos (Glassmorphism e Neumorphism)", "Integração de Variáveis CSS com JavaScript"] 
     },
     js: { 
         iniciante: ["Variáveis e Constantes (let e const)", "Tipos de Dados Essenciais", "Operadores Matemáticos e Lógicos", "Estruturas Condicionais (if, else, else if)", "Estruturas de Repetição (for e while)", "Introdução às Funções", "Arrays Simples (Listas)", "Objetos Básicos (Chave e Valor)", "Manipulação Básica do DOM (getElementById)", "Eventos de Teclado e Mouse (addEventListener)"], 
@@ -25,7 +26,6 @@ let currentLevel = 'iniciante';
 let currentDesafioTech = 'html';
 let currentDesafioLevel = 'iniciante';
 
-// Controles da Enciclopédia
 function setTech(tech) {
     currentTech = tech;
     document.querySelectorAll('#view-enciclopedia .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
@@ -39,7 +39,6 @@ function setLevel(lvl) {
     renderEncGrid();
 }
 
-// Controles dos Desafios (Exercícios Antigos)
 function setDesafioTech(tech) {
     currentDesafioTech = tech;
     document.querySelectorAll('#view-desafios .main-btn').forEach(b => b.classList.remove('active-html', 'active-css', 'active-js'));
@@ -53,9 +52,6 @@ function setDesafioLevel(lvl) {
     renderDesafiosGrid();
 }
 
-// ==========================================
-// RENDERIZAR GRADES (GRIDS) NA TELA
-// ==========================================
 function renderEncGrid() {
     const grid = document.getElementById('topics-grid');
     if (!grid) return;
@@ -75,10 +71,8 @@ function renderDesafiosGrid() {
     if (!grid) return;
     grid.innerHTML = '';
     
-    // Os desafios lêem os ficheiros antigos da pasta exercicios!
     let dataObj = null;
     if (currentDesafioTech === 'html') dataObj = window.exerciciosHTML;
-    // Se no futuro tiver exerciciosCSS ou JS, eles entrariam aqui
     
     const topics = (dataObj && dataObj[currentDesafioLevel]) ? Object.keys(dataObj[currentDesafioLevel]) : [];
     
@@ -134,9 +128,6 @@ function renderMissoesGrid() {
     });
 }
 
-// ==========================================
-// GERENCIAMENTO DOS MODAIS (JANELAS DE CONTEÚDO)
-// ==========================================
 function openModal(topic, tipo, index = null) {
     const overlay = document.getElementById('reader');
     const container = document.getElementById('reader-body');
@@ -145,7 +136,6 @@ function openModal(topic, tipo, index = null) {
     title.innerText = topic;
     container.innerHTML = "";
 
-    // 1. ENCICLOPÉDIA
     if (tipo === 'estudo') {
         let content = `<p>Conteúdo teórico do tópico <b>${topic}</b> em desenvolvimento.</p>`;
         if (currentTech === 'html' && window.conteudosHTML) content = window.conteudosHTML[topic] || content;
@@ -157,7 +147,6 @@ function openModal(topic, tipo, index = null) {
         
         container.innerHTML = content;
     } 
-    // 2. DESAFIOS (Os exercícios curtos antigos com Teoria e Prática)
     else if (tipo === 'desafio') {
         let ex = null;
         if (currentDesafioTech === 'html' && window.exerciciosHTML) {
@@ -192,17 +181,26 @@ function openModal(topic, tipo, index = null) {
             container.innerHTML = "<p>Desafio não encontrado.</p>";
         }
     }
-    // 3. MISSÕES (Os projetos longos)
     else if (tipo === 'missao-nova') {
         const missao = window.missoesProjetos[index];
+        // MODIFICADO AQUI PARA AS 3 CAIXAS DE TEXTO
         container.innerHTML = `
             <div style="background: rgba(56, 189, 248, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #38bdf8;">
                 <h3 style="margin-top:0; color:#38bdf8;">📜 Instruções de Desenvolvimento</h3>
                 <div style="font-size:14px; line-height:1.6;">${missao.instrucoes}</div>
             </div>
+            
             <div style="background: rgba(245, 158, 11, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                <h3 style="margin-top:0; color:#f59e0b;">💻 Ambiente Unificado de Código</h3>
-                <textarea id="input-resposta" class="caixa-resposta" style="height:300px; font-family:monospace;">${missao.codigoInicial}</textarea>
+                <h3 style="margin-top:0; color:#f59e0b;">💻 Ambiente de Código</h3>
+                
+                <p style="color:#cbd5e1; font-weight:bold; font-size:14px; margin-bottom:5px;">HTML</p>
+                <textarea id="input-html" class="caixa-resposta" style="height:150px; font-family:monospace;">&lt;!DOCTYPE html&gt;\n&lt;html lang="pt-br"&gt;\n  &lt;head&gt;\n    &lt;meta charset="utf-8"&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n  &lt;/body&gt;\n&lt;/html&gt;</textarea>
+                
+                <p style="color:#cbd5e1; font-weight:bold; font-size:14px; margin-top:20px; margin-bottom:5px;">CSS</p>
+                <textarea id="input-css" class="caixa-resposta" style="height:120px; font-family:monospace;"></textarea>
+                
+                <p style="color:#cbd5e1; font-weight:bold; font-size:14px; margin-top:20px; margin-bottom:5px;">JavaScript</p>
+                <textarea id="input-js" class="caixa-resposta" style="height:150px; font-family:monospace;">${missao.codigoInicial || ""}</textarea>
             </div>
             <button class="btn-verificar" onclick="validarMissaoNova(${index})" style="width:100%; margin-top:15px; padding:12px;">Submeter Projeto Completo</button>
         `;
@@ -213,11 +211,6 @@ function openModal(topic, tipo, index = null) {
     document.body.style.overflow = 'hidden'; 
 }
 
-// ==========================================
-// MOTORES DE VALIDAÇÃO
-// ==========================================
-
-// Validação dos Desafios (Antiga Lógica Dupla)
 window.validarDesafio = async (topic) => {
     let ex = null;
     if (currentDesafioTech === 'html' && window.exerciciosHTML) ex = window.exerciciosHTML[currentDesafioLevel][topic];
@@ -239,19 +232,23 @@ window.validarDesafio = async (topic) => {
     await salvarEAtualizar(topic);
 };
 
-// Validação das Missões Novas (Limpeza total de espaços)
 window.validarMissaoNova = async (index) => {
     const missao = window.missoesProjetos[index];
-    const input = document.getElementById('input-resposta').value;
     
-    const str1 = input.toLowerCase().replace(/\s+/g, '').replace(/;/g, '').replace(/['"]/g, '');
+    // Agora o sistema junta os textos de HTML, CSS e JS para procurar a resposta correta em qualquer um deles
+    const inpHtml = document.getElementById('input-html').value || "";
+    const inpCss = document.getElementById('input-css').value || "";
+    const inpJs = document.getElementById('input-js').value || "";
+    const inputTotal = inpHtml + inpCss + inpJs;
+    
+    const str1 = inputTotal.toLowerCase().replace(/\s+/g, '').replace(/;/g, '').replace(/['"]/g, '');
     const str2 = missao.correta.toLowerCase().replace(/\s+/g, '').replace(/;/g, '').replace(/['"]/g, '');
     
     if (str1.includes(str2) || str1 === str2) {
         alert("🎉 Espetacular! Missão cumprida com sucesso. Próximo projeto desbloqueado!");
         await salvarEAtualizar(missao.titulo);
     } else {
-        alert("❌ Seu código ainda não atende a todos os requisitos descritos no guia.");
+        alert("❌ O seu código ainda não atende a todos os requisitos descritos no guia.");
     }
 };
 
