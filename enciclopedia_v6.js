@@ -1,5 +1,5 @@
 // ========================================================
-// BANCO DE DADOS GIGANTE DA ENCICLOPÉDIA (COMPLETO E SEM NÚMEROS NO CSS)
+// BANCO DE DADOS GIGANTE DA ENCICLOPÉDIA 
 // ========================================================
 const db = {
     html: {
@@ -127,6 +127,28 @@ function renderMissoesGrid() {
     });
 }
 
+// LÓGICA DAS ABAS DAS PASTAS DA MISSÃO
+window.switchMissionTab = (tab) => {
+    const tabs = ['html', 'css', 'js'];
+    tabs.forEach(t => {
+        const input = document.getElementById('input-' + t);
+        const btn = document.getElementById('tab-' + t);
+        if (!input || !btn) return;
+        
+        if (t === tab) {
+            input.style.display = 'block';
+            btn.style.color = '#38bdf8';
+            btn.style.background = '#0f172a'; // Cor de fundo ativa igual à da janela
+            btn.style.fontWeight = 'bold';
+        } else {
+            input.style.display = 'none';
+            btn.style.color = '#64748b';
+            btn.style.background = '#020617'; // Fundo mais escuro para abas inativas
+            btn.style.fontWeight = 'normal';
+        }
+    });
+};
+
 function openModal(topic, tipo, index = null) {
     const overlay = document.getElementById('reader');
     const container = document.getElementById('reader-body');
@@ -139,7 +161,6 @@ function openModal(topic, tipo, index = null) {
         let content = `<p>Conteúdo teórico do tópico <b>${topic}</b> em desenvolvimento.</p>`;
         if (currentTech === 'html' && window.conteudosHTML) content = window.conteudosHTML[topic] || content;
         else if (currentTech === 'css' && window.conteudos && window.conteudos.css) {
-            // Como removemos os números de db.css, mas eles podem estar no conteudos.css, procuramos por parte do texto
             const item = window.conteudos.css[currentLevel].find(c => c.titulo.includes(topic) || topic.includes(c.titulo));
             content = item ? item.conteudo : content;
         }
@@ -184,7 +205,6 @@ function openModal(topic, tipo, index = null) {
     else if (tipo === 'missao-nova') {
         const missao = window.missoesProjetos[index];
         
-        // ESTRUTURA BASE DO HTML GARANTIDA AQUI
         const htmlBase = `<!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -194,6 +214,7 @@ function openModal(topic, tipo, index = null) {
   </body>
 </html>`;
 
+        // Aqui construímos as abas dinâmicas
         container.innerHTML = `
             <div style="background: rgba(56, 189, 248, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #38bdf8;">
                 <h3 style="margin-top:0; color:#38bdf8;">📜 Instruções de Desenvolvimento</h3>
@@ -201,16 +222,19 @@ function openModal(topic, tipo, index = null) {
             </div>
             
             <div style="background: rgba(245, 158, 11, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                <h3 style="margin-top:0; color:#f59e0b;">💻 Ambiente de Código</h3>
+                <h3 style="margin-top:0; color:#f59e0b; margin-bottom: 15px;">💻 Editor de Pastas</h3>
                 
-                <p style="color:#cbd5e1; font-weight:bold; font-size:14px; margin-bottom:5px;">HTML</p>
-                <textarea id="input-html" class="caixa-resposta" style="height:150px; font-family:monospace;">${htmlBase}</textarea>
+                <div style="display: flex; gap: 5px; margin-bottom: -1px;">
+                    <button id="tab-html" onclick="switchMissionTab('html')" style="background: #0f172a; border: 1px solid #334155; border-bottom: none; color: #38bdf8; padding: 8px 15px; border-radius: 5px 5px 0 0; cursor: pointer; font-weight: bold; transition: 0.2s;">index.html</button>
+                    <button id="tab-css" onclick="switchMissionTab('css')" style="background: #020617; border: 1px solid #334155; border-bottom: none; color: #64748b; padding: 8px 15px; border-radius: 5px 5px 0 0; cursor: pointer; font-weight: normal; transition: 0.2s;">style.css</button>
+                    <button id="tab-js" onclick="switchMissionTab('js')" style="background: #020617; border: 1px solid #334155; border-bottom: none; color: #64748b; padding: 8px 15px; border-radius: 5px 5px 0 0; cursor: pointer; font-weight: normal; transition: 0.2s;">script.js</button>
+                </div>
                 
-                <p style="color:#cbd5e1; font-weight:bold; font-size:14px; margin-top:20px; margin-bottom:5px;">CSS</p>
-                <textarea id="input-css" class="caixa-resposta" style="height:120px; font-family:monospace;"></textarea>
-                
-                <p style="color:#cbd5e1; font-weight:bold; font-size:14px; margin-top:20px; margin-bottom:5px;">JavaScript</p>
-                <textarea id="input-js" class="caixa-resposta" style="height:150px; font-family:monospace;">${missao.codigoInicial || ""}</textarea>
+                <div style="border: 1px solid #334155; border-radius: 0 5px 5px 5px; background: #020617; padding: 1px;">
+                    <textarea id="input-html" class="caixa-resposta" style="height:250px; border:none; margin:0; border-radius:0 0 5px 5px; display:block;">${htmlBase}</textarea>
+                    <textarea id="input-css" class="caixa-resposta" style="height:250px; border:none; margin:0; border-radius:0 0 5px 5px; display:none;"></textarea>
+                    <textarea id="input-js" class="caixa-resposta" style="height:250px; border:none; margin:0; border-radius:0 0 5px 5px; display:none;">${missao.codigoInicial || ""}</textarea>
+                </div>
             </div>
             <button class="btn-verificar" onclick="validarMissaoNova(${index})" style="width:100%; margin-top:15px; padding:12px;">Submeter Projeto Completo</button>
         `;
@@ -245,7 +269,6 @@ window.validarDesafio = async (topic) => {
 window.validarMissaoNova = async (index) => {
     const missao = window.missoesProjetos[index];
     
-    // Soma os 3 blocos de código para validar
     const inpHtml = document.getElementById('input-html').value || "";
     const inpCss = document.getElementById('input-css').value || "";
     const inpJs = document.getElementById('input-js').value || "";
