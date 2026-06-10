@@ -1,5 +1,5 @@
 // ========================================================
-// BANCO DE DADOS GIGANTE DA ENCICLOPÉDIA (COMPLETO)
+// BANCO DE DADOS GIGANTE DA ENCICLOPÉDIA (COMPLETO E SEM NÚMEROS NO CSS)
 // ========================================================
 const db = {
     html: {
@@ -8,7 +8,6 @@ const db = {
         avancado: ["A tag <canvas> (O Palco dos Jogos)", "SVG inline (<svg> e <path>)", "Imagens Responsivas (<picture> e srcset)", "Áudios Avançados (Atributos e Eventos de <audio>)", "Pré-carregamento de Assets (preload e prefetch)", "Iframe Avançado (<iframe> e Sandbox)", "Manipulação de Templates (<template> e <slot>)", "Armazenamento no Navegador (O papel técnico do HTML5)", "Componentes Web Nativos (Custom Elements)", "Acessibilidade de Teclado Avançada (tabindex e Foco)"]
     },
     css: { 
-        // NÚMEROS REMOVIDOS AQUI COMO PEDIDO
         iniciante: ["Seletores Básicos e Combinadores", "O Box Model (Modelo de Caixa)", "Cores e Backgrounds", "Tipografia Web", "Unidades de Medida", "Display Básico", "Bordas e Arredondamentos", "Sombras Simples", "Estados Básicos (Pseudo-classes)", "Variáveis CSS Nativas (Básico)"], 
         intermediario: ["Posicionamento (Position) e z-index", "Fundamentos do Flexbox", "Flexbox Avançado", "Fundamentos do CSS Grid", "Pseudo-elementos (::before e ::after)", "Transições Suaves (Transitions)", "Transformações 2D (Transforms)", "Design Responsivo (Media Queries)", "Pseudo-classes Avançadas", "Filtros Gráficos (Filters e Blend Modes)"], 
         avancado: ["Animações Complexas com Keyframes", "Transformações 3D", "CSS Grid Layout Avançado", "Funções Matemáticas", "Clip-path e Formas Complexas", "Scroll Snapping e Scrollbars Estilizadas", "Container Queries (@container)", "Arquitetura CSS (Metodologia BEM)", "Efeitos Visuais Modernos (Glassmorphism e Neumorphism)", "Integração de Variáveis CSS com JavaScript"] 
@@ -140,7 +139,8 @@ function openModal(topic, tipo, index = null) {
         let content = `<p>Conteúdo teórico do tópico <b>${topic}</b> em desenvolvimento.</p>`;
         if (currentTech === 'html' && window.conteudosHTML) content = window.conteudosHTML[topic] || content;
         else if (currentTech === 'css' && window.conteudos && window.conteudos.css) {
-            const item = window.conteudos.css[currentLevel].find(c => c.titulo === topic);
+            // Como removemos os números de db.css, mas eles podem estar no conteudos.css, procuramos por parte do texto
+            const item = window.conteudos.css[currentLevel].find(c => c.titulo.includes(topic) || topic.includes(c.titulo));
             content = item ? item.conteudo : content;
         }
         else if (currentTech === 'js' && window.conteudosJS) content = window.conteudosJS[topic] || content;
@@ -183,7 +183,17 @@ function openModal(topic, tipo, index = null) {
     }
     else if (tipo === 'missao-nova') {
         const missao = window.missoesProjetos[index];
-        // MODIFICADO AQUI PARA AS 3 CAIXAS DE TEXTO
+        
+        // ESTRUTURA BASE DO HTML GARANTIDA AQUI
+        const htmlBase = `<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+  </body>
+</html>`;
+
         container.innerHTML = `
             <div style="background: rgba(56, 189, 248, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #38bdf8;">
                 <h3 style="margin-top:0; color:#38bdf8;">📜 Instruções de Desenvolvimento</h3>
@@ -194,7 +204,7 @@ function openModal(topic, tipo, index = null) {
                 <h3 style="margin-top:0; color:#f59e0b;">💻 Ambiente de Código</h3>
                 
                 <p style="color:#cbd5e1; font-weight:bold; font-size:14px; margin-bottom:5px;">HTML</p>
-                <textarea id="input-html" class="caixa-resposta" style="height:150px; font-family:monospace;">&lt;!DOCTYPE html&gt;\n&lt;html lang="pt-br"&gt;\n  &lt;head&gt;\n    &lt;meta charset="utf-8"&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n  &lt;/body&gt;\n&lt;/html&gt;</textarea>
+                <textarea id="input-html" class="caixa-resposta" style="height:150px; font-family:monospace;">${htmlBase}</textarea>
                 
                 <p style="color:#cbd5e1; font-weight:bold; font-size:14px; margin-top:20px; margin-bottom:5px;">CSS</p>
                 <textarea id="input-css" class="caixa-resposta" style="height:120px; font-family:monospace;"></textarea>
@@ -235,7 +245,7 @@ window.validarDesafio = async (topic) => {
 window.validarMissaoNova = async (index) => {
     const missao = window.missoesProjetos[index];
     
-    // Agora o sistema junta os textos de HTML, CSS e JS para procurar a resposta correta em qualquer um deles
+    // Soma os 3 blocos de código para validar
     const inpHtml = document.getElementById('input-html').value || "";
     const inpCss = document.getElementById('input-css').value || "";
     const inpJs = document.getElementById('input-js').value || "";
