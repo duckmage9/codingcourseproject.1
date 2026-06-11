@@ -1032,9 +1032,9 @@ function renderModals() {
 
 function renderEstudoModalContent() {
   let content = "Conteúdo Indisponível.";
-  if (state.selectedTech === "html") content = conteudosHTML[state.activeTopic] || content;
-  if (state.selectedTech === "css") content = conteudosCSS[state.activeTopic] || content;
-  if (state.selectedTech === "js") content = conteudosJS[state.activeTopic] || content;
+  if (state.selectedTech === "html") content = (window.conteudosHTML || conteudosHTML)[state.activeTopic] || content;
+  if (state.selectedTech === "css") content = (window.conteudosCSS || conteudosCSS)[state.activeTopic] || content;
+  if (state.selectedTech === "js") content = (window.conteudosJS || conteudosJS)[state.activeTopic] || content;
   
   const jaLido = state.aluno.progresso.includes(state.activeTopic);
 
