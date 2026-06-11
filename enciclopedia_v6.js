@@ -1,8 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
 // === BANCO DE DADOS DA ENCICLOPÉDIA COMPLETO ===
-export const dbColecaoTopicos = {
+const dbColecaoTopicos = {
     html: {
         iniciante: ["Conceito de Tags", "Estrutura Global", "Tags de Texto", "Meta Tags Técnicas", "Atributos e IDs", "Links e Navegação", "Listas de Inventário", "Inserção de Mídia", "Containers Div", "Comentários de Código"],
         intermediario: ["Elementos Semânticos (Header, Nav, Footer)", "Seções de Conteúdo (Section, Article, Aside)", "Estrutura de Tabelas Simples (Table, Tr, Td)", "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)", "Formulários Básicos (Form, Input, Label)", "Tipos de Input (Text, Password, Email, Button)", "Seleções em Formulários (Radio, Checkbox, Select)", "Validação Nativa de Formulários", "Introdução à Acessibilidade (Atributos ARIA)", "A tag <dialog> (Modais Nativos)"],
@@ -20,7 +17,7 @@ export const dbColecaoTopicos = {
     }
 };
 
-export const conteudosHTML = {
+const conteudosHTML = {
     "Conceito de Tags": `
         <p>As tags são a base da linguagem HTML e funcionam como comandos que informam ao navegador como o conteúdo deve ser estruturado. No desenvolvimento de jogos, elas são usadas para definir desde a área onde o jogo será exibido até os botões de menu e textos de interface.</p>
         <pre><code>&lt;h1&gt;Meu Primeiro Jogo&lt;/h1&gt;\n&lt;p&gt;Pressione Start para começar.&lt;/p&gt;</code></pre>`,
@@ -113,7 +110,7 @@ export const conteudosHTML = {
         <pre><code>&lt;button tabindex="1"&gt;Iniciar&lt;/button&gt;</code></pre>`
 };
 
-export const conteudosCSS = {
+const conteudosCSS = {
     "Seletores Básicos e Combinadores": `
         <p>Os seletores e combinadores determinam com precisão cirúrgica quais elementos do DOM recebem estilo.</p>
         <pre><code>.hotbar-acoes &gt; .icone-item {\n  width: 48px;\n}</code></pre>`,
@@ -206,7 +203,7 @@ export const conteudosCSS = {
         <pre><code>elemento.style.setProperty('--vida', '45%');</code></pre>`
 };
 
-export const conteudosJS = {
+const conteudosJS = {
     "Variáveis e Constantes (let e const)": `
         <p>Recipientes de memória para dados mutáveis (let), como coordenadas, ou fixos (const), como a gravidade.</p>
         <pre><code>const GRAVIDADE = 0.8;\nlet personagemX = 100;</code></pre>`,
@@ -284,7 +281,7 @@ export const conteudosJS = {
         <pre><code>let cache = { x: 1 }; cache = null; // Liberado</code></pre>`
 };
 
-export const desafiosColecao = {
+const desafiosColecao = {
   html: {
     iniciante: {
       "Conceito de Tags": {
@@ -421,7 +418,7 @@ export const desafiosColecao = {
   }
 };
 
-export const missoesProjetos = [
+const missoesProjetos = [
   {
     titulo: "Missão 1: Calculadora",
     instrucoes: `<b>Arquivo: index.html</b><br>
@@ -490,18 +487,22 @@ const state = {
 
 // Fallback Firestore
 let db = null;
-try {
-  const app = initializeApp({
-    apiKey: "AIzaSyAtmCs6z1IuRh_LCneG4Zdb502lZOwvxyg",
-    authDomain: "enciclopedia-gamdev.firebaseapp.com",
-    projectId: "enciclopedia-gamdev",
-    storageBucket: "enciclopedia-gamdev.firebasestorage.app",
-    messagingSenderId: "1005763934082",
-    appId: "1:1005763934082:web:a92064c1bd9cf05385819b"
-  });
-  db = getFirestore(app);
-} catch (err) {
-  console.warn("Firestore offline. Salvamento local em cache ativo.", err);
+if (typeof firebase !== 'undefined') {
+  try {
+    const app = firebase.initializeApp({
+      apiKey: "AIzaSyAtmCs6z1IuRh_LCneG4Zdb502lZOwvxyg",
+      authDomain: "enciclopedia-gamdev.firebaseapp.com",
+      projectId: "enciclopedia-gamdev",
+      storageBucket: "enciclopedia-gamdev.firebasestorage.app",
+      messagingSenderId: "1005763934082",
+      appId: "1:1005763934082:web:a92064c1bd9cf05385819b"
+    });
+    db = firebase.firestore();
+  } catch (err) {
+    console.warn("Firestore offline. Salvamento local em cache ativo.", err);
+  }
+} else {
+  console.warn("SDK do Firebase não está carregado no escopo global.");
 }
 
 // Persistência local do Aluno
@@ -526,7 +527,7 @@ async function handleCadastro(nome) {
   
   try {
     if (db) {
-      await setDoc(doc(db, "alunos", pin), novoAluno);
+      await db.collection("alunos").doc(pin).set(novoAluno);
     }
     commitAlunoState(novoAluno);
     alert(`Cadastro Completo! Guarde o seu PIN de acesso seguro: ${pin}`);
@@ -547,8 +548,8 @@ async function handleLogin(nome, codigo) {
   
   try {
     if (db) {
-      const snap = await getDoc(doc(db, "alunos", codigo));
-      if (snap.exists()) {
+      const snap = await db.collection("alunos").doc(codigo).get();
+      if (snap.exists) {
         const data = snap.data();
         if (data.nome.toLowerCase() === nome.toLowerCase()) {
           commitAlunoState({
@@ -587,8 +588,8 @@ async function registrarConclusaoItem(titulo) {
   
   try {
     if (db) {
-      await updateDoc(doc(db, "alunos", state.aluno.codigo), {
-        progresso: arrayUnion(titulo)
+      await db.collection("alunos").doc(state.aluno.codigo).update({
+        progresso: firebase.firestore.FieldValue.arrayUnion(titulo)
       });
     }
   } catch (err) {
@@ -670,7 +671,7 @@ function handleValidarMissao() {
 }
 
 // === CENTRAL DE RENDER DO DOM ===
-export function render() {
+function render() {
   const root = document.getElementById("root");
   if (!root) return;
   
@@ -678,7 +679,6 @@ export function render() {
   if (!state.aluno) {
     root.innerHTML = renderAuthView();
     bindAuthEvents();
-    window.gamedevAppLoaded = true;
     return;
   }
   
@@ -687,7 +687,6 @@ export function render() {
   if (typeof lucide !== 'undefined' && lucide.createIcons) {
     lucide.createIcons();
   }
-  window.gamedevAppLoaded = true;
 }
 
 // Views HTML em Template Strings
