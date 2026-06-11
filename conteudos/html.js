@@ -15,7 +15,7 @@ window.conteudosHTML = {
         <div class="code-block"><pre><code>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Game Page&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;!-- O jogo entra aqui --&gt;\n&lt;/body&gt;\n&lt;/html&gt;</code></pre></div>`,
 
     "Tags de Texto": `
-        <p>As tags de texto são usadas para exibir informações escritas, como diálogos de NPCs, pontuação ou descrições de itens. As tags mais comuns são os títulos (<code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code>) e os parágrafos (<code>&lt;p&gt;</code>). Elas ajudam a definir a importância visual de cada informação.</p>
+        <p>As tags de texto são usadas para exibir informações escritas, como diálogos de NPCs, pontuação ou descrições de itens. As mais comuns são os títulos (<code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code>) e os parágrafos (<code>&lt;p&gt;</code>). Elas ajudam a definir a importância visual de cada informação.</p>
         <p>Além das básicas, existem tags para destacar partes do texto, como <code>&lt;strong&gt;</code> para negrito ou <code>&lt;em&gt;</code> para itálico. Em interfaces de jogos, isso é útil para destacar nomes de itens lendários ou valores críticos de dano dentro de uma frase.</p>
         <p>Usar as tags corretas de texto não apenas melhora o visual, mas também ajuda na acessibilidade e no SEO do projeto. O navegador entende automaticamente a hierarquia e o espaçamento padrão entre esses elementos, facilitando o design inicial.</p>
         <div class="code-block"><pre><code>&lt;h2&gt;Missão Principal&lt;/h2&gt;\n&lt;p&gt;Encontre a &lt;strong&gt;Chave de Ouro&lt;/strong&gt; no calabouço.&lt;/p&gt;</code></pre></div>`,
@@ -23,12 +23,12 @@ window.conteudosHTML = {
     "Meta Tags Técnicas": `
         <p>As meta tags ficam localizadas dentro do cabeçalho do documento e fornecem instruções técnicas essenciais para o navegador. A tag <code>charset="UTF-8"</code>, por exemplo, é obrigatória para que caracteres especiais e acentos do português funcionem corretamente sem erros de exibição.</p>
         <p>Outra meta tag crucial para jogos web é a <code>viewport</code>. Ela configura como a página deve se comportar em telas de celulares e tablets, garantindo que o jogo não fique com zoom exagerado ou minúsculo ao ser aberto em dispositivos diferentes.</p>
-        <p>Embora sejam invisíveis para o jogador, essas tags ditam a compatibilidade do projeto. Elas também são usadas para definir a descrição do site que aparece em buscas do Google, ajudando na divulgação do jogo para novos usuários.</p>
+        <p>Embora sejam invisíveis para o jogador, essas tags ditam a compatibilidade do projeto. Elas também são usadas para definir a descrição do site que aparece em buscas do Google, helping na divulgação do jogo para novos usuários.</p>
         <div class="code-block"><pre><code>&lt;meta charset="UTF-8"&gt;\n&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre></div>`,
 
     "Atributos e IDs": `
         <p>Atributos são propriedades que adicionamos às tags para modificar seu comportamento ou identificá-las. O atributo <code>id</code> é um dos mais importantes: ele funciona como um nome exclusivo para um elemento, permitindo que o JavaScript o encontre para alterar a vida ou a posição de um objeto.</p>
-        <p>Enquanto o <code>id</code> deve ser único, o atributo <code>class</code> pode ser usado em vários elementos ao mesmo tempo. Isso permite que você aplique o mesmo estilo visual de "botão de menu" ou "card de item" para diversos componentes simultaneamente usando CSS.</p>
+        <p>Enquanto o <code>id</code> deve ser único, o atributo <code>class</code> pode ser usado em vários elements ao mesmo tempo. Isso permite que você aplique o mesmo estilo visual de "botão de menu" ou "card de item" para diversos componentes simultaneamente usando CSS.</p>
         <p>Entender a diferença entre IDs e classes é vital para a organização do código. IDs são usados para elementos de controle (como a tela do jogo), enquanto classes são usadas para elementos de design que se repetem na interface.</p>
         <div class="code-block"><pre><code>&lt;div id="jogador-um" class="status-box"&gt;&lt;/div&gt;\n&lt;div id="jogador-dois" class="status-box"&gt;&lt;/div&gt;</code></pre></div>`,
 
@@ -155,7 +155,7 @@ window.conteudosHTML = {
     "Pré-carregamento de Assets (preload e prefetch)": `
         <p>O pré-carregamento é a técnica secreta para acabar com os ecrãs pretos e modelos invisíveis no início de uma fase. Usando as diretrizes <code>preload</code> e <code>prefetch</code> dentro da tag <code>&lt;head&gt;</code>, o desenvolvedor ordena ao navegador que baixe de forma agressiva e antecipada os assets (texturas, sons, fontes) essenciais antes de construir o resto da página.</p>
         <p>O <code>preload</code> é usado para a fase atual (ex: baixar a spritesheet do herói com urgência máxima). O <code>prefetch</code> é uma técnica mais subtil: ele baixa os ficheiros da fase 2 enquanto o jogador ainda está a jogar a fase 1, aproveitando a internet ociosa nos bastidores para que a transição de níveis seja absolutamente instantânea.</p>
-        <p>Esta arquitetura garante que a experiência lúdica nunca seja interrompida por quebras de download. Manter os ficheiros pesados já alocados no cache da máquina antes que a lógica de física precise deles é o que separa um jogo web amador de uma verdadeira aplicação gráfica profissional.</p>
+        <p>Esta arquitetura garante que a experiência lúdica nunca seja interrompida por quebras de download. Manter os ficheiros pesados já alocados no cache da máquina antes que a lógica de física precisa deles é o que separa um jogo web amador de uma verdadeira aplicação gráfica profissional.</p>
         <div class="code-block"><pre><code>&lt;head&gt;\n&lt;link rel="preload" href="spritesheet.png" as="image"&gt;\n&lt;link rel="preload" href="explosao.mp3" as="audio"&gt;\n&lt;/head&gt;</code></pre></div>`,
 
     "Iframe Avançado (<iframe> e Sandbox)": `
