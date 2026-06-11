@@ -683,7 +683,9 @@ export function render() {
   
   root.innerHTML = renderMainDashboard();
   bindDashboardEvents();
-  lucide.createIcons();
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
 }
 
 // Views HTML em Template Strings
@@ -1146,7 +1148,9 @@ function bindAuthEvents() {
       }
     };
   }
-  lucide.createIcons();
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
 }
 
 function bindDashboardEvents() {
