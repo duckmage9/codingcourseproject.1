@@ -678,6 +678,7 @@ export function render() {
   if (!state.aluno) {
     root.innerHTML = renderAuthView();
     bindAuthEvents();
+    window.gamedevAppLoaded = true;
     return;
   }
   
@@ -686,6 +687,7 @@ export function render() {
   if (typeof lucide !== 'undefined' && lucide.createIcons) {
     lucide.createIcons();
   }
+  window.gamedevAppLoaded = true;
 }
 
 // Views HTML em Template Strings
