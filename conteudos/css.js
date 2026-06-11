@@ -5,7 +5,7 @@ window.conteudos.css = {
         {
             titulo: "1. Seletores Básicos e Combinadores",
             conteudo: `
-                <p>Os seletores e combinadores são os sistemas de mira cirúrgica do CSS. O navegador interpreta a árvore do documento (DOM) de forma hierárquica, e os seletores determinam com precisão matemática quais as caixas que vão receber as diretivas de estilo. Os seletores básicos miram diretamente em Tags globais (como div ou button), em .classes reutilizáveis (perfeitas para múltiplos botões de inventário) ou em #ids únicos e absolutos (reservados para elementos soberanos como a barra de vida principal do herói). No entanto, a verdadeira engenharia surge com os combinadores: o combinador descendente (um espaço simples) e o combinador de filhos diretos (>). Eles permitem-lhe ditar regras estruturais profundas, garantindo que o texto dentro de uma janela de diálogo seja afetado, mas que o mesmo texto fora desse contêiner permaneça intocado.</p>
+                <p>Os seletores e combinadores são os sistemas de mira cirúrgica do CSS. O navegador interpreta a árvore do documento (DOM) de forma hierárquica, e os seletores dão precisão matemática para quais são as caixas que vão receber as diretivas de estilo. Os seletores básicos miram diretamente em Tags globais (como div ou button), em .classes reutilizáveis (perfeitas para múltiplos botões de inventário) ou em #ids únicos e absolutos (reservados para elementos soberanos como a barra de vida principal do herói). No entanto, a verdadeira engenharia surge com os combinadores: o combinador descendente (um espaço simples) e o combinador de filhos diretos (>). Eles permitem-lhe ditar regras estruturais profundas, garantindo que o texto dentro de uma janela de diálogo seja afetado, mas que o mesmo texto fora desse contêiner permaneça intocado.</p>
                 <p>Na arquitetura de um jogo, o uso correto de seletores e combinadores evita que polua o seu código HTML com milhares de classes repetidas e redundantes. Imagine que tem uma secção dedicada à loja de itens (<code>&lt;section class="loja-itens"&gt;</code>) e lá dentro possui dezenas de cartões de armas, cada um com um título <code>&lt;h3&gt;</code>. Em vez de dar uma classe específica para cada título de cada arma, utiliza o combinador descendente <code>.loja-itens h3</code>. Isso centraliza todo o controlo estético num único bloco de código.</p>
                 <p>A relevância teórica deste conceito reside no peso de processamento que o motor do navegador enfrenta. O CSS é lido da direita para a esquerda; por isso, seletores excessivamente genéricos ou mal encadeados obrigam o interpretador a fazer varreduras exaustivas na memória para descobrir quem deve ser pintado.</p>
 <pre><code>/* Seletor de Tag Global: Define a fonte base para todas as caixas de texto */
@@ -98,7 +98,7 @@ p {
         {
             titulo: "4. Tipografia Web",
             conteudo: `
-                <p>A Tipografia Web é a voz do seu jogo manifestada através de vetores de texto. Estilizar texto no CSS transcende a mera escolha de fontes; envolve o ajuste micrométrico do peso visual (<code>font-weight</code>), o tamanho proporcional (<code>font-size</code>) e a distância vertical exata entre as linhas (<code>line-height</code>). Podemos quebrar as limitações de fontes padrão utilizando o Google Fonts através da diretiva <code>@import</code>, descarregando fontes temáticas medievais, futuristas ou pixel-art diretamente para a memória volátil do jogador.</p>
+                <p>A Tipografia Web é a voice do seu jogo manifestada através de vetores de texto. Estilizar texto no CSS transcende a mera escolha de fontes; envolve o ajuste micrométrico do peso visual (<code>font-weight</code>), o tamanho proporcional (<code>font-size</code>) e a distância vertical exata entre as linhas (<code>line-height</code>). Podemos quebrar as limitações de fontes padrão utilizando o Google Fonts através da diretiva <code>@import</code>, descarregando fontes temáticas medievais, futuristas ou pixel-art diretamente para a memória volátil do jogador.</p>
                 <p>Num RPG de fantasia, a tipografia é uma ferramenta narrativa crucial. Usará uma fonte gótica imponente para os títulos das missões. Já para o registo de combate flutuante (onde dezenas de linhas de dano surgem por segundo), optará por uma fonte monospace, ajustando o line-height para garantir que os números críticos de dano não fiquem encavalitados e sejam legíveis num piscar de olhos.</p>
                 <p>Ignorar as minúcias tipográficas destrói a estética e o acabamento profissional do seu jogo. Se o line-height for muito curto, os textos explicativos das habilidades vão colapsar uns sobre os outros. A tipografia correta cria a atmosfera psicológica ideal.</p>
 <pre><code>/* Importação direta de uma fonte pixel-art e medieval do Google Fonts */
@@ -271,7 +271,7 @@ html {
         {
             titulo: "10. Variáveis CSS Nativas (Básico)",
             conteudo: `
-                <p>As Variáveis CSS Nativas (Custom Properties) trouxeram a modularidade da lógica de programação para as folhas de estilo. Declaradas tradicionalmente dentro da pseudo-classe soberana <code>:root</code>, elas são definidas prefixando dois traços no nome (<code>--cor-primaria</code>) e consumidas através da função nativa <code>var(--nome-variavel)</code>. Isto permite criar um ponto centralizado de verdade para valores repetitivos de cores, fontes e tamanhos.</p>
+                <p>As Variáveis CSS Nativas (Custom Properties) trouxeram a modularidade da lógica de programação para as folhas de estilo. Declaradas tradicionalmente dentro da pseudo-classe soberana <code>:root</code>, eles são definidas prefixando dois traços no nome (<code>--cor-primaria</code>) e consumidas através da função nativa <code>var(--nome-variavel)</code>. Isto permite criar um ponto centralizado de verdade para valores repetitivos de cores, fontes e tamanhos.</p>
                 <p>Na engenharia de produção de jogos, as variáveis nativas são o alicerce para sistemas de Temas e Paletas de Cores. Se a equipa decidir que a cor dos itens Épicos está muito escura, altera o valor da variável uma única vez no bloco :root, e todo o jogo atualiza-se instantaneamente na velocidade da luz.</p>
                 <p>A importância das variáveis nativas reside na eliminação total do código duplicado e na escalabilidade a longo prazo, preparando o terreno ideal para integrações em tempo real com o motor JavaScript que veremos nos níveis avançados.</p>
 <pre><code>/* Declaração Centralizada de Variáveis Globais no Topo do Ficheiro */
@@ -394,7 +394,7 @@ html {
         {
             titulo: "14. Fundamentos do CSS Grid",
             conteudo: `
-                <p>O CSS Grid Layout é o arquiteto supremo bidimensional. Ao declarar <code>display: grid</code>, transforma-se o elemento num sistema matemático rígido de coordenadas. Através de <code>grid-template-columns</code> e <code>grid-template-rows</code>, define a anatomia da malha espacial. Com a propriedade <code>gap</code>, estipula o distanciamento exato entre as células da grelha.</p>
+                <p>O CSS Grid Layout é o arquiteto supremo bidimensional. Ao declarar <code>display: grid</code>, transforma-se o elemento num sistema matemático rígido de coordenadas. Através de <code>grid-template-columns</code> e <code>grid-template-rows</code>, define a anatomia da malha espacial. Con a propriedade <code>gap</code>, estipula o distanciamento exato entre as células da grelha.</p>
                 <p>A aplicação primordial em jogos é a modelagem de tabuleiros complexos e ecrãs de seleção. Para criar um clone de Tetris ou uma mesa de RPG, configura oito colunas idênticas e simétricas que dividem o espaço disponível com precisão cirúrgica de pixels, criando o campo de jogo ideal.</p>
                 <p>Dominar o CSS Grid poupa o processamento do jogo, delegando ao motor nativo do navegador a responsabilidade de calcular divisões espaciais complexas.</p>
 <pre><code>/* Tabuleiro de Xadrez ou Campo Tático 8x8 com CSS Grid */
@@ -904,3 +904,13 @@ function aplicarDanoNoGuerreiro(pontosDano) {
         }
     ]
 };
+
+// Mapeamento automático de window.conteudos.css para window.conteudosCSS para manter compatibilidade perfeita!
+window.conteudosCSS = {};
+for (const level in window.conteudos.css) {
+    window.conteudos.css[level].forEach(item => {
+        window.conteudosCSS[item.titulo] = item.conteudo;
+        const cleanTitle = item.titulo.replace(/^\d+\.\s*/, "");
+        window.conteudosCSS[cleanTitle] = item.conteudo;
+    });
+}
