@@ -442,9 +442,31 @@ export const missoesProjetos = [
   }
 ];
 
+// Emulação segura de localStorage para evitar quebras em iframes com sandbox restrito
+if (!window.gamedevSafeStorage) {
+  window.gamedevSafeStorage = {
+    getItem: (key) => {
+      try { return localStorage.getItem(key); } catch (e) { return window["_fallback_" + key] || null; }
+    },
+    setItem: (key, val) => {
+      try { localStorage.setItem(key, val); } catch (e) { window["_fallback_" + key] = val; }
+    },
+    removeItem: (key) => {
+      try { localStorage.removeItem(key); } catch (e) { delete window["_fallback_" + key]; }
+    }
+  };
+}
+
 // === ENGINE DE RENDERIZAÇÃO E APP STATE ===
 const state = {
-  aluno: JSON.parse(localStorage.getItem("aluno_gamedev")) || null,
+  aluno: (() => {
+    try {
+      const v = window.gamedevSafeStorage.getItem("aluno_gamedev");
+      return v ? JSON.parse(v) : null;
+    } catch(e) {
+      return null;
+    }
+  })(),
   authView: 'login', // 'login' ou 'cadastro'
   mainView: 'enciclopedia', // 'enciclopedia', 'desafios', 'missoes'
   selectedTech: 'html', // 'html', 'css', 'js'
@@ -486,9 +508,9 @@ try {
 function commitAlunoState(aluno) {
   state.aluno = aluno;
   if (aluno) {
-    localStorage.setItem("aluno_gamedev", JSON.stringify(aluno));
+    window.gamedevSafeStorage.setItem("aluno_gamedev", JSON.stringify(aluno));
   } else {
-    localStorage.removeItem("aluno_gamedev");
+    window.gamedevSafeStorage.removeItem("aluno_gamedev");
   }
   render();
 }
@@ -541,7 +563,8 @@ async function handleLogin(nome, codigo) {
       }
     }
     // Fallback local caso offline ou cadastrado localmente
-    const local = JSON.parse(localStorage.getItem("aluno_gamedev"));
+    const localVal = window.gamedevSafeStorage.getItem("aluno_gamedev");
+    const local = localVal ? JSON.parse(localVal) : null;
     if (local && local.codigo === codigo && local.nome.toLowerCase() === nome.toLowerCase()) {
       commitAlunoState(local);
     } else {
