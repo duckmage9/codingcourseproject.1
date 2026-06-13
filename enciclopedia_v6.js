@@ -1007,27 +1007,29 @@ function renderMissoes() {
 }
 
 // Renderização dos Modais
+// Renderização dos Modais
 function renderModals() {
   const activeTopic = state.activeTopic;
   
-  return `
-    <div class="fixed inset-0 bg-[#020617]/95 backdrop-blur-md z-50 flex items-start justify-center p-4 md:p-8 overflow-y-auto">
-      <div class="bg-[#0f172a] border border-slate-800 rounded-3xl w-full max-w-4xl p-6 md:p-10 shadow-2xl relative my-auto overflow-hidden">
-        <button id="btn-close-modal" class="absolute right-4 top-4 md:right-6 md:top-6 w-8 h-8 rounded-xl border border-rose-500/20 bg-slate-950 text-rose-500 hover:bg-rose-500 hover:text-white transition-all flex justify-center items-center cursor-pointer">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-        
-        <h2 class="text-xl md:text-2xl font-black font-mono uppercase tracking-tight text-white mb-6 pb-4 border-b border-slate-800/80 flex items-center gap-2">
-          <i data-lucide="book-open" class="text-sky-400 w-5 h-5"></i>
-          <span>${state.modalType === 'missao' ? missoesProjetos[state.activeMissionIndex].titulo : activeTopic}</span>
-        </h2>
-
-        ${state.modalType === 'estudo' ? renderEstudoModalContent() : ''}
-        ${state.modalType === 'desafio' ? renderDesafioModalContent() : ''}
-        ${state.modalType === 'missao' ? renderMissionModalContent() : ''}
-      </div>
-    </div>
-  `;
+  let html = '';
+  html += '<div class="fixed inset-0 bg-[#020617]/95 backdrop-blur-md z-50 flex items-start justify-center p-4 md:p-8 overflow-y-auto">';
+  html += '  <div class="bg-[#0f172a] border border-slate-800 rounded-3xl w-full max-w-4xl p-6 md:p-10 shadow-2xl relative my-auto overflow-hidden">';
+  html += '    <button id="btn-close-modal" class="absolute right-4 top-4 md:right-6 md:top-6 w-8 h-8 rounded-xl border border-rose-500/20 bg-slate-950 text-rose-500 hover:bg-rose-500 hover:text-white transition-all flex justify-center items-center cursor-pointer">';
+  html += '      <i data-lucide="x" class="w-4 h-4"></i>';
+  html += '    </button>';
+  html += '    ';
+  html += '    <h2 class="text-xl md:text-2xl font-black font-mono uppercase tracking-tight text-white mb-6 pb-4 border-b border-slate-800/80 flex items-center gap-2">';
+  html += '      <i data-lucide="book-open" class="text-sky-400 w-5 h-5"></i>';
+  html += '      <span>' + (state.modalType === 'missao' ? missoesProjetos[state.activeMissionIndex].titulo : activeTopic) + '</span>';
+  html += '    </h2>';
+  html += '    ';
+  html += '    ' + (state.modalType === 'estudo' ? renderEstudoModalContent() : '');
+  html += '    ' + (state.modalType === 'desafio' ? renderDesafioModalContent() : '');
+  html += '    ' + (state.modalType === 'missao' ? renderMissionModalContent() : '');
+  html += '  </div>';
+  html += '</div>';
+  
+  return html;
 }
 
 function renderEstudoModalContent() {
