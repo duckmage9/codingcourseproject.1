@@ -323,61 +323,61 @@ const desafiosColecao = {
         enunciado1: "Identifique a sintaxe correta utilizada para abrir e fechar um elemento em um documento HTML.",
         opcoes: [
           "a) [p]Meu parágrafo[/p]",
-          "b) \\x3Cp\\x3EMeu parágrafo\\x3Cp\\x3E",
+          "b) <p>Meu parágrafo<p>",
           "c) {p}Meu parágrafo{/p}",
-          "d) \\x3Cp\\x3EMeu parágrafo\\x3C/p\\x3E",
-          "e) \\x3C/p\\x3EMeu parágrafo\\x3Cp\\x3E"
+          "d) <p>Meu parágrafo</p>",
+          "e) </p>Meu parágrafo<p>"
         ],
         respostaMultipla: 3,
         enunciado2: "A linguagem HTML utiliza sinais de 'menor que' e 'maior que' para definir o início de um elemento. O fechamento é igual à abertura com uma barra oblíqua (/) inicial.",
         questaoPratica: "Um desenvolvedor tentou criar um botão e um parágrafo, mas errou no fechamento. Corrija o código base abaixo:",
-        codigoInicial: "\\x3Cbutton\\x3EClique em mim\\x3Cbutton\\x3E\\n\\x3Cp\\x3EEste é um texto de aviso importante.\\x3Cp\\x3E",
-        correta: "\\x3Cbutton\\x3EClique em mim\\x3C/button\\x3E\\n\\x3Cp\\x3EEste é um texto de aviso importante.\\x3C/p\\x3E"
+        codigoInicial: "<button>Clique em mim<button>\n<p>Este é um texto de aviso importante.<p>",
+        correta: "<button>Clique em mim</button>\n<p>Este é um texto de aviso importante.</p>"
       },
       "Estrutura Global": {
         enunciado1: "Qual é a tag raiz que envolve todo o conteúdo de uma página HTML?",
         opcoes: [
-          "a) \\x3Chead\\x3E",
-          "b) \\x3Cbody\\x3E",
-          "c) \\x3Chtml\\x3E",
-          "d) \\x3Cmain\\x3E",
-          "e) \\x3C!DOCTYPE html\\x3E"
+          "a) <head>",
+          "b) <body>",
+          "c) <html>",
+          "d) <main>",
+          "e) <!DOCTYPE html>"
         ],
         respostaMultipla: 2,
         enunciado2: "O head agrupa metadados e o body abriga elementos visíveis. Tudo fica encapsulado na seção raiz html.",
         questaoPratica: "Corrija a estrutura misturada abaixo reorganizando head, body e seus respectivos filhos nos locais devidos:",
-        codigoInicial: "\\x3C!DOCTYPE html\\x3E\\n\\x3Chtml\\x3E\\n  \\x3Cbody\\x3E\\n    \\x3Ctitle\\x3EMinha Primeira Página\\x3C/title\\x3E\\n  \\x3C/body\\x3E\\n  \\x3Chead\\x3E\\n    \\x3Ch1\\x3EBem-vindo ao meu site!\\x3C/h1\\x3E\\n    \\x3Cp\\x3EAqui você encontrará meu portfólio.\\x3C/p\\x3E\\n  \\x3C/head\\x3E\\n\\x3C/html\\x3E",
-        correta: "\\x3C!DOCTYPE html\\x3E\\n\\x3Chtml\\x3E\\n  \\x3Chead\\x3E\\n    \\x3Ctitle\\x3EMinha Primeira Página\\x3C/title\\x3E\\n  \\x3C/head\\x3E\\n  \\x3Cbody\\x3E\\n    \\x3Ch1\\x3EBem-vindo ao meu site!\\x3C/h1\\x3E\\n    \\x3Cp\\x3EAqui você encontrará meu portfólio.\\x3C/p\\x3E\\n  \\x3C/body\\x3E\\n\\x3C/html\\x3E"
+        codigoInicial: "<!DOCTYPE html>\n<html>\n  <body>\n    <title>Minha Primeira Página</title>\n  </body>\n  <head>\n    <h1>Bem-vindo ao meu site!</h1>\n    <p>Aqui você encontrará meu portfólio.</p>\n  </head>\n</html>",
+        correta: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>Minha Primeira Página</title>\n  </head>\n  <body>\n    <h1>Bem-vindo ao meu site!</h1>\n    <p>Aqui você encontrará meu portfólio.</p>\n  </body>\n</html>"
       },
       "Tags de Texto": {
         enunciado1: "Para definir o título de maior importância (nível 1) em um documento HTML, qual tag usar?",
         opcoes: [
-          "a) \\x3Ctitle\\x3E",
-          "b) \\x3Cheader\\x3E",
-          "c) \\x3Cstrong\\x3E",
-          "d) \\x3Ch1\\x3E",
-          "e) \\x3Ch6\\x3E"
+          "a) <title>",
+          "b) <header>",
+          "c) <strong>",
+          "d) <h1>",
+          "e) <h6>"
         ],
         respostaMultipla: 3,
         enunciado2: "Usamos os títulos h1 a h6 representados na ordem descendente de relevância estética.",
         questaoPratica: "O código abaixo tem um cruzamento incorreto de tags de título h2 e parágrafo. Corrija fechando-as devidamente:",
-        codigoInicial: "\\x3Ch2\\x3EO que é o Universo?\\x3Cp\\x3EO universo é tudo o que existe, incluindo espaço, tempo e matéria.\\x3C/h2\\x3E\\x3C/p\\x3E",
-        correta: "\\x3Ch2\\x3EO que é o Universo?\\x3C/h2\\x3E\\n\\x3Cp\\x3EO universo é tudo o que existe, incluindo espaço, tempo e matéria.\\x3C/p\\x3E"
+        codigoInicial: "<h2>O que é o Universo?<p>O universo é tudo o que existe, incluindo espaço, tempo e matéria.</h2></p>",
+        correta: "<h2>O que é o Universo?</h2>\n<p>O universo é tudo o que existe, incluindo espaço, tempo e matéria.</p>"
       },
       "Meta Tags Técnicas": {
         enunciado1: "Qual é a tag para certificar caracteres especiais e acentuações no idioma português?",
         opcoes: [
-          "a) \\x3Cmeta name=\\\"viewport\\\" content=\\\"width=device-width\\\"\\x3E",
-          "b) \\x3Cmeta charset=\\\"UTF-8\\\"\\x3E",
-          "c) \\x3Cmeta language=\\\"pt-br\\\"\\x3E",
-          "d) \\x3Clink rel=\\\"charset\\\" href=\\\"UTF-8\\\"\\x3E",
-          "e) \\x3Ctitle charset=\\\"UTF-8\\\"\\x3E"
+          "a) <meta name=\"viewport\" content=\"width=device-width\">",
+          "b) <meta charset=\"UTF-8\">",
+          "c) <meta language=\"pt-br\">",
+          "d) <link rel=\"charset\" href=\"UTF-8\">",
+          "e) <title charset=\"UTF-8\">"
         ],
         respostaMultipla: 1,
         enunciado2: "O padrão universal de caracteres das páginas web modernas é o UTF-8.",
         questaoPratica: "Injeta a meta tag charset faltando no cabeçalho invisível para corrigir as letras especiais:",
-        codigoInicial: "\\x3C!DOCTYPE html\\x3E\\n\\x3Chtml lang=\\\"pt-BR\\\"\\x3E\\n\\x3Chead\\x3E\\n    \\x3Ctitle\\x3EPainel de Controle\\x3C/title\\x3E\\n\\x3C/head\\x3E\\n\\x3Cbody\\x3E\\n    \\x3Ch1\\x3EConfigurações do Usuário\\x3C/h1\\x3E\\n\\x3C/body\\x3E\\n\\x3C/html\\x3E",
-        correta: "\\x3C!DOCTYPE html\\x3E\\n\\x3Chtml lang=\\\"pt-BR\\\"\\x3E\\n\\x3Chead\\x3E\\n    \\x3Ctitle\\x3EPainel de Controle\\x3C/title\\x3E\\n    \\x3Cmeta charset=\\\"UTF-8\\\"\\x3E\\n\\x3C/head\\x3E\\n\\x3Cbody\\x3E\\n    \\x3Ch1\\x3EConfigurações do Usuário\\x3C/h1\\x3E\\n\\x3C/body\\x3E\\n\\x3C/html\\x3E"
+        codigoInicial: "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n    <title>Painel de Controle</title>\n</head>\n<body>\n    <h1>Configurações do Usuário</h1>\n</body>\n</html>",
+        correta: "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n    <title>Painel de Controle</title>\n    <meta charset=\"UTF-8\">\n</head>\n<body>\n    <h1>Configurações do Usuário</h1>\n</body>\n</html>"
       },
       "Atributos e IDs": {
         enunciado1: "Sobre o atributo id, é correto afirmar que:",
@@ -391,25 +391,25 @@ const desafiosColecao = {
         respostaMultipla: 2,
         enunciado2: "CPF estrito de elementos. Classes aceitam múltiplos focos, mas os IDs são únicos por documento.",
         questaoPratica: "Organize as caixas de avisos abaixo atribuindo IDs únicos e semanticamente limpos:",
-        codigoInicial: "\\x3Cdiv id=\\\"caixa-alerta\\\"\\x3E\\n  \\x3Cp\\x3ESucesso: Usuário cadastrado!\\x3C/p\\x3E\\n\\x3C/div\\x3E\\n\\x3Cdiv id=\\\"caixa-alerta\\\"\\x3E\\n  \\x3Cp\\x3EAviso: Verifique seu e-mail.\\x3C/p\\x3E\\n\\x3C/div\\x3E\\n\\x3Cdiv id=\\\"caixa-alerta\\\"\\x3E\\n  \\x3Cp\\x3EErro: Senha incorreta.\\x3C/p\\x3E\\n\\x3C/div\\x3E",
-        correta: "\\x3Cdiv id=\\\"alerta-sucesso\\\"\\x3E\\n  \\x3Cp\\x3ESucesso: Usuário cadastrado!\\x3C/p\\x3E\\n\\x3C/div\\x3E\\n\\x3Cdiv id=\\\"alerta-aviso\\\"\\x3E\\n  \\x3Cp\\x3EAviso: Verifique seu e-mail.\\x3C/p\\x3E\\n\\x3C/div\\x3E\\n\\x3Cdiv id=\\\"alerta-erro\\\"\\x3E\\n  \\x3Cp\\x3EErro: Senha incorreta.\\x3C/p\\x3E\\n\\x3C/div\\x3E"
+        codigoInicial: "<div id=\"caixa-alerta\">\n  <p>Sucesso: Usuário cadastrado!</p>\n</div>\n<div id=\"caixa-alerta\">\n  <p>Aviso: Verifique seu e-mail.</p>\n</div>\n<div id=\"caixa-alerta\">\n  <p>Erro: Senha incorreta.</p>\n</div>",
+        correta: "<div id=\"alerta-sucesso\">\n  <p>Sucesso: Usuário cadastrado!</p>\n</div>\n<div id=\"alerta-aviso\">\n  <p>Aviso: Verifique seu e-mail.</p>\n</div>\n<div id=\"alerta-erro\">\n  <p>Erro: Senha incorreta.</p>\n</div>"
       }
     },
     intermediario: {
       "Elementos Semânticos (Header, Nav, Footer)": {
         enunciado1: "Qual elemento semântico é especificamente desenhado para agrupar os principais links de navegação?",
         opcoes: [
-          "a) \\x3Cmenu\\x3E",
-          "b) \\x3Cheader\\x3E",
-          "c) \\x3Cnav\\x3E",
-          "d) \\x3Cfooter\\x3E",
-          "e) \\x3Clinks\\x3E"
+          "a) <menu>",
+          "b) <header>",
+          "c) <nav>",
+          "d) <footer>",
+          "e) <links>"
         ],
         respostaMultipla: 2,
         enunciado2: "Usa-se a tag nav para links e mapas de navegação rápida de ecrãs.",
         questaoPratica: "Troque os blocos genéricos de cabeçalho por tags semânticas limpas: header e nav:",
-        codigoInicial: "\\x3Cdiv id=\\\"cabecalho\\\"\\x3E\\n  \\x3Ch1\\x3EMeu Portfólio\\x3C/h1\\x3E\\n  \\x3Cdiv id=\\\"menu-principal\\\"\\x3E\\n    \\x3Ca href=\\\"/home\\\"\\x3EInício\\x3C/a\\x3E\\n  \\x3C/div\\x3E\\n\\x3C/div\\x3E",
-        correta: "\\x3Cheader\\x3E\\n  \\x3Ch1\\x3EMeu Portfólio\\x3C/h1\\x3E\\n  \\x3Cnav\\x3E\\n    \\x3Ca href=\\\"/home\\\"\\x3EInício\\x3C/a\\x3E\\n  \\x3C/nav\\x3E\\n\\x3C/header\\x3E"
+        codigoInicial: "<div id=\"cabecalho\">\n  <h1>Meu Portfólio</h1>\n  <div id=\"menu-principal\">\n    <a href=\"/home\">Início</a>\n  </div>\n</div>",
+        correta: "<header>\n  <h1>Meu Portfólio</h1>\n  <nav>\n    <a href=\"/home\">Início</a>\n  </nav>\n</header>"
       }
     }
   },
