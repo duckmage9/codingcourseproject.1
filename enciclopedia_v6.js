@@ -17,7 +17,7 @@ const dbColecaoTopicos = {
     }
 };
 
-const conteudosHTML = {
+const conteudosHTML_local = {
     "Conceito de Tags": `
         <p>As tags são a base da linguagem HTML e funcionam como comandos que informam ao navegador como o conteúdo deve ser estruturado. No desenvolvimento de jogos, elas são usadas para definir desde a área onde o jogo será exibido até os botões de menu e textos de interface.</p>
         <pre><code>&lt;h1&gt;Meu Primeiro Jogo&lt;/h1&gt;\n&lt;p&gt;Pressione Start para começar.&lt;/p&gt;</code></pre>`,
@@ -109,8 +109,9 @@ const conteudosHTML = {
         <p>Define a ordem mecânica de navegação via teclado, trazendo foco para botões ativados.</p>
         <pre><code>&lt;button tabindex="1"&gt;Iniciar&lt;/button&gt;</code></pre>`
 };
+let conteudosHTML = window.conteudosHTML || conteudosHTML_local;
 
-const conteudosCSS = {
+const conteudosCSS_local = {
     "Seletores Básicos e Combinadores": `
         <p>Os seletores e combinadores determinam com precisão cirúrgica quais elementos do DOM recebem estilo.</p>
         <pre><code>.hotbar-acoes &gt; .icone-item {\n  width: 48px;\n}</code></pre>`,
@@ -202,8 +203,9 @@ const conteudosCSS = {
         <p>Controladores JS atualizando variáveis CSS nativas em tempo real para sincronização visual suave.</p>
         <pre><code>elemento.style.setProperty('--vida', '45%');</code></pre>`
 };
+let conteudosCSS = window.conteudosCSS || conteudosCSS_local;
 
-const conteudosJS = {
+const conteudosJS_local = {
     "Variáveis e Constantes (let e const)": `
         <p>Recipientes de memória para dados mutáveis (let), como coordenadas, ou fixos (const), como a gravidade.</p>
         <pre><code>const GRAVIDADE = 0.8;\nlet personagemX = 100;</code></pre>`,
@@ -315,6 +317,7 @@ const conteudosJS = {
         <p>Absorver moldes provados a nível mundial na formatação tática de acoplar blocos em código transforma sistemas rudes de amadores perdidos para motores profissionais infalíveis de manutenção instantânea e blindagens perfeitas onde tudo opera orquestrado perfeitamente na perfeição garantida das mecânicas fluidas indestrutíveis prontas aos abalos do mercado robustos das produções colossais.</p>
         <div class="code-block"><pre><code>const Acoes = {\n    CORRER: () => console.log("Lógica Limpa da Corrida isolada."), \n    PULAR: () => console.log("Lógica Livre de Gravidade Pura.")\n};\n\nlet maquinaEstadoAtual = Acoes.CORRER;\nmaquinaEstadoAtual(); // Executa apenas o estado seguro.</code></pre></div>`
 };
+let conteudosJS = window.conteudosJS || conteudosJS_local;
 
 const desafiosColecao = {
   html: {
@@ -1288,11 +1291,48 @@ function bindDashboardEvents() {
   if (btnSubMissao) btnSubMissao.onclick = handleValidarMissao;
 }
 
-// Inicializa a aplicação
-if (document.readyState === "loading") {
-  window.addEventListener("DOMContentLoaded", () => {
-    render();
-  });
-} else {
+// === CONEXÃO SIMPLES COM O GITHUB VIA RAW URLS ===
+async function carregarDoGithubRaw() {
+  const GITHUB_BASE = "https://raw.githubusercontent.com/ottocolonnelli/enciclopedia-gamdev/main/";
+  
+  const files = [
+    { path: "html/conteudo_html.js", target: "conteudosHTML" },
+    { path: "css/conteudo_css.js", target: "conteudosCSS" },
+    { path: "js/conteudo_js.js", target: "conteudosJS" }
+  ];
+
+  for (const file of files) {
+    try {
+      const response = await fetch(GITHUB_BASE + file.path);
+      if (response.ok) {
+        const text = await response.text();
+        // Executa o script no escopo global para carregar os conteúdos dinamicamente
+        const scriptElement = document.createElement("script");
+        scriptElement.text = text;
+        document.body.appendChild(scriptElement);
+        console.log(`[GitHub Raw] Carregado com sucesso: ${file.path}`);
+      } else {
+        throw new Error(`HTTP Status ${response.status}`);
+      }
+    } catch (e) {
+      console.warn(`[GitHub Raw] Sem conexão ou falha ao carregar ${file.path}, usando fallback local:`, e);
+    }
+  }
+
+  // Sincroniza as variáveis locais com o window
+  if (window.conteudosHTML) conteudosHTML = window.conteudosHTML;
+  if (window.conteudosCSS) conteudosCSS = window.conteudosCSS;
+  if (window.conteudosJS) conteudosJS = window.conteudosJS;
+}
+
+// Inicializa a aplicação com carregamento de dados do GitHub Raw e Firebase simples
+async function inicializarApp() {
+  await carregarDoGithubRaw();
   render();
+}
+
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", inicializarApp);
+} else {
+  inicializarApp();
 }
