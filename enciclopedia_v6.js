@@ -1,5 +1,9 @@
-// === BANCO DE DADOS DA ENCICLOPÉDIA COMPLETO ===
-const dbColecaoTopicos = {
+// Executado apenas quando o DOM estiver totalmente carregado para evitar conflitos de escopo global
+document.addEventListener("DOMContentLoaded", () => {
+    'use strict';
+
+    // === BANCO DE DADOS DA ENCICLOPÉDIA COMPLETO ===
+    const dbColecaoTopicos = {
     html: {
         iniciante: ["Conceito de Tags", "Estrutura Global", "Tags de Texto", "Meta Tags Técnicas", "Atributos e IDs", "Links e Navegação", "Listas de Inventário", "Inserção de Mídia", "Containers Div", "Comentários de Código"],
         intermediario: ["Elementos Semânticos (Header, Nav, Footer)", "Seções de Conteúdo (Section, Article, Aside)", "Estrutura de Tabelas Simples (Table, Tr, Td)", "Cabeçalhos e Grupos de Tabela (Thead, Tbody, Tfoot)", "Formulários Básicos (Form, Input, Label)", "Tipos de Input (Text, Password, Email, Button)", "Seleções em Formulários (Radio, Checkbox, Select)", "Validação Nativa de Formulários", "Introdução à Acessibilidade (Atributos ARIA)", "A tag <dialog> (Modais Nativos)"],
@@ -1291,48 +1295,11 @@ function bindDashboardEvents() {
   if (btnSubMissao) btnSubMissao.onclick = handleValidarMissao;
 }
 
-// === CONEXÃO SIMPLES COM O GITHUB VIA RAW URLS ===
-async function carregarDoGithubRaw() {
-  const GITHUB_BASE = "https://raw.githubusercontent.com/ottocolonnelli/enciclopedia-gamdev/main/";
-  
-  const files = [
-    { path: "html/conteudo_html.js", target: "conteudosHTML" },
-    { path: "css/conteudo_css.js", target: "conteudosCSS" },
-    { path: "js/conteudo_js.js", target: "conteudosJS" }
-  ];
-
-  for (const file of files) {
-    try {
-      const response = await fetch(GITHUB_BASE + file.path);
-      if (response.ok) {
-        const text = await response.text();
-        // Executa o script no escopo global para carregar os conteúdos dinamicamente
-        const scriptElement = document.createElement("script");
-        scriptElement.text = text;
-        document.body.appendChild(scriptElement);
-        console.log(`[GitHub Raw] Carregado com sucesso: ${file.path}`);
-      } else {
-        throw new Error(`HTTP Status ${response.status}`);
-      }
-    } catch (e) {
-      console.warn(`[GitHub Raw] Sem conexão ou falha ao carregar ${file.path}, usando fallback local:`, e);
-    }
-  }
-
-  // Sincroniza as variáveis locais com o window
+  // Sincroniza as variáveis locais com os dados injetados externamente no escopo global
   if (window.conteudosHTML) conteudosHTML = window.conteudosHTML;
   if (window.conteudosCSS) conteudosCSS = window.conteudosCSS;
   if (window.conteudosJS) conteudosJS = window.conteudosJS;
-}
 
-// Inicializa a aplicação com carregamento de dados do GitHub Raw e Firebase simples
-async function inicializarApp() {
-  await carregarDoGithubRaw();
+  // Renderiza o Dashboard principal diretamente
   render();
-}
-
-if (document.readyState === "loading") {
-  window.addEventListener("DOMContentLoaded", inicializarApp);
-} else {
-  inicializarApp();
-}
+});
