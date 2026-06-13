@@ -734,7 +734,7 @@ function renderAuthView() {
       <div class="bg-[#0f172a] border border-slate-800 rounded-3xl p-8 max-w-md w-full shadow-2xl relative overflow-hidden">
         <div class="absolute -top-12 -left-12 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl"></div>
         <div class="text-center mb-8 relative">
-          <div class="w-16 h-16 bg-sky-500/10 rounded-2xl mx-auto flex items-center justify-center text-sky-400 mb-4 animate-pulse">
+          <div class="w-16 h-16 bg-sky-500/10 rounded-2xl mx-auto flex items-center justify-center text-sky-400 mb-4">
             <i data-lucide="gamepad-2" class="w-8 h-8"></i>
           </div>
           <h2 class="text-3xl font-black font-mono tracking-tight text-white">GAMEDEV ACADEMY</h2>
@@ -765,7 +765,7 @@ function renderAuthView() {
             </div>
           ` : ''}
           
-          <button type="submit" class="w-full py-3.5 bg-sky-500 hover:bg-sky-450 text-slate-950 font-black font-mono uppercase tracking-wider rounded-xl text-xs flex justify-center items-center gap-2 shadow-lg transition-transform active:scale-98">
+          <button type="submit" class="w-full py-3.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-black font-mono uppercase tracking-wider rounded-xl text-xs flex justify-center items-center gap-2 shadow-lg transition-transform active:scale-98">
             <span>${state.loading ? 'Processando...' : (state.authView === "login" ? "Entrar na Academia ✔️" : "Criar Minha Matrícula 🚀")}</span>
           </button>
         </form>
@@ -859,11 +859,11 @@ function renderMainDashboard() {
             <p class="text-slate-400 text-xs mt-1">Conquiste desafios reais de programação e preencha a sua caderneta de medalhas.</p>
           </div>
           <div class="flex gap-4 items-center animate-fade-in">
-            <div class="text-center bg-[#020617] border border-slate-850 rounded-xl px-4 py-2">
+            <div class="text-center bg-[#020617] border border-slate-800 rounded-xl px-4 py-2">
               <span class="block text-[9px] uppercase text-slate-400 font-bold tracking-wider">Módulos Solucionados</span>
               <span class="text-[#38bdf8] font-mono font-bold text-sm block mt-0.5">${state.aluno.progresso.length} Concluídos</span>
             </div>
-            <div class="text-center bg-[#020617] border border-slate-850 rounded-xl px-4 py-2">
+            <div class="text-center bg-[#020617] border border-slate-800 rounded-xl px-4 py-2">
               <span class="block text-[9px] uppercase text-slate-400 font-bold tracking-wider">Trilhas de Estudo</span>
               <span class="text-amber-400 font-mono font-bold text-sm block mt-0.5">HTML / CSS / JS</span>
             </div>
@@ -929,7 +929,7 @@ function renderEnciclopedia() {
               <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-xs text-slate-400 font-mono">${String(idx + 1).padStart(2, '0')}</div>
               ${concluido ? `
                 <div class="px-2 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded uppercase border border-emerald-500/20 flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                  <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
                   <span>Concluído</span>
                 </div>
               ` : `
@@ -995,10 +995,10 @@ function renderMissoes() {
     <div class="space-y-6">
       <div class="text-center max-w-xl mx-auto mb-8">
         <h2 class="text-2xl font-bold tracking-tight text-amber-400 font-mono flex items-center justify-center gap-2">
-          <i data-lucide="flame" class="w-6 h-6 animate-pulse"></i>
+          <i data-lucide="flame" class="w-6 h-6"></i>
           <span>Mini-Projetos de Javascript</span>
         </h2>
-        <p class="text-slate-450 text-xs mt-2 leading-relaxed">Desenvolva algoritmos interativos reais. Complete a sequência para liberar as seguintes!</p>
+        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Desenvolva algoritmos interativos reais. Complete a sequência para liberar as seguintes!</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1013,7 +1013,7 @@ function renderMissoes() {
             return `
               <div class="bg-[#0f172a]/30 border border-slate-800/80 p-6 rounded-2xl cursor-not-allowed opacity-40 select-none relative">
                 <i data-lucide="lock" class="absolute top-4 right-4 text-slate-600 w-5 h-5"></i>
-                <span class="text-[10px] font-mono uppercase bg-slate-950 px-2 py-0.5 rounded text-slate-600 border border-slate-850">Bloqueado</span>
+                <span class="text-[10px] font-mono uppercase bg-slate-950 px-2 py-0.5 rounded text-slate-600 border border-slate-800">Bloqueado</span>
                 <h3 class="text-base font-bold text-slate-600 font-mono mt-4 mb-2">🔒 ${missao.titulo}</h3>
                 <p class="text-slate-500 text-xs mt-1">Conclua a missão anterior para desbloquear este laboratório.</p>
               </div>
@@ -1027,7 +1027,7 @@ function renderMissoes() {
                   <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded border ${jaConcluiu ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}">
                     ${jaConcluiu ? "Concluído" : "Disponível"}
                   </span>
-                  ${jaConcluiu ? '<i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 animate-pulse"></i>' : ''}
+                  ${jaConcluiu ? '<i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>' : ''}
                 </div>
                 <h3 class="text-lg font-bold text-white font-mono mt-4 mb-2 hover:text-sky-400">${missao.titulo}</h3>
                 <p class="text-slate-400 text-xs leading-relaxed mb-4">Módulo interativo focado em Javascript. Codifique a estrutura lógica de algoritmos reais.</p>
@@ -1082,7 +1082,7 @@ function renderEstudoModalContent() {
       <div class="prose max-w-full">${content}</div>
       <div class="pt-6 border-t border-slate-800/80 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
         <p class="text-xs text-slate-500 font-mono">💡 Já leu toda a documentação estrutural?</p>
-        <button id="btn-marcar-concluido" class="px-6 py-3 rounded-xl font-bold tracking-wide transition-all shadow-md text-xs uppercase ${jaLido ? 'bg-slate-800 text-slate-500 cursor-not-allowed' : 'bg-sky-400 text-slate-950 hover:bg-sky-450'}" ${jaLido ? 'disabled' : ''}>
+        <button id="btn-marcar-concluido" class="px-6 py-3 rounded-xl font-bold tracking-wide transition-all shadow-md text-xs uppercase ${jaLido ? 'bg-slate-800 text-slate-500 cursor-not-allowed' : 'bg-sky-400 text-slate-950 hover:bg-sky-400'}" ${jaLido ? 'disabled' : ''}>
           ${jaLido ? "Estudo Concluído ✅" : "Marcar como Lido & Concluído ⭐"}
         </button>
       </div>
@@ -1098,7 +1098,7 @@ function renderDesafioModalContent() {
   return `
     <div class="space-y-6 max-h-[75vh] overflow-y-auto pr-2">
       <!-- Múltipla Escolha -->
-      <div class="bg-sky-550/5 border-l-4 border-sky-400 p-5 rounded-r-xl bg-sky-950/20">
+      <div class="bg-sky-500/15 border-l-4 border-sky-400 p-5 rounded-r-xl bg-[#020617]">
         <span class="text-[10px] font-mono uppercase bg-sky-500/10 text-sky-400 px-2 py-0.5 rounded">Parte 1: Missão Teórica</span>
         <p class="text-white font-bold leading-relaxed mt-3 mb-4">${desafio.enunciado1}</p>
         
@@ -1113,16 +1113,16 @@ function renderDesafioModalContent() {
       </div>
 
       <!-- Prática -->
-      <div class="bg-amber-550/5 border-l-4 border-amber-500 p-5 rounded-r-xl bg-amber-950/10 space-y-4">
+      <div class="bg-amber-500/10 border-l-4 border-amber-500 p-5 rounded-r-xl bg-[#020617] space-y-4">
         <span class="text-[10px] font-mono uppercase bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded">Parte 2: Escrita de Código</span>
-        <p class="text-slate-450 text-xs italic">${desafio.enunciado2}</p>
+        <p class="text-slate-400 text-xs italic">${desafio.enunciado2}</p>
         <p class="text-white font-bold text-sm leading-relaxed"><strong>Desafio Prático:</strong> ${desafio.questaoPratica}</p>
         <div class="bg-[#020617] p-1.5 rounded-xl border border-slate-800 shadow-inner">
           <textarea id="resposta-pratica" class="w-full bg-transparent min-h-[140px] text-amber-400 font-mono text-xs p-4 outline-none resize-none" placeholder="// Insira seu código aqui...">${state.respostaPratica}</textarea>
         </div>
       </div>
 
-      <button id="btn-verificar-desafio" class="w-full bg-sky-500 hover:bg-sky-450 text-[#020617] font-black font-mono uppercase tracking-wider py-4 rounded-xl text-center shadow-lg cursor-pointer text-xs transition-transform active:scale-98">
+      <button id="btn-verificar-desafio" class="w-full bg-sky-500 hover:bg-sky-400 text-[#020617] font-black font-mono uppercase tracking-wider py-4 rounded-xl text-center shadow-lg cursor-pointer text-xs transition-transform active:scale-98">
         Verificar Desafio ✔️
       </button>
     </div>
@@ -1146,17 +1146,17 @@ function renderMissionModalContent() {
         </h4>
         
         <div class="flex gap-1.5 mb-3 border-b border-slate-800/80 pb-2">
-          <button id="tab-file-html" class="px-4 py-2 rounded-xl font-mono text-xs cursor-pointer ${state.activeMissionTab === 'html' ? 'bg-sky-500/15 border border-sky-450/30 text-sky-400 font-bold' : 'text-slate-500'}">index.html</button>
-          <button id="tab-file-css" class="px-4 py-2 rounded-xl font-mono text-xs cursor-pointer ${state.activeMissionTab === 'css' ? 'bg-sky-500/15 border border-sky-450/30 text-sky-400 font-bold' : 'text-slate-500'}">style.css</button>
-          <button id="tab-file-js" class="px-4 py-2 rounded-xl font-mono text-xs cursor-pointer ${state.activeMissionTab === 'js' ? 'bg-sky-500/15 border border-sky-450/30 text-sky-400 font-bold' : 'text-slate-500'}">script.js</button>
+          <button id="tab-file-html" class="px-4 py-2 rounded-xl font-mono text-xs cursor-pointer ${state.activeMissionTab === 'html' ? 'bg-sky-500/15 border border-sky-400/30 text-sky-400 font-bold' : 'text-slate-500'}">index.html</button>
+          <button id="tab-file-css" class="px-4 py-2 rounded-xl font-mono text-xs cursor-pointer ${state.activeMissionTab === 'css' ? 'bg-sky-500/15 border border-sky-400/30 text-sky-400 font-bold' : 'text-slate-500'}">style.css</button>
+          <button id="tab-file-js" class="px-4 py-2 rounded-xl font-mono text-xs cursor-pointer ${state.activeMissionTab === 'js' ? 'bg-sky-500/15 border border-sky-400/30 text-sky-400 font-bold' : 'text-slate-500'}">script.js</button>
         </div>
 
-        <div class="bg-[#020617] rounded-xl overflow-hidden border border-slate-850 p-1">
+        <div class="bg-[#020617] rounded-xl overflow-hidden border border-slate-800 p-1">
           <textarea id="editor-codigo" class="w-full bg-[#020617] border-0 min-h-[250px] font-mono text-xs p-4 outline-none resize-y ${state.activeMissionTab === 'html' ? 'text-amber-400' : state.activeMissionTab === 'css' ? 'text-sky-450' : 'text-yellow-450'}">${state.activeMissionTab === 'html' ? state.missionHtmlCode : state.activeMissionTab === 'css' ? state.missionCssCode : state.missionJsCode}</textarea>
         </div>
       </div>
 
-      <button id="btn-submeter-missao" class="w-full bg-emerald-500 hover:bg-emerald-450 text-[#020617] font-black font-mono uppercase tracking-wider py-4 rounded-xl text-center shadow-lg transition-colors cursor-pointer text-xs">
+      <button id="btn-submeter-missao" class="w-full bg-emerald-500 hover:bg-emerald-400 text-[#020617] font-black font-mono uppercase tracking-wider py-4 rounded-xl text-center shadow-lg transition-colors cursor-pointer text-xs">
         Submeter Projeto Completo 🚀
       </button>
     </div>
