@@ -274,11 +274,46 @@ const conteudosJS = {
         <p>Açúcar sintático de alta perisclépia para organizar comandos assíncronos como fluxos síncronos legíveis.</p>
         <pre><code>const dados = await baixarAssets();</code></pre>`,
     "Recursividade": `
-        <p>Processamento autônomo elegante onde um método executa a si mesmo até encontrar limites firmes.</p>
-        <pre><code>function busca(nivel) { if (nivel == 5) return; busca(nivel+1); }</code></pre>`,
+        <p>A recursividade é uma técnica conceptual fantástica onde uma função tenta resolver um grande problema ao convocar e executar a si própria infinitamente até atingir uma condição de bloqueio (fuga) rígida. Se falhares a implementação do travão absoluto central, a função entrará em colapso engolindo processamento, memória vital e acabará no mortal "Stack Overflow".</p>
+        <p>O panteão de utilização no Gamedev reside majestosamente nos sistemas de "Busca Espacial" como encontrar buracos num Campo Minado. Quando carregas na casa vazia, a recursividade expande nas oitos casas do lado invocando funções internas nelas mesmas, limpando grandes extensões de terreno verde sem uma centena de voltas de ciclos no código sujo que gastariam kilobytes inteiros forçados em texto repetitivo condicional.</p>
+        <p>A Inteligência Artificial dos Chefões de fase aplica o Pathfinding (busca em labirintos). Uma aranha gigante envia simulações da sua função nas paredes verificando colisões em ramos paralelos no abismo da recursão para gerar o trilho sem erros pelas armadilhas visando rasgar a tua armadura sem errar nos obstáculos.</p>
+        <div class="code-block"><pre><code>function buscarSaida(corredorAtual) {\n    if (corredorAtual === 5) { // CONDIÇÃO PARADA\n        return "Saída Encontrada!"; \n    }\n    return buscarSaida(corredorAtual + 1); // CHAMA A SI MESMA\n}\n\nconsole.log(buscarSaida(1));</code></pre></div>`,
+
+    "Manipulação Avançada de Objetos": `
+        <p>A manipulação de ponta mergulha profundamente no DNA e chassi basal estrutural dos elementos. Métodos robustos do núcleo lógico (<code>Object.assign</code> e <code>Object.keys</code>) extraem a essência crua dos valores isolados destrinchando armaduras em números manipuláveis sem teres de adivinhar as propriedades escritas semanas atrás.</p>
+        <p>É a dádiva sagrada para desenvolver o Crafting. Se queres colar uma "Pedra Flamejante" venenosa na "Lança Padrão", o <code>assign</code> varre ambos os objetos separadamente absorvendo a letalidade combinada injetada numa arma clonada e perfeitamente simbiótica pronta a ceifar nos inventários base da interface.</p>
+        <p>Puxando pelo <code>keys</code> listas automáticas com chaves de controlo dinâmicas desenham menus gigantes. Permitem polular dados dinâmicos em lojas onde amanhã crias o machado sagrado, ele extrai os atributos invisíveis de força e empacota num div bonito preenchendo todos os vazios visuais perfeitamente alinhados na tabela de vendas de ouro ao mercador sem refazer nada no teu DOM estruturalmente central.</p>
+        <div class="code-block"><pre><code>const base = { atk: 10 };\nconst fogo = { magia: 25, dot: "Queimar" };\n\n// Fusão Perfeita de Itens\nconst espadaFogo = Object.assign({}, base, fogo);\n\n// Puxa atributos para mostrar na tela de status\nconst statusNomes = Object.keys(espadaFogo);\nconsole.log("Atributos: " + statusNomes.join(", "));</code></pre></div>`,
+
+    "APIs e Fetch": `
+        <p>A requisição Fetch (buscadora do HTTPS) transmutou o mundo solitário offline permitindo que as tuas aplicações interajam com as teias nervosas de bancos de dados mastodônticos na internet mundial em segundos de frações. Abre comunicações puras nos servidores online convertendo os resultados fechados isolados na aba para os pódios eternos alojados e arquivados no teu backend invisível ou na Nuvem global das leaderboards.</p>
+        <p>Com um POST passas o recorde brutal do herói local depois deste matar um boss com 50 golpes. Ao mesmo tempo um GET faz download puro JSON e popula na hora o rank visual em primeiro, destruindo corações a outros concorrentes no seu navegador atualizando os Top 10 em lista imersiva no seu ecossistema sem sair da jogatina atual pausada lá fora da rede tridimensional do cenário de sprites vivos.</p>
+        <p>Estes construtos elevam experiências fechadas a metrópoles vivas diárias interligando o multiplayer social assíncrono perante eventos massivos, garantindo cálculos isolados pesados do lado do servidor longe de possíveis hackeamentos client-side e assegurando os prémios exatos e purificados imaculados pro jogador honrado num combate cibernético real.</p>
+        <div class="code-block"><pre><code>async function salvarRecorde() {\n    try {\n        const res = await fetch("https://api.meujogo.com/rank");\n        const dados = await res.json();\n        console.log("Top 1 Mundial: " + dados[0].nome);\n    } catch (e) {\n        console.log("Modo Offline ativado.");\n    }\n}</code></pre></div>`,
+
+    "Bitwise Operators (Operadores de Bit)": `
+        <p>Os Operadores Bitwise assumem os lugares divinos da programação onde intervimos no mais baixo nível concebível de energia purificada: a manipulação bruta de zeros e uns (bits) literais do processador. Estes símbolos crípticos transmutam montanhas pesadas de lógicas encadeadas em micro-comandos de processamentos milissegundos sem qualquer esforço ao computador final.</p>
+        <p>Para controlar os debuffs e maldições simultâneas em chefões usamos isto como Collision Masks perfeitas (Mascaras lógicas encadeadas). Juntar com (AND & e OR |) funde o estado venenoso com o escudo de pedra pesado em apenas um byte encolhido compacto validando o IF principal absoluto de cálculo físico antes da espada desferir qualquer frame que pese memória matemática no browser limitando loops em laços massivos da colisão.</p>
+        <p>Sustentam sessenta quadros perfeitos perante cem zumbis lançando três feitiços caóticos em aparelhos ultrapassados reduzindo brutalmente gastos térmicos do celular rodando sem travamentos a tela pesada de fogo cruzado blindada e fluida na engrenagem suprema invisível calculando fraquezas sem sobrecargas nocivas sistêmicas.</p>
+        <div class="code-block"><pre><code>const ST_NORMAL = 0;\nconst ST_FOGO = 1;     // 0001\nconst ST_GELO = 2;     // 0010\n\nlet estado = ST_NORMAL;\nestado = ST_FOGO | ST_GELO; // Queimando e Congelado!\n\nif (estado & ST_GELO) {\n    console.log("Herói preso. Movimento cortado.");\n}</code></pre></div>`,
+
+    "Regular Expressions (Regex)": `
+        <p>Regex são foices ocultas abstratas que desbravam densas barreiras de informações em grandes cordões e longas strings varrendo identificações perfeitamente numa miríade textual onde loops e condicionais se debateriam dolorosamente devagar. A sua presença é indispensável a ler logs e sanear comandos vindos do caos de inputs da interface exterior crivada de dados cruciais sensíveis e desordenados nos quadros lidos em puro JavaScript nativo.</p>
+        <p>Se tens um Chat online aberto entre equipas, ou abres linhas de comando pra inserir Cheats na aventura, a Regex rastreia códigos injetados cirurgicamente validando "invocar_Ouro_500" isolando palavras cortadas exatas nas variáveis corretas de entidade (Ouro) e números de somatórios (500) blindando comandos contra caracteres letais vindos de hackers ardilosos no painel console manipulados na injeção perigosa dos teus forms da partida central em atividade exposta.</p>
+        <p>Defendem integralmente o núcleo lógico base garantindo purificação nas texturas lidas nos painéis complexos e formatando valores de tempos estragados protegendo os componentes vitais sem estragar conexões diretas nos eventos paralelos ocorridos no cenário tridimensional de combate atrás dos fundos obscuros matemáticos base.</p>
+        <div class="code-block"><pre><code>const comando = "/invocar Dragao 100";\nconst expressao = /^\\/([a-zA-Z]+)\\s+([a-zA-Z]+)\\s+(\\d+)$/;\n\nconst dadosLimpos = comando.match(expressao);\nif (dadosLimpos) {\n    console.log(\`Ação: \${dadosLimpos[1]} | Qtd: \${dadosLimpos[3]}\`);\n}</code></pre></div>`,
+
     "Memory Management (Garbage Collector)": `
-        <p>Coletor autônomo de lixo do navegador que limpa dados soltos sem referência economizando recursos de RAM.</p>
-        <pre><code>let cache = { x: 1 }; cache = null; // Liberado</code></pre>`
+        <p>Gestão avançada assenta a paz perante os vazamentos terríveis de RAM (Memory Leaks). A máquina virtual de base oculta um fiscal interno: O "Garbage Collector" (Lixeiro de Memória) caçando estâncias órfãs destruídas para libertar o processador e reciclar gigabytes sugados pela renderização constante invisivelmente mantendo as barreiras técnicas firmes sem rebentar os celulares do jogador após duas horas jogadas nos chefes longos.</p>
+        <p>Quando um vilão repleto de animações 4K perece sob o machado e evapora do cenário desenhado, as suas conexões a arrays e os listeners trancados mantêm-no escondido alimentando-se ativamente de processamento morto estourando o limite técnico engolindo o painel e desligando agressivamente a tela com ecrã negro terminando tragicamente a vida e progressão contínua ali executada no loop eterno da arena gerada.</p>
+        <p>Apagar ativamente matrizes densas e definir referências gigantes do cache para "Null" logo ao finalizar níveis expulsa o monstro e os seus lixos alocados, esvaziando o cenário pesado do sistema operativo devolvendo estabilidade máxima respiratória a aplicação complexa que lida no cerne arquitetônico da obra épica sustentando a perfeição industrial base duradora impecável nos dispositivos modestos e absolutos presentes online nos jogadores em foco principal das campanhas lançadas por vocês de jogos independentes grandiosos criados no front end liso estruturado no browser limpo.</p>
+        <div class="code-block"><pre><code>let bossTexturas = { sprites: new Array(10000).fill("img.png") };\n\nfunction matarBoss() {\n    // A imagem sumiu da tela, mas a RAM continua cheia.\n    // Precisamos de forçar a libertação de memória:\n    bossTexturas = null;\n    console.log("RAM limpa. O Garbage Collector pode reciclar os MB!");\n}</code></pre></div>`,
+
+    "Design Patterns (Padrões de Projeto)": `
+        <p>O Design Patterns é o apogeu sagrado na engenharia limpa impedindo torres enormes caírem com seus remendos isolados insustentáveis enraizados entre bases frouxas amontoadas sob desculpas fáceis temporárias destruídas e caídas aos abalos sistêmicos criados sob os próprios desenvolvimentos desgovernados nos DLCs vindouros e expansões pesadas anexadas nos alicerces já antigos.</p>
+        <p>Utilizar padrões rigorosos como "State Pattern" ou "Singleton" isola engrenagens pesadas como "pulo" ou "correr" para longe de Ifs infindos confusos da sua engine. A State tranca em blocos blindados autónomos e indestrutíveis os fluxos onde saltar jamais quebra ações de golpear, protegendo a pureza sistêmica em pastas modulares separadas intocadas por corrupção acidental que geraria mortes infinitas no boneco flutuando nas lógicas corrompidas de falhas.</p>
+        <p>Absorver moldes provados a nível mundial na formatação tática de acoplar blocos em código transforma sistemas rudes de amadores perdidos para motores profissionais infalíveis de manutenção instantânea e blindagens perfeitas onde tudo opera orquestrado perfeitamente na perfeição garantida das mecânicas fluidas indestrutíveis prontas aos abalos do mercado robustos das produções colossais.</p>
+        <div class="code-block"><pre><code>const Acoes = {\n    CORRER: () => console.log("Lógica Limpa da Corrida isolada."), \n    PULAR: () => console.log("Lógica Livre de Gravidade Pura.")\n};\n\nlet maquinaEstadoAtual = Acoes.CORRER;\nmaquinaEstadoAtual(); // Executa apenas o estado seguro.</code></pre></div>`
 };
 
 const desafiosColecao = {
@@ -288,61 +323,61 @@ const desafiosColecao = {
         enunciado1: "Identifique a sintaxe correta utilizada para abrir e fechar um elemento em um documento HTML.",
         opcoes: [
           "a) [p]Meu parágrafo[/p]",
-          "b) <p>Meu parágrafo<p>",
+          "b) \\x3Cp\\x3EMeu parágrafo\\x3Cp\\x3E",
           "c) {p}Meu parágrafo{/p}",
-          "d) <p>Meu parágrafo</p>",
-          "e) </p>Meu parágrafo<p>"
+          "d) \\x3Cp\\x3EMeu parágrafo\\x3C/p\\x3E",
+          "e) \\x3C/p\\x3EMeu parágrafo\\x3Cp\\x3E"
         ],
         respostaMultipla: 3,
         enunciado2: "A linguagem HTML utiliza sinais de 'menor que' e 'maior que' para definir o início de um elemento. O fechamento é igual à abertura com uma barra oblíqua (/) inicial.",
         questaoPratica: "Um desenvolvedor tentou criar um botão e um parágrafo, mas errou no fechamento. Corrija o código base abaixo:",
-        codigoInicial: "<button>Clique em mim<button>\n<p>Este é um texto de aviso importante.<p>",
-        correta: "<button>Clique em mim</button>\n<p>Este é um texto de aviso importante.</p>"
+        codigoInicial: "\\x3Cbutton\\x3EClique em mim\\x3Cbutton\\x3E\\n\\x3Cp\\x3EEste é um texto de aviso importante.\\x3Cp\\x3E",
+        correta: "\\x3Cbutton\\x3EClique em mim\\x3C/button\\x3E\\n\\x3Cp\\x3EEste é um texto de aviso importante.\\x3C/p\\x3E"
       },
       "Estrutura Global": {
         enunciado1: "Qual é a tag raiz que envolve todo o conteúdo de uma página HTML?",
         opcoes: [
-          "a) <head>",
-          "b) <body>",
-          "c) <html>",
-          "d) <main>",
-          "e) <!DOCTYPE html>"
+          "a) \\x3Chead\\x3E",
+          "b) \\x3Cbody\\x3E",
+          "c) \\x3Chtml\\x3E",
+          "d) \\x3Cmain\\x3E",
+          "e) \\x3C!DOCTYPE html\\x3E"
         ],
         respostaMultipla: 2,
         enunciado2: "O head agrupa metadados e o body abriga elementos visíveis. Tudo fica encapsulado na seção raiz html.",
         questaoPratica: "Corrija a estrutura misturada abaixo reorganizando head, body e seus respectivos filhos nos locais devidos:",
-        codigoInicial: "<!DOCTYPE html>\n<html>\n  <body>\n    <title>Minha Primeira Página</title>\n  </body>\n  <head>\n    <h1>Bem-vindo ao meu site!</h1>\n    <p>Aqui você encontrará meu portfólio.</p>\n  </head>\n</html>",
-        correta: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>Minha Primeira Página</title>\n  </head>\n  <body>\n    <h1>Bem-vindo ao meu site!</h1>\n    <p>Aqui você encontrará meu portfólio.</p>\n  </body>\n</html>"
+        codigoInicial: "\\x3C!DOCTYPE html\\x3E\\n\\x3Chtml\\x3E\\n  \\x3Cbody\\x3E\\n    \\x3Ctitle\\x3EMinha Primeira Página\\x3C/title\\x3E\\n  \\x3C/body\\x3E\\n  \\x3Chead\\x3E\\n    \\x3Ch1\\x3EBem-vindo ao meu site!\\x3C/h1\\x3E\\n    \\x3Cp\\x3EAqui você encontrará meu portfólio.\\x3C/p\\x3E\\n  \\x3C/head\\x3E\\n\\x3C/html\\x3E",
+        correta: "\\x3C!DOCTYPE html\\x3E\\n\\x3Chtml\\x3E\\n  \\x3Chead\\x3E\\n    \\x3Ctitle\\x3EMinha Primeira Página\\x3C/title\\x3E\\n  \\x3C/head\\x3E\\n  \\x3Cbody\\x3E\\n    \\x3Ch1\\x3EBem-vindo ao meu site!\\x3C/h1\\x3E\\n    \\x3Cp\\x3EAqui você encontrará meu portfólio.\\x3C/p\\x3E\\n  \\x3C/body\\x3E\\n\\x3C/html\\x3E"
       },
       "Tags de Texto": {
         enunciado1: "Para definir o título de maior importância (nível 1) em um documento HTML, qual tag usar?",
         opcoes: [
-          "a) <title>",
-          "b) <header>",
-          "c) <strong>",
-          "d) <h1>",
-          "e) <h6>"
+          "a) \\x3Ctitle\\x3E",
+          "b) \\x3Cheader\\x3E",
+          "c) \\x3Cstrong\\x3E",
+          "d) \\x3Ch1\\x3E",
+          "e) \\x3Ch6\\x3E"
         ],
         respostaMultipla: 3,
         enunciado2: "Usamos os títulos h1 a h6 representados na ordem descendente de relevância estética.",
         questaoPratica: "O código abaixo tem um cruzamento incorreto de tags de título h2 e parágrafo. Corrija fechando-as devidamente:",
-        codigoInicial: "<h2>O que é o Universo?<p>O universo é tudo o que existe, incluindo espaço, tempo e matéria.</h2></p>",
-        correta: "<h2>O que é o Universo?</h2>\n<p>O universo é tudo o que existe, incluindo espaço, tempo e matéria.</p>"
+        codigoInicial: "\\x3Ch2\\x3EO que é o Universo?\\x3Cp\\x3EO universo é tudo o que existe, incluindo espaço, tempo e matéria.\\x3C/h2\\x3E\\x3C/p\\x3E",
+        correta: "\\x3Ch2\\x3EO que é o Universo?\\x3C/h2\\x3E\\n\\x3Cp\\x3EO universo é tudo o que existe, incluindo espaço, tempo e matéria.\\x3C/p\\x3E"
       },
       "Meta Tags Técnicas": {
         enunciado1: "Qual é a tag para certificar caracteres especiais e acentuações no idioma português?",
         opcoes: [
-          "a) <meta name=\"viewport\" content=\"width=device-width\">",
-          "b) <meta charset=\"UTF-8\">",
-          "c) <meta language=\"pt-br\">",
-          "d) <link rel=\"charset\" href=\"UTF-8\">",
-          "e) <title charset=\"UTF-8\">"
+          "a) \\x3Cmeta name=\\\"viewport\\\" content=\\\"width=device-width\\\"\\x3E",
+          "b) \\x3Cmeta charset=\\\"UTF-8\\\"\\x3E",
+          "c) \\x3Cmeta language=\\\"pt-br\\\"\\x3E",
+          "d) \\x3Clink rel=\\\"charset\\\" href=\\\"UTF-8\\\"\\x3E",
+          "e) \\x3Ctitle charset=\\\"UTF-8\\\"\\x3E"
         ],
         respostaMultipla: 1,
         enunciado2: "O padrão universal de caracteres das páginas web modernas é o UTF-8.",
         questaoPratica: "Injeta a meta tag charset faltando no cabeçalho invisível para corrigir as letras especiais:",
-        codigoInicial: "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n    <title>Painel de Controle</title>\n</head>\n<body>\n    <h1>Configurações do Usuário</h1>\n</body>\n</html>",
-        correta: "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n    <title>Painel de Controle</title>\n    <meta charset=\"UTF-8\">\n</head>\n<body>\n    <h1>Configurações do Usuário</h1>\n</body>\n</html>"
+        codigoInicial: "\\x3C!DOCTYPE html\\x3E\\n\\x3Chtml lang=\\\"pt-BR\\\"\\x3E\\n\\x3Chead\\x3E\\n    \\x3Ctitle\\x3EPainel de Controle\\x3C/title\\x3E\\n\\x3C/head\\x3E\\n\\x3Cbody\\x3E\\n    \\x3Ch1\\x3EConfigurações do Usuário\\x3C/h1\\x3E\\n\\x3C/body\\x3E\\n\\x3C/html\\x3E",
+        correta: "\\x3C!DOCTYPE html\\x3E\\n\\x3Chtml lang=\\\"pt-BR\\\"\\x3E\\n\\x3Chead\\x3E\\n    \\x3Ctitle\\x3EPainel de Controle\\x3C/title\\x3E\\n    \\x3Cmeta charset=\\\"UTF-8\\\"\\x3E\\n\\x3C/head\\x3E\\n\\x3Cbody\\x3E\\n    \\x3Ch1\\x3EConfigurações do Usuário\\x3C/h1\\x3E\\n\\x3C/body\\x3E\\n\\x3C/html\\x3E"
       },
       "Atributos e IDs": {
         enunciado1: "Sobre o atributo id, é correto afirmar que:",
@@ -356,25 +391,25 @@ const desafiosColecao = {
         respostaMultipla: 2,
         enunciado2: "CPF estrito de elementos. Classes aceitam múltiplos focos, mas os IDs são únicos por documento.",
         questaoPratica: "Organize as caixas de avisos abaixo atribuindo IDs únicos e semanticamente limpos:",
-        codigoInicial: "<div id=\"caixa-alerta\">\n  <p>Sucesso: Usuário cadastrado!</p>\n</div>\n<div id=\"caixa-alerta\">\n  <p>Aviso: Verifique seu e-mail.</p>\n</div>\n<div id=\"caixa-alerta\">\n  <p>Erro: Senha incorreta.</p>\n</div>",
-        correta: "<div id=\"alerta-sucesso\">\n  <p>Sucesso: Usuário cadastrado!</p>\n</div>\n<div id=\"alerta-aviso\">\n  <p>Aviso: Verifique seu e-mail.</p>\n</div>\n<div id=\"alerta-erro\">\n  <p>Erro: Senha incorreta.</p>\n</div>"
+        codigoInicial: "\\x3Cdiv id=\\\"caixa-alerta\\\"\\x3E\\n  \\x3Cp\\x3ESucesso: Usuário cadastrado!\\x3C/p\\x3E\\n\\x3C/div\\x3E\\n\\x3Cdiv id=\\\"caixa-alerta\\\"\\x3E\\n  \\x3Cp\\x3EAviso: Verifique seu e-mail.\\x3C/p\\x3E\\n\\x3C/div\\x3E\\n\\x3Cdiv id=\\\"caixa-alerta\\\"\\x3E\\n  \\x3Cp\\x3EErro: Senha incorreta.\\x3C/p\\x3E\\n\\x3C/div\\x3E",
+        correta: "\\x3Cdiv id=\\\"alerta-sucesso\\\"\\x3E\\n  \\x3Cp\\x3ESucesso: Usuário cadastrado!\\x3C/p\\x3E\\n\\x3C/div\\x3E\\n\\x3Cdiv id=\\\"alerta-aviso\\\"\\x3E\\n  \\x3Cp\\x3EAviso: Verifique seu e-mail.\\x3C/p\\x3E\\n\\x3C/div\\x3E\\n\\x3Cdiv id=\\\"alerta-erro\\\"\\x3E\\n  \\x3Cp\\x3EErro: Senha incorreta.\\x3C/p\\x3E\\n\\x3C/div\\x3E"
       }
     },
     intermediario: {
       "Elementos Semânticos (Header, Nav, Footer)": {
         enunciado1: "Qual elemento semântico é especificamente desenhado para agrupar os principais links de navegação?",
         opcoes: [
-          "a) <menu>",
-          "b) <header>",
-          "c) <nav>",
-          "d) <footer>",
-          "e) <links>"
+          "a) \\x3Cmenu\\x3E",
+          "b) \\x3Cheader\\x3E",
+          "c) \\x3Cnav\\x3E",
+          "d) \\x3Cfooter\\x3E",
+          "e) \\x3Clinks\\x3E"
         ],
         respostaMultipla: 2,
         enunciado2: "Usa-se a tag nav para links e mapas de navegação rápida de ecrãs.",
         questaoPratica: "Troque os blocos genéricos de cabeçalho por tags semânticas limpas: header e nav:",
-        codigoInicial: "<div id=\"cabecalho\">\n  <h1>Meu Portfólio</h1>\n  <div id=\"menu-principal\">\n    <a href=\"/home\">Início</a>\n  </div>\n</div>",
-        correta: "<header>\n  <h1>Meu Portfólio</h1>\n  <nav>\n    <a href=\"/home\">Início</a>\n  </nav>\n</header>"
+        codigoInicial: "\\x3Cdiv id=\\\"cabecalho\\\"\\x3E\\n  \\x3Ch1\\x3EMeu Portfólio\\x3C/h1\\x3E\\n  \\x3Cdiv id=\\\"menu-principal\\\"\\x3E\\n    \\x3Ca href=\\\"/home\\\"\\x3EInício\\x3C/a\\x3E\\n  \\x3C/div\\x3E\\n\\x3C/div\\x3E",
+        correta: "\\x3Cheader\\x3E\\n  \\x3Ch1\\x3EMeu Portfólio\\x3C/h1\\x3E\\n  \\x3Cnav\\x3E\\n    \\x3Ca href=\\\"/home\\\"\\x3EInício\\x3C/a\\x3E\\n  \\x3C/nav\\x3E\\n\\x3C/header\\x3E"
       }
     }
   },
@@ -425,8 +460,8 @@ const missoesProjetos = [
     1. Crie o visor: <code>&lt;input id="visor" readonly&gt;</code>.<br>
     2. Crie botões de número com ações rápidas: <code>&lt;button onclick="acrescentar('7')"&gt;7&lt;/button&gt;</code>.<br>
     3. Crie botões matemáticos de operadores, botão de resposta (=) calculando com eval e limpar (C) alterando inner HTML.`,
-    codigoInicial: `<input id="visor" readonly>\n`,
-    correta: `<input id="visor" readonly><button onclick="acrescentar('7')">7</button><button onclick="acrescentar('+')">+</button><button onclick="limpar()">C</button><button onclick="calcular()">=</button>function acrescentar(valor){let tela = document.getElementById('visor');tela.value = tela.value + valor;}function limpar(){let tela = document.getElementById('visor');tela.value = "";}function calcular(){let tela = document.getElementById('visor');tela.value = eval(tela.value);}`
+    codigoInicial: `\\x3Cinput id="visor" readonly\\x3E\\n`,
+    correta: `\\x3Cinput id="visor" readonly\\x3E\\x3Cbutton onclick="acrescentar('7')"\\x3E7\\x3C/button\\x3E\\x3Cbutton onclick="acrescentar('+')"\\x3E+\\x3C/button\\x3E\\x3Cbutton onclick="limpar()"\\x3EC\\x3C/button\\x3E\\x3Cbutton onclick="calcular()"\\x3E=\\x3C/button\\x3Efunction acrescentar(valor){let tela = document.getElementById('visor');tela.value = tela.value + valor;}function limpar(){let tela = document.getElementById('visor');tela.value = "";}function calcular(){let tela = document.getElementById('visor');tela.value = eval(tela.value);}`
   },
   {
     titulo: "Missão 2: Jogo da Velha",
@@ -434,7 +469,7 @@ const missoesProjetos = [
     1. Crie uma matriz vazia rastreando posições ocupadas: <code>let tabuleiro = ["", "", "", "", "", "", "", "", ""];</code>.<br>
     2. Defina o jogador atual: <code>let turno = "x";</code>.<br>
     3. Crie <code>function jogar(id_botao)</code> avaliando se já há dados nessa coordenada antes de aplicar ações.`,
-    codigoInicial: `\n`,
+    codigoInicial: `\\n`,
     correta: `let tabuleiro=["","","","","","","","",""];let turno="x";function jogar(id_botao){if(tabuleiro[id_botao]!==""){return;}tabuleiro[id_botao]=turno;document.getElementById(id_botao).innerText=turno;}`
   }
 ];
